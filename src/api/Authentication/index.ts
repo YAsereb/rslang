@@ -12,7 +12,7 @@ export async function createUser(user: { email: string; password: string }) {
 }
 
 export async function loginUser(user: { email: string; password: string }) {
-  const response = await fetch(`${url}/signin`, {
+  const resposne = await fetch(`${url}/signin`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -21,7 +21,9 @@ export async function loginUser(user: { email: string; password: string }) {
     body: JSON.stringify(user),
   });
 
-  const userInfo = await response.json();
+  if (resposne.status === 404) {
+    console.log(123);
+  }
 
-  console.log(userInfo);
+  console.log(resposne);
 }
