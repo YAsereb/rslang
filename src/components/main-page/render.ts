@@ -7,7 +7,7 @@ export function renderMain() {
   const html = `<main class="main">
   <nav class="navigation">
     <div class="navigation-item">
-      <a href="#" id="electonic-book">Электронный учебник</a>
+      <a href="#" id="electronic-book">Электронный учебник</a>
     </div>
     <div class="navigation-item">
       <a href="#" id="list-of-words">Список слов</a>
