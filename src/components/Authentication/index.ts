@@ -3,6 +3,10 @@ import './style.scss';
 
 const authVariables = {
   isSignUp: true,
+  isValidate: true,
+  authBtn: '' as string | HTMLButtonElement,
+  emailInput: '' as string | HTMLInputElement,
+  passwordInput: '' as string | HTMLInputElement,
 };
 
 function renderAuthentication() {
@@ -42,18 +46,26 @@ function renderAuthentication() {
 }
 
 function handleListeners() {
-  const authenticationBtn = document.getElementById('authentication-btn');
-  const changeAuthBtn = document.getElementById('change-authentication');
-  const emailInput = document.getElementById('email-input');
-  const passwordInput = document.getElementById('password-input');
+  authVariables.authBtn = document.getElementById(
+    'authentication-btn'
+  ) as HTMLButtonElement;
+  const changeAuthBtn = document.getElementById(
+    'change-authentication'
+  ) as HTMLButtonElement;
+  authVariables.emailInput = document.getElementById(
+    'email-input'
+  ) as HTMLInputElement;
+  authVariables.passwordInput = document.getElementById(
+    'password-input'
+  ) as HTMLInputElement;
 
-  authenticationBtn?.addEventListener('click', handleForm);
-  changeAuthBtn?.addEventListener('click', changeAuthentication);
-  emailInput?.addEventListener('input', () => {
-    deleteInputError('E-mail', 'email');
+  authVariables.authBtn.addEventListener('click', handleForm);
+  changeAuthBtn.addEventListener('click', changeAuthentication);
+  authVariables.emailInput.addEventListener('input', () => {
+    deleteErrors('E-mail', 'email');
   });
-  passwordInput?.addEventListener('input', () => {
-    deleteInputError('Password', 'password');
+  authVariables.passwordInput.addEventListener('input', () => {
+    deleteErrors('Password', 'password');
   });
 }
 
@@ -72,26 +84,23 @@ function changeAuthentication(e: Event) {
 function handleForm(e: Event) {
   e.preventDefault();
 
-  const target = e.target as HTMLElement;
+  handleValidate();
 
-  const email = document.getElementById('email-input') as HTMLInputElement;
-  const password = document.getElementById(
-    'password-input'
-  ) as HTMLInputElement;
+  if (authVariables.isValidate) {
+    const user = {
+      email: (authVariables.emailInput as HTMLInputElement).value,
+      password: (authVariables.passwordInput as HTMLInputElement).value,
+    };
 
-  const user = {
-    email: email.value,
-    password: password.value,
-  };
-
-  if (target.textContent === 'SIGN UP') {
-    handleValidate();
-
-    createUser(user);
+    if (
+      (authVariables.authBtn as HTMLButtonElement).textContent === 'SIGN UP'
+    ) {
+      createUser(user);
+    } else {
+      loginUser(user);
+    }
   } else {
-    handleValidate();
-
-    loginUser(user);
+    (authVariables.authBtn as HTMLButtonElement).disabled = true;
   }
 }
 
@@ -101,36 +110,85 @@ function handleValidate() {
 }
 
 function handlePasswordValidate() {
-  const password = document.getElementById(
-    'password-input'
-  ) as HTMLInputElement;
-
-  if (password.value.length < 8) {
-    password.value = '';
-    password.placeholder = 'Password is too short - should be 8 chars minimum.';
-    password.classList.add('error-input');
+  if ((authVariables.passwordInput as HTMLInputElement).value.length < 8) {
+    (authVariables.passwordInput as HTMLInputElement).value = '';
+    (authVariables.passwordInput as HTMLInputElement).placeholder =
+      'Password is too short - should be 8 chars minimum!';
+    (authVariables.passwordInput as HTMLInputElement).classList.add(
+      'auth-error__input'
+    );
+    authVariables.isValidate = false;
   }
 }
 
 function handleEmailValidate() {
-  const email = document.getElementById('email-input') as HTMLInputElement;
-
-  if (email.value.length === 0) {
-    email.placeholder = 'Email is required field';
-    email.classList.add('error-input');
-  } else if (!email.validity.valid) {
-    email.value = '';
-    email.placeholder = 'Email should have correct format';
-    email.classList.add('error-input');
+  if ((authVariables.emailInput as HTMLInputElement).value.length === 0) {
+    (authVariables.emailInput as HTMLInputElement).placeholder =
+      'Email is required field!';
+    (authVariables.emailInput as HTMLInputElement).classList.add(
+      'auth-error__input'
+    );
+    authVariables.isValidate = false;
+  } else if (!(authVariables.emailInput as HTMLInputElement).validity.valid) {
+    handleErrorEmailInput();
   }
 }
 
-function deleteInputError(defaultPlaceholder: string, id: string) {
-  const element = document.getElementById(`${id}-input`) as HTMLInputElement;
+export function handleErrorEmailInput() {
+  (authVariables.emailInput as HTMLInputElement).value = '';
+  (authVariables.emailInput as HTMLInputElement).placeholder =
+    'Email should have correct format!';
+  (authVariables.emailInput as HTMLInputElement).classList.add(
+    'auth-error__input'
+  );
+  authVariables.isValidate = false;
+}
 
-  if (element.classList.contains('error-input')) {
-    element.classList.remove('error-input');
-    element.placeholder = defaultPlaceholder;
+function deleteErrors(defaultPlaceholder: string, id: string) {
+  const inputElement = document.getElementById(
+    `${id}-input`
+  ) as HTMLInputElement;
+  const textElement = document.querySelector('.auth-error__title');
+
+  if (inputElement.classList.contains('auth-error__input')) {
+    inputElement.classList.remove('auth-error__input');
+    inputElement.placeholder = defaultPlaceholder;
+    handleActivateBtn();
+  } else if (textElement) {
+    (authVariables.authBtn as HTMLButtonElement).disabled = false;
+    textElement.remove();
+  }
+}
+
+function handleActivateBtn() {
+  if (
+    !(authVariables.emailInput as HTMLInputElement).classList.contains(
+      'auth-error__input'
+    ) &&
+    !(authVariables.passwordInput as HTMLInputElement).classList.contains(
+      'auth-error__input'
+    )
+  ) {
+    (authVariables.authBtn as HTMLButtonElement).disabled = false;
+    authVariables.isValidate = true;
+  }
+}
+
+export function showTextError(textError: string) {
+  const titleAuth = document.getElementById(
+    'authentication-title'
+  ) as HTMLElement;
+
+  const elementError = document.querySelector('.auth-error__title');
+
+  if (!elementError) {
+    const element = document.createElement('p');
+
+    element.textContent = textError;
+    element.classList.add('auth-error__title');
+
+    titleAuth.insertAdjacentElement('afterend', element);
+    (authVariables.authBtn as HTMLButtonElement).disabled = true;
   }
 }
 

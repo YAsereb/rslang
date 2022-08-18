@@ -1,20 +1,14 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .authentication-block {
-  max-width: 600px;
-  padding: 2rem 4rem;
-  border: 2px solid #c31162;
-  border-radius: 1.875rem;
+  max-width: 60rem;
+  padding: 4rem 5rem;
+  border: 3px solid #c31162;
+  border-radius: 2rem;
   h3 {
     text-align: center;
     font-weight: 500;
-    font-size: 3rem;
-    line-height: 4.5rem;
-    margin-bottom: 1.875rem;
+    font-size: 4.8rem;
+    line-height: 5rem;
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -23,6 +17,7 @@
   flex-direction: column;
   align-items: center;
   box-sizing: inherit;
+  padding: 1.5rem 0;
   input {
     width: 100%;
     padding: 0.8rem 1rem;
@@ -37,13 +32,17 @@
   button {
     width: 80%;
     padding: 1rem 0;
-    background-color: #c31162;
+    background-color: #124bcd;
     border: none;
     border-radius: 1.5rem;
     font-size: 0.875rem;
     line-height: 1.375rem;
     font-weight: 500;
     color: #ffffff;
+    &:disabled {
+      background-color: #61739c;
+      cursor: default;
+    }
   }
 }
 
@@ -63,9 +62,14 @@
   }
 }
 
-.error-input {
-  border: 2px solid #c31162 !important;
+.auth-error__input {
+  border: 1px solid #c31162 !important;
   &::placeholder {
     color: #c31162;
   }
+}
+
+.auth-error__title {
+  text-align: center;
+  color: #c31162;
 }
