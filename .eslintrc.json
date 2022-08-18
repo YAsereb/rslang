@@ -22,7 +22,10 @@
     "@typescript-eslint/no-explicit-any": 2,
     "import/extensions": "off",
     "comma-dangle": "off",
-    "@typescript-eslint/comma-dangle": "off"
+    "@typescript-eslint/comma-dangle": "off",
+    "indent": "off",
+    "no-use-before-define": ["error", { "functions": false, "classes": false }],
+    "operator-linebreak": "off"
   },
   "settings": {
     "import/resolver": {
