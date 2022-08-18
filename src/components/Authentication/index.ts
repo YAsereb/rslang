@@ -99,8 +99,6 @@ function handleForm(e: Event) {
     } else {
       loginUser(user);
     }
-  } else {
-    (authVariables.authBtn as HTMLButtonElement).disabled = true;
   }
 }
 
@@ -117,6 +115,7 @@ function handlePasswordValidate() {
     (authVariables.passwordInput as HTMLInputElement).classList.add(
       'auth-error__input'
     );
+    (authVariables.authBtn as HTMLButtonElement).disabled = true;
     authVariables.isValidate = false;
   }
 }
@@ -128,6 +127,7 @@ function handleEmailValidate() {
     (authVariables.emailInput as HTMLInputElement).classList.add(
       'auth-error__input'
     );
+    (authVariables.authBtn as HTMLButtonElement).disabled = true;
     authVariables.isValidate = false;
   } else if (!(authVariables.emailInput as HTMLInputElement).validity.valid) {
     handleErrorEmailInput();
@@ -141,6 +141,7 @@ export function handleErrorEmailInput() {
   (authVariables.emailInput as HTMLInputElement).classList.add(
     'auth-error__input'
   );
+  (authVariables.authBtn as HTMLButtonElement).disabled = true;
   authVariables.isValidate = false;
 }
 
