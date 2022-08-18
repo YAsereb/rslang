@@ -1,5 +1,5 @@
 import { createUser, loginUser } from '../../api/Authentication';
-import './style.css';
+import './style.scss';
 
 const authVariables = {
   isSignUp: true,
