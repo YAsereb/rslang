@@ -1,7 +1,8 @@
-import renderAuthentication from './components/Authentication';
+import renderDictionaryPage from './components/DictionaryPage';
+import './style.css';
 
 function start() {
-  renderAuthentication();
+  renderDictionaryPage();
 }
 
 start();
