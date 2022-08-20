@@ -9,7 +9,7 @@ function renderMain() {
   <main class="main">
     <article class="article">
       <h2 class="article-header">О нас</h2>
-      <p class="article-text">Добро пожаловать в приложения  Rslang, приложение для изучения английского языка в игровой форме</p>
+      <p class="article-text">Добро пожаловать в приложения  Rslang - приложение для изучения английского языка в игровой форме</p>
     </article>
     <article class="article">
       <h2 class="article-header">Наши возможности</h2>
