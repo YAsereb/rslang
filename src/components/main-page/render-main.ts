@@ -1,4 +1,4 @@
-import renderNavigation from './navigation/render-navigation';
+import renderNavigation from './compomemts/navigation/render-navigation';
 import './style.scss';
 
 function renderMain() {

@@ -1,10 +1,10 @@
+import './header.scss';
+
 function renderHeader() {
   return `
   <header class="header">
-    <div id="home">
-    <a href="#">Home</a>
-    <a href="#sign-in" id="sign-up">Sign up</a>
-    </div>
+      <a href="#" class="home-button"></a>
+      <a href="#sign-in" id="sign-up" class="sign-up-button">Sign up</a>
   </header>
  `;
 }
