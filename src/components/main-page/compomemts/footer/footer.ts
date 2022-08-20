@@ -1,5 +1,6 @@
-import gitHubIcon from '../../assets/icon/GitHub-ico.png';
-import rsschoolIcon from '../../assets/icon/rs_school_js.svg';
+import gitHubIcon from '../../../../assets/icon/GitHub-ico.png';
+import rsschoolIcon from '../../../../assets/icon/rs_school_js.svg';
+import './footer.scss';
 
 function renderFooter() {
   return `

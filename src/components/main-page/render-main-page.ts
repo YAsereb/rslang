@@ -1,5 +1,5 @@
-import renderFooter from './footer';
-import renderHeader from './header';
+import renderFooter from './compomemts/footer/footer';
+import renderHeader from './compomemts/header/header';
 import renderMain from './render-main';
 
 function renderMainPage() {
