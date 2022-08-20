@@ -8,6 +8,9 @@ const getRouter = () => {
 const handleRouter = () => {
   const href = getRouter();
   switch (href) {
+    case 'sign-in':
+      console.log('sign-in');
+      break;
     case 'electronic-book':
       console.log('electronic-book');
       break;

@@ -3,7 +3,7 @@ function renderHeader() {
   <header class="header">
     <div id="home">
     <a href="#">Home</a>
-    <button id="sign-up">Sign up</button>
+    <a href="#sign-in" id="sign-up">Sign up</a>
     </div>
   </header>
  `;
