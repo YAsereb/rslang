@@ -1,12 +1,12 @@
 import renderMainPage from './components/main-page/render-main-page';
 
-const getRouter = () => {
+function getHash() {
   const hash: string = window.location.hash ? window.location.hash.slice(1) : '';
   return hash;
-};
+}
 
-const handleRouter = () => {
-  const href = getRouter();
+function handleRouter() {
+  const href = getHash();
   switch (href) {
     case 'sign-in':
       console.log('sign-in');
@@ -36,11 +36,11 @@ const handleRouter = () => {
       renderMainPage();
       break;
   }
-};
+}
 
-export const routeInit = () => {
+export function routeInit() {
   renderMainPage();
   window.addEventListener('hashchange', handleRouter);
-};
+}
 
-export default getRouter;
+export default routeInit;
