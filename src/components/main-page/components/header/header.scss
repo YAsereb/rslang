@@ -9,7 +9,9 @@
     width: 8rem;
     height: 3rem;
     font-size: 1.5rem;
-    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     border: solid 0.2rem black;
     border-radius: 1rem;
