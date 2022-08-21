@@ -6,25 +6,29 @@ function renderFooter() {
   return `
   <footer class="footer">
     <div class="RSschool">
-      <a href="https://rs.school/js/">
-        <img src="${rsschoolIcon}" alt="School-icon">
+      <a href="https://rs.school/js/" class="link">
+        <img src="${rsschoolIcon}" alt="School-icon" class="school-icon">
       </a>
     </div>
     <div class="developer">
-      <a href="https://github.com/YAsereb">Serebrenikov Yaroslav
+      <a href="https://github.com/YAsereb"  class="link">
         <img src="${gitHubIcon}" class="gitHub-icon" alt="gitHub-icon">
+        <p class="link-name">YAsereb</p>
       </a>
     </div>
     <div class="developer">
-      <a href="https://github.com/SEvk4a">
+      <a href="https://github.com/SEvk4a"  class="link">
         <img src="${gitHubIcon}" class="gitHub-icon" alt="gitHub-icon">
+        <p class="link-name">SEvk4a</p>
       </a>
     </div>
     <div class="developer">
-      <a href="https://github.com/zhentosmak">
+      <a href="https://github.com/zhentosmak"  class="link">
         <img src="${gitHubIcon}" class="gitHub-icon" alt="gitHub-icon">
+        <p class="link-name">zhentosmak</p>
       </a>
     </div>
+    <p class="link-name">@2022</p>
   </footer>
   `;
 }
