@@ -1,7 +1,7 @@
-import renderAuthentication from './components/Authentication';
+import audioGameStart from './components/audio-game';
 
 function start() {
-  renderAuthentication();
+  audioGameStart();
 }
 
 start();
