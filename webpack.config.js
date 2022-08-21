@@ -48,10 +48,18 @@ const baseConfig = {
     new EslintPlugin({ extensions: 'ts' }),
     new CopyPlugin({
       patterns: [
-        { from: 'source', to: 'dest' },
-        { from: 'other', to: 'public' },
+        {
+          from: path.resolve(__dirname, 'src/assets'),
+          to: path.resolve(__dirname, './dist/assets'),
+          noErrorOnMissing: true,
+        },
+        {
+          from: path.resolve(__dirname, 'src/files'),
+          to: path.resolve(__dirname, './dist/files'),
+          noErrorOnMissing: true,
+        },
       ],
-    })
+    }),
   ],
   experiments: {
     topLevelAwait: true,
