@@ -1,8 +1,5 @@
-import getWords from './api';
-import { getRandomIndex, getWordsArray } from './game';
+import { renderWords } from './render';
 
 export default async function audioGameStart() {
-  const words = await getWords();
-  const a = getWordsArray(words);
-  console.log(a);
+  renderWords();
 }

@@ -16,3 +16,9 @@ export type Word = {
 }
 
 export type Words = Word[];
+
+export type State = {
+  page: number,
+  group: number,
+  trueWordId: string,
+}
