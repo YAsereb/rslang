@@ -1,13 +1,24 @@
 import { Words } from '../../types';
+// import { getWord } from './api';
+import { state } from './state';
 
 export function getRandomIndex(words: Words) {
   const randomIndex = Math.floor((Math.random() * words.length));
   return randomIndex;
 }
 
+// export async function getAudioSrc(id: string) {
+//   const word = await getWord(id);
+//   const src = word.audioExample;
+//   return src;
+// }
+
 export function getWordsArray(words: Words) {
   const trueIndex = getRandomIndex(words);
   const trueWord = words[trueIndex];
+
+  state.trueWordAudio = trueWord.audio;
+  state.trueWordAudioExample = trueWord.audioExample;
 
   console.log(trueWord);
   let i = 0;

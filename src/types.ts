@@ -21,4 +21,6 @@ export type State = {
   page: number,
   group: number,
   trueWordId: string,
+  trueWordAudio: string,
+  trueWordAudioExample: string
 }

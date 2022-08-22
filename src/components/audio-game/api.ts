@@ -1,9 +1,9 @@
-import { Words } from '../../types';
+import { Words, Word } from '../../types';
 
 const baseLink = 'http://localhost:8000';
 
-export async function getWord(id: number) {
-  const word = await (await fetch(`${baseLink}/word${id}`));
+export async function getWord(id: string): Promise<Word> {
+  const word: Word = await (await (await fetch(`${baseLink}/word/${id}`)).json());
   return word;
 }
 

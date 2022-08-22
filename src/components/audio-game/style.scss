@@ -1,0 +1,15 @@
+.wrapper-words {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.word {
+  width: 3rem;
+  height: 1.5rem;
+  border: solid 0.2rem black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
