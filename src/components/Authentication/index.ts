@@ -1,15 +1,21 @@
 import { createUser, loginUser } from '../../api/Authentication';
+import { IAuthVariables } from '../../types/everydayTypes/authentication';
 import './style.scss';
 
-const authVariables = {
+const authVariables: IAuthVariables = {
   isSignUp: true,
   isValidate: true,
-  authBtn: '' as string | HTMLButtonElement,
-  emailInput: '' as string | HTMLInputElement,
-  passwordInput: '' as string | HTMLInputElement,
+  authBtn: '',
+  emailInput: '',
+  passwordInput: '',
 };
 
 function renderAuthentication() {
+  renderHtmlAuth();
+  handleListeners();
+}
+
+function renderHtmlAuth() {
   const body = document.querySelector('body') as HTMLElement;
 
   body.innerHTML = '';
@@ -41,8 +47,6 @@ function renderAuthentication() {
                     `;
 
   body.append(block);
-
-  handleListeners();
 }
 
 function handleListeners() {
@@ -60,7 +64,7 @@ function handleListeners() {
   ) as HTMLInputElement;
 
   authVariables.authBtn.addEventListener('click', handleForm);
-  changeAuthBtn.addEventListener('click', changeAuthentication);
+  changeAuthBtn.addEventListener('click', toggleAuthentication);
   authVariables.emailInput.addEventListener('input', () => {
     deleteErrors('E-mail', 'email');
   });
@@ -69,7 +73,7 @@ function handleListeners() {
   });
 }
 
-function changeAuthentication(e: Event) {
+function toggleAuthentication(e: Event) {
   const target = e.target as HTMLElement;
 
   if (target.textContent === 'Sign up') {
