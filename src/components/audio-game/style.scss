@@ -1,15 +1,43 @@
+.audio-wrapper {
+  margin: 0 auto;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.audio-img {
+  width: 5rem;
+  height: 5rem;
+}
+
 .wrapper-words {
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
 }
 
 .word {
-  width: 3rem;
+  width: 4rem;
   height: 1.5rem;
   border: solid 0.2rem black;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.1s;
+}
+
+.word:hover {
+  cursor: pointer;
+  background-color: antiquewhite;
+}
+
+.winner-word {
+  background-color: green;
+}
+
+.lose-word {
+  background-color: red;
 }

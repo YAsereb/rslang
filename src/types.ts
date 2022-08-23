@@ -22,5 +22,6 @@ export type State = {
   group: number,
   trueWordId: string,
   trueWordAudio: string,
-  trueWordAudioExample: string
+  trueWordAudioExample: string,
+  imageSrc: string
 }

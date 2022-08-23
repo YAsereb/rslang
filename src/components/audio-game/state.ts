@@ -5,7 +5,8 @@ export const state: State = {
   group: 0,
   trueWordId: '',
   trueWordAudio: '',
-  trueWordAudioExample: ''
+  trueWordAudioExample: '',
+  imageSrc: ''
 };
 
 export const a = 1;

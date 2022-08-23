@@ -1,6 +1,7 @@
 import { Word } from '../../types';
 import { getWords } from './api';
 import { getWordsArray } from './game';
+import listener from './listener';
 import { state } from './state';
 import './style.scss';
 
@@ -17,12 +18,13 @@ export async function renderWords(page = 0, group = 0) {
 
   const html = `
   <div class="audio-wrapper">
-    <audio src="../../assets/${state.trueWordAudioExample}" class="audio" controls preload="auto"></audio>
-    <img>
-  </div>
-    <div class="wrapper-words">
-      ${wordsArray.map((word) => renderWord(word)).join('')}
+    <img src="../../assets/img/Sound-Audio.png" class="audio-img">
+    <audio src="../../assets/${state.trueWordAudioExample}" class="audio" controls></audio>
+      <div class="wrapper-words">
+        ${wordsArray.map((word) => renderWord(word)).join('')}
+      </div>
     </div>
   `;
   mainHtml.innerHTML = html;
+  listener();
 }
