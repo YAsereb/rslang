@@ -23,5 +23,6 @@ export type State = {
   trueWordId: string,
   trueWordAudio: string,
   trueWordAudioExample: string,
-  imageSrc: string
+  imageSrc: string,
+  countAnswer: number
 }

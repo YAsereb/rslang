@@ -29,20 +29,21 @@ export function getWordsArray(words: Words) {
   return wordsArray;
 }
 
-export async function isTrueWord(element: HTMLElement) {
+async function handleAnswer() {
   const img = document.querySelector('.audio-img') as HTMLImageElement;
-
-  element.classList.add('winner-word');
   img.src = `../../assets/${state.imageSrc}`;
+  state.countAnswer += 1;
   setTimeout(await renderWords, 2000);
 }
 
-export async function isFalseWord(element: HTMLElement) {
-  const img = document.querySelector('.audio-img') as HTMLImageElement;
+export async function isTrueWord(element: HTMLElement) {
+  element.classList.add('winner-word');
+  handleAnswer();
+}
 
+export async function isFalseWord(element: HTMLElement) {
   element.classList.add('lose-word');
-  img.src = `../../assets/${state.imageSrc}`;
-  setTimeout(await renderWords, 2000);
+  handleAnswer();
 }
 
 export function handleAudioGame(event: Event) {
@@ -57,4 +58,10 @@ export function handleAudioGame(event: Event) {
   } else {
     isFalseWord(target);
   }
+}
+
+export function handlePlayAudio() {
+  const audioPlayer = document.querySelector('audio') as HTMLAudioElement;
+  audioPlayer.load();
+  audioPlayer.play();
 }

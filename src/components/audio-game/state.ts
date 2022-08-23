@@ -6,7 +6,8 @@ export const state: State = {
   trueWordId: '',
   trueWordAudio: '',
   trueWordAudioExample: '',
-  imageSrc: ''
+  imageSrc: '',
+  countAnswer: 0,
 };
 
 export const a = 1;

@@ -17,9 +17,10 @@ export async function renderWords(page = 0, group = 0) {
   const wordsArray = getWordsArray(words);
 
   const html = `
+  <div class="counter">${state.countAnswer}</div>
   <div class="audio-wrapper">
     <img src="../../assets/img/Sound-Audio.png" class="audio-img">
-    <audio src="../../assets/${state.trueWordAudioExample}" class="audio" controls></audio>
+    <audio src="../../assets/${state.trueWordAudioExample}" autoplay class="audio"></audio>
       <div class="wrapper-words">
         ${wordsArray.map((word) => renderWord(word)).join('')}
       </div>
