@@ -1,7 +1,8 @@
-import renderAuthentication from './components/Authentication';
+import { routeInit } from './router';
+import './style.css';
 
 function start() {
-  renderAuthentication();
+  routeInit();
 }
 
 start();
