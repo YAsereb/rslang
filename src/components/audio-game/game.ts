@@ -1,11 +1,11 @@
 import { Words } from '../../types';
-import { renderWords } from './render';
+import { endGame, renderWords } from './render';
 import { state } from './state';
 
 export function setRandomStatePage() {
   const min = 0;
   const max = 30;
-  const page = Math.random() * (max - min);
+  const page = Math.floor(Math.random() * (max - min));
   state.page = page;
 }
 
@@ -37,16 +37,6 @@ export function getWordsArray(words: Words) {
   return wordsArray;
 }
 
-export async function isTrueWord(element: HTMLElement) {
-  element.classList.add('winner-word');
-  handleAnswer();
-}
-
-export async function isFalseWord(element: HTMLElement) {
-  element.classList.add('lose-word');
-  handleAnswer();
-}
-
 export function setChosenToStateGroup(event: Event) {
   const target = event.target as HTMLElement;
   if (!target.classList.contains('group-level')) return;
@@ -64,9 +54,26 @@ export function handleGroup(event: Event) {
 async function handleAnswer() {
   const img = document.querySelector('.audio-img') as HTMLImageElement;
   img.src = `../../assets/${state.imageSrc}`;
+  setRandomStatePage();
 
   state.countAnswer += 1;
   setTimeout(await renderWords, 2000);
+}
+
+export async function isTrueWord(element: HTMLElement) {
+  element.classList.add('winner-word');
+  const word = element.textContent as string;
+  state.wordsStatistic.push({ word, answer: true });
+
+  handleAnswer();
+}
+
+export async function isFalseWord(element: HTMLElement) {
+  element.classList.add('lose-word');
+  const word = element.textContent as string;
+  state.wordsStatistic.push({ word, answer: false });
+
+  handleAnswer();
 }
 
 export function handleAudioGame(event: Event) {
@@ -89,6 +96,11 @@ export function handlePlayAudio() {
   audioPlayer.play();
 }
 
+export function playAudio() {
+  const audioPlayer = document.querySelector('audio') as HTMLAudioElement;
+  audioPlayer.play();
+}
+
 export function viewStatisticGame() {
-  console.log('finish game');
+  endGame();
 }

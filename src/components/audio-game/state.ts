@@ -7,7 +7,8 @@ export const state: State = {
   trueWordAudio: '',
   trueWordAudioExample: '',
   imageSrc: '',
-  countAnswer: 0,
+  countAnswer: 19,
+  wordsStatistic: []
 };
 
 export const a = 1;

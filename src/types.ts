@@ -17,6 +17,11 @@ export type Word = {
 
 export type Words = Word[];
 
+export type AnswerWord = {
+  word: string,
+  answer: boolean
+}
+
 export type State = {
   page: number,
   group: number,
@@ -24,5 +29,6 @@ export type State = {
   trueWordAudio: string,
   trueWordAudioExample: string,
   imageSrc: string,
-  countAnswer: number
+  countAnswer: number,
+  wordsStatistic: AnswerWord[]
 }

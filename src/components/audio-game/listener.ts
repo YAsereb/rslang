@@ -1,7 +1,6 @@
 import {
-  handleAudioGame, handleGroup, handlePlayAudio, viewStatisticGame
+  handleAudioGame, handleGroup, handlePlayAudio
 } from './game';
-import { state } from './state';
 
 export function listenerChooseGroup() {
   const groupButton = document.querySelector('#group') as HTMLElement;
@@ -14,5 +13,4 @@ export function listenerAnswer() {
 
   wordsButtons.addEventListener('click', handleAudioGame);
   audioButton.addEventListener('click', handlePlayAudio);
-  if (state.countAnswer > 20) viewStatisticGame();
 }
