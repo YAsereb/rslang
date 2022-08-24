@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
   entry: path.resolve(__dirname, './src/index.ts'),
@@ -45,6 +46,20 @@ const baseConfig = {
     }),
     new CleanWebpackPlugin(),
     new EslintPlugin({ extensions: 'ts' }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/assets'),
+          to: path.resolve(__dirname, './dist/assets'),
+          noErrorOnMissing: true,
+        },
+        {
+          from: path.resolve(__dirname, 'src/files'),
+          to: path.resolve(__dirname, './dist/files'),
+          noErrorOnMissing: true,
+        },
+      ],
+    }),
   ],
   experiments: {
     topLevelAwait: true,
