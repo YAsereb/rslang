@@ -1,8 +1,8 @@
-import renderDictionaryPage from './components/DictionaryPage';
+import routeInit from './router';
 import './style.css';
 
 function start() {
-  renderDictionaryPage();
+  routeInit();
 }
 
 start();
