@@ -1,6 +1,32 @@
-.audio-wrapper {
+.start-game {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.group-wrapper {
+  width: 50%;
+  height: 3rem;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-level {
+  width: 2rem;
+  height: 2rem;
+  border: solid 0.1rem black;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+.audio-wrapper {
   max-width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,16 +39,17 @@
 }
 
 .wrapper-words {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
 }
 
 .word {
-  width: 4rem;
+  max-width: 100%;
   height: 1.5rem;
-  border: solid 0.2rem black;
+  padding: 0.3rem;
+  border: solid 0.1rem black;
   display: flex;
   justify-content: center;
   align-items: center;

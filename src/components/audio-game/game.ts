@@ -2,10 +2,18 @@ import { Words } from '../../types';
 import { renderWords } from './render';
 import { state } from './state';
 
+export function setRandomStatePage() {
+  const min = 0;
+  const max = 30;
+  const page = Math.random() * (max - min);
+  state.page = page;
+}
+
 export function getRandomIndex(words: Words) {
   const randomIndex = Math.floor((Math.random() * words.length));
   return randomIndex;
 }
+
 export function getWordsArray(words: Words) {
   const trueIndex = getRandomIndex(words);
   const trueWord = words[trueIndex];
@@ -29,13 +37,6 @@ export function getWordsArray(words: Words) {
   return wordsArray;
 }
 
-async function handleAnswer() {
-  const img = document.querySelector('.audio-img') as HTMLImageElement;
-  img.src = `../../assets/${state.imageSrc}`;
-  state.countAnswer += 1;
-  setTimeout(await renderWords, 2000);
-}
-
 export async function isTrueWord(element: HTMLElement) {
   element.classList.add('winner-word');
   handleAnswer();
@@ -44,6 +45,28 @@ export async function isTrueWord(element: HTMLElement) {
 export async function isFalseWord(element: HTMLElement) {
   element.classList.add('lose-word');
   handleAnswer();
+}
+
+export function setChosenToStateGroup(event: Event) {
+  const target = event.target as HTMLElement;
+  if (!target.classList.contains('group-level')) return;
+  const group = target.textContent as string;
+  state.group = +group;
+}
+
+export function handleGroup(event: Event) {
+  setChosenToStateGroup(event);
+  setRandomStatePage();
+
+  renderWords(state.page, state.group);
+}
+
+async function handleAnswer() {
+  const img = document.querySelector('.audio-img') as HTMLImageElement;
+  img.src = `../../assets/${state.imageSrc}`;
+
+  state.countAnswer += 1;
+  setTimeout(await renderWords, 2000);
 }
 
 export function handleAudioGame(event: Event) {
@@ -64,4 +87,8 @@ export function handlePlayAudio() {
   const audioPlayer = document.querySelector('audio') as HTMLAudioElement;
   audioPlayer.load();
   audioPlayer.play();
+}
+
+export function viewStatisticGame() {
+  console.log('finish game');
 }
