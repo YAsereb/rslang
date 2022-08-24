@@ -1,7 +1,10 @@
+import renderDictionaryPage from './components/DictionaryPage';
 import renderMainPage from './components/main-page/render-main-page';
 
 function getHash() {
-  const hash: string = window.location.hash ? window.location.hash.slice(1) : '';
+  const hash: string = window.location.hash
+    ? window.location.hash.slice(1)
+    : '';
   return hash;
 }
 
@@ -12,7 +15,7 @@ function handleRouter() {
       console.log('sign-in');
       break;
     case 'electronic-book':
-      console.log('electronic-book');
+      renderDictionaryPage();
       break;
     case 'list-of-words':
       console.log('list-of-words');
@@ -38,8 +41,8 @@ function handleRouter() {
   }
 }
 
-export function routeInit() {
-  renderMainPage();
+function routeInit() {
+  handleRouter();
   window.addEventListener('hashchange', handleRouter);
 }
 

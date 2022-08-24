@@ -8,6 +8,8 @@ export const dictionaryVariables = {
 };
 
 function renderDictionaryPage() {
+  console.log(1);
+
   renderMainDictionary();
 }
 
