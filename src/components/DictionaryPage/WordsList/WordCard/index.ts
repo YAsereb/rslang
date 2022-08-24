@@ -1,8 +1,6 @@
-import IWordCard from '../../../types/interfaces/words';
+import IWordCard from '../../../../types/interfaces/words';
 
 function renderWordCard(e: IWordCard) {
-  console.log(e.textExample);
-
   return `<li>
             <div class="card-header" style="background-image: url(./${e.image})"}>
               <div class="card-header__overlay">

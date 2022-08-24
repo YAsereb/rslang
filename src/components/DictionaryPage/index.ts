@@ -1,26 +1,26 @@
-import './style.scss';
-import getAllWords from '../../api/Words';
-import IWordCard from '../../types/interfaces/words';
-import renderWordCard from './WordCard';
+import renderLevels from './Levels';
+import renderWordsList from './WordsList';
+
+export const dictionaryVariables = {
+  currentGroup: '0',
+  currentPage: 1,
+  prevPage: 1,
+};
 
 function renderDictionaryPage() {
   renderMainDictionary();
 }
 
-async function renderMainDictionary() {
+function renderMainDictionary() {
+  renderHtmlDictinaryPage();
+  renderLevels();
+  renderWordsList();
+}
+
+function renderHtmlDictinaryPage() {
   const { body } = document;
 
-  const words: IWordCard[] = await getAllWords();
-
   const main = document.createElement('main');
-
-  main.innerHTML = `
-                    <ul class="words-list">
-                        ${words.map((e) => renderWordCard(e)).join('')}
-                    </ul>
-  
-  
-                    `;
 
   body.append(main);
 }
