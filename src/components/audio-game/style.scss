@@ -8,9 +8,14 @@
   flex-direction: column;
 }
 
+.center-page {
+  width: 100%;
+  height: 100vh;
+}
+
 .start-game {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .group-wrapper {
@@ -31,15 +36,14 @@
 }
 
 .audio-wrapper {
-  max-width: 80%;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .audio-img {
   width: 5rem;
   height: 5rem;
   display: block;
-  margin: 5rem;
+  margin: 2rem;
 }
 
 .wrapper-words {
@@ -68,4 +72,35 @@
 
 .lose-word {
   background-color: red;
+}
+
+.words-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.word-card {
+  width: 50rem;
+  height: 5rem;
+  padding: 1rem;
+}
+
+.true-answer,
+.false-answer {
+  width: 100%;
+  height: 4rem;
+
+  .sound-icon {
+    width: 2rem;
+    height: 2rem;
+    padding-left: 1rem;
+  }
+}
+
+.counter {
+  width: 3rem;
+  height: 2rem;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
 }

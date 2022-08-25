@@ -35,14 +35,20 @@ export function renderWord(word: Word) {
 
 export async function renderWords(page: number, group: number) {
   const mainHtml = document.querySelector('main') as HTMLElement;
+  mainHtml.classList.add('center-page');
+  mainHtml.classList.add('flex-center');
+
   const words = await getWords(page, group);
   const wordsArray = getWordsArray(words);
+  state.isButtonActive = false;
 
   const html = `
   <div class="counter">${state.countAnswer}/20</div>
   <div class="audio-wrapper flex-center flex-column">
     <img src="../../assets/img/Sound-Audio.png" class="audio-img">
-    <audio src="../../assets/${state.trueWordAudioExample}" class="audio"></audio>
+    <audio src="../../assets/${state.trueWordAudioExample}" class="audio">
+    </audio>
+    <p id="true-word" class="true-answer"></p>
       <div class="wrapper-words">
         ${wordsArray.map((word) => renderWord(word)).join('')}
       </div>
@@ -54,16 +60,27 @@ export async function renderWords(page: number, group: number) {
 }
 
 function renderAnswer(word: AnswerWord) {
-  const div = document.createElement('div');
-  if (word.answer) div.classList.add('true-answer');
-  div.classList.add('false-answer');
+  return `
+    <div class="word-card">
+      <div class="${word.answer}-answer flex-center">${word.word}
+        <img src="../../assets/icon/sound-icon.png"class="sound-icon" id="play"></div>
+      <div class="button-wrapper flex-center">
+        <button>TODO:на изучение</button>
+        <button>TODO:сложное</button>
+      </div>
+    </div>
+  `;
 }
 
 export function endGame() {
   const mainHtml = document.querySelector('main') as HTMLElement;
+  mainHtml.classList.add('center-page');
+  mainHtml.classList.add('flex-center');
+  console.log(state.wordsStatistic);
+
   const html = `
-  <div class="flex-center">
-    ${state.wordsStatistic.map((word) => renderAnswer(word))}
+  <div class="words-wrapper flex-center flex-column">
+    ${state.wordsStatistic.map((word) => renderAnswer(word)).join('')}
   </div>
   `;
   mainHtml.innerHTML = html;

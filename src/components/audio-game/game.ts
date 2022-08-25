@@ -1,5 +1,5 @@
 import { Words } from '../../types';
-import { endGame, renderWords } from './render';
+import { renderWords } from './render';
 import { state } from './state';
 
 export function setRandomStatePage() {
@@ -21,6 +21,7 @@ export function getWordsArray(words: Words) {
   state.trueWordAudio = trueWord.audio;
   state.trueWordAudioExample = trueWord.audioExample;
   state.trueWordId = trueWord.id;
+  state.trueWord = trueWord.word;
   state.imageSrc = trueWord.image;
 
   let i = 0;
@@ -53,6 +54,10 @@ export function handleGroup(event: Event) {
 
 async function handleAnswer() {
   const img = document.querySelector('.audio-img') as HTMLImageElement;
+  const trueWordParagraph = document.querySelector('#true-word') as HTMLElement;
+  trueWordParagraph.textContent = state.trueWord;
+  trueWordParagraph.hidden = false;
+
   img.src = `../../assets/${state.imageSrc}`;
   setRandomStatePage();
 
@@ -77,6 +82,7 @@ export async function isFalseWord(element: HTMLElement) {
 }
 
 export function handleAudioGame(event: Event) {
+  if (state.isButtonActive) return;
   const target = event.target as HTMLElement;
 
   if (!target.hasAttribute('id')) return;
@@ -85,8 +91,10 @@ export function handleAudioGame(event: Event) {
 
   if (id === state.trueWordId) {
     isTrueWord(target);
+    state.isButtonActive = true;
   } else {
     isFalseWord(target);
+    state.isButtonActive = true;
   }
 }
 
@@ -99,8 +107,4 @@ export function handlePlayAudio() {
 export function playAudio() {
   const audioPlayer = document.querySelector('audio') as HTMLAudioElement;
   audioPlayer.play();
-}
-
-export function viewStatisticGame() {
-  endGame();
 }

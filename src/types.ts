@@ -26,9 +26,11 @@ export type State = {
   page: number,
   group: number,
   trueWordId: string,
+  trueWord: string,
   trueWordAudio: string,
   trueWordAudioExample: string,
   imageSrc: string,
   countAnswer: number,
-  wordsStatistic: AnswerWord[]
+  wordsStatistic: AnswerWord[],
+  isButtonActive: boolean
 }

@@ -1,7 +1,5 @@
-import { viewStatisticGame } from './game';
-import { renderStartGame } from './render';
-import { state } from './state';
+import { renderStartGame, endGame } from './render';
 
 export default async function audioGameStart() {
-  renderStartGame();
+  endGame();
 }
