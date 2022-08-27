@@ -1,5 +1,5 @@
-import { renderStartGame, endGame } from './render';
+import { renderStartGame } from './render';
 
 export default async function audioGameStart() {
-  endGame();
+  renderStartGame();
 }

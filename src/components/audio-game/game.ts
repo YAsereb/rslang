@@ -1,4 +1,4 @@
-import { Words } from '../../types';
+import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
 import { state } from './state';
 
@@ -18,11 +18,12 @@ export function getWordsArray(words: Words) {
   const trueIndex = getRandomIndex(words);
   const trueWord = words[trueIndex];
 
-  state.trueWordAudio = trueWord.audio;
-  state.trueWordAudioExample = trueWord.audioExample;
   state.trueWordId = trueWord.id;
   state.trueWord = trueWord.word;
+  state.trueWordAudio = trueWord.audio;
+  state.trueWordAudioExample = trueWord.audioExample;
   state.imageSrc = trueWord.image;
+  state.wordTranslate = trueWord.wordTranslate;
 
   let i = 0;
   const wordsArray: Words = [trueWord];
@@ -65,19 +66,29 @@ async function handleAnswer() {
   setTimeout(await renderWords, 2000);
 }
 
-export async function isTrueWord(element: HTMLElement) {
-  element.classList.add('winner-word');
-  const word = element.textContent as string;
-  state.wordsStatistic.push({ word, answer: true });
+function addTrueWord({ trueWord, trueWordAudio, wordTranslate }: AnswerWord) {
+  state.trueAnswers.push({ trueWord, trueWordAudio, wordTranslate });
+}
 
+function addFalseWord({ trueWord, trueWordAudio, wordTranslate }: AnswerWord) {
+  state.falseAnswers.push({ trueWord, trueWordAudio, wordTranslate });
+}
+
+function isTrueWord(element: HTMLElement) {
+  element.classList.add('winner-word');
+
+  const { trueWord, trueWordAudio, wordTranslate } = state;
+
+  addTrueWord({ trueWord, trueWordAudio, wordTranslate });
   handleAnswer();
 }
 
-export async function isFalseWord(element: HTMLElement) {
+function isFalseWord(element: HTMLElement) {
   element.classList.add('lose-word');
-  const word = element.textContent as string;
-  state.wordsStatistic.push({ word, answer: false });
 
+  const { trueWord, trueWordAudio, wordTranslate } = state;
+
+  addFalseWord({ trueWord, trueWordAudio, wordTranslate });
   handleAnswer();
 }
 
@@ -100,11 +111,21 @@ export function handleAudioGame(event: Event) {
 
 export function handlePlayAudio() {
   const audioPlayer = document.querySelector('audio') as HTMLAudioElement;
+
   audioPlayer.load();
   audioPlayer.play();
 }
 
 export function playAudio() {
   const audioPlayer = document.querySelector('audio') as HTMLAudioElement;
+
+  audioPlayer.play();
+}
+
+export function playAudioEndGame(event: Event) {
+  const target = event.target as HTMLElement;
+  const audioPlayer = target.nextElementSibling as HTMLAudioElement;
+  audioPlayer.muted = false;
+
   audioPlayer.play();
 }

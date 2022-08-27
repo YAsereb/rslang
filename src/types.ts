@@ -1,25 +1,26 @@
 export type Word = {
-  id: 'string',
+  id: string,
   group: number,
   page: number,
-  word: 'string',
-  image: 'string',
-  audio: 'string',
-  audioMeaning: 'string',
-  audioExample: 'string',
-  textMeaning: 'string',
-  textExample: 'string',
-  transcription: 'string',
-  wordTranslate: 'string',
-  textMeaningTranslate: 'string',
-  textExampleTranslate: 'string'
+  word: string,
+  image: string,
+  audio: string,
+  audioMeaning: string,
+  audioExample: string,
+  textMeaning: string,
+  textExample: string,
+  transcription: string,
+  wordTranslate: string,
+  textMeaningTranslate: string,
+  textExampleTranslate: string
 }
 
 export type Words = Word[];
 
 export type AnswerWord = {
-  word: string,
-  answer: boolean
+  trueWord: string,
+  trueWordAudio: string,
+  wordTranslate: string
 }
 
 export type State = {
@@ -31,6 +32,8 @@ export type State = {
   trueWordAudioExample: string,
   imageSrc: string,
   countAnswer: number,
-  wordsStatistic: AnswerWord[],
+  wordTranslate: string,
+  trueAnswers: AnswerWord[]
+  falseAnswers: AnswerWord[]
   isButtonActive: boolean
 }

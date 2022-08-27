@@ -1,5 +1,5 @@
 import {
-  handleAudioGame, handleGroup, handlePlayAudio
+  handleAudioGame, handleGroup, handlePlayAudio, playAudioEndGame
 } from './game';
 import { endGame } from './render';
 import { state } from './state';
@@ -12,15 +12,19 @@ export function listenerChooseGroup() {
 export function listenerAnswer() {
   const wordsButtons = document.querySelector('.wrapper-words') as HTMLElement;
   const audioButton = document.querySelector('.audio-img ') as HTMLElement;
+
   if (state.countAnswer > 19) {
     endGame();
   }
+
   wordsButtons.addEventListener('click', handleAudioGame);
   audioButton.addEventListener('click', handlePlayAudio);
 }
 
 export function listenerStatistic() {
-  const playButton = document.querySelector('#play') as HTMLElement;
+  const playButtons = document.querySelectorAll('#play');
 
-  playButton.addEventListener('click', handlePlayAudio);
+  playButtons.forEach((button) => {
+    button.addEventListener('click', playAudioEndGame);
+  });
 }

@@ -9,15 +9,9 @@ export const state: State = {
   trueWordAudioExample: '',
   imageSrc: '',
   countAnswer: 18,
-  wordsStatistic: [{ word: 'fsdfs', answer: true },
-  { word: 'fsdfs', answer: true },
-  { word: 'fsdfs', answer: false },
-  { word: 'fsdfs', answer: true },
-  { word: 'fsdfs', answer: false },
-  { word: 'fsdfs', answer: true },
-  { word: 'fsdfs', answer: false },
-  { word: 'fsdfs', answer: true },
-  ],
+  wordTranslate: '',
+  trueAnswers: [],
+  falseAnswers: [],
   isButtonActive: false,
 
 };

@@ -1,7 +1,7 @@
 import { AnswerWord, Word } from '../../types';
 import { getWords } from './api';
 import { getWordsArray, playAudio } from './game';
-import { listenerAnswer, listenerChooseGroup } from './listener';
+import { listenerAnswer, listenerChooseGroup, listenerStatistic } from './listener';
 import { state } from './state';
 import './style.scss';
 
@@ -48,7 +48,7 @@ export async function renderWords(page: number, group: number) {
     <img src="../../assets/img/Sound-Audio.png" class="audio-img">
     <audio src="../../assets/${state.trueWordAudioExample}" class="audio">
     </audio>
-    <p id="true-word" class="true-answer"></p>
+    <p id="true-word" class="true-word"></p>
       <div class="wrapper-words">
         ${wordsArray.map((word) => renderWord(word)).join('')}
       </div>
@@ -62,11 +62,10 @@ export async function renderWords(page: number, group: number) {
 function renderAnswer(word: AnswerWord) {
   return `
     <div class="word-card">
-      <div class="${word.answer}-answer flex-center">${word.word}
-        <img src="../../assets/icon/sound-icon.png"class="sound-icon" id="play"></div>
-      <div class="button-wrapper flex-center">
-        <button>TODO:на изучение</button>
-        <button>TODO:сложное</button>
+      <div class="answers-item flex-start">
+        <img src="../../assets/icon/sound-icon.png"class="sound-icon" id="play">
+        <audio src="../../assets/${word.trueWordAudio}" muted></audio>
+        <p>${word.trueWord} &mdash; ${word.wordTranslate}</p>
       </div>
     </div>
   `;
@@ -74,14 +73,20 @@ function renderAnswer(word: AnswerWord) {
 
 export function endGame() {
   const mainHtml = document.querySelector('main') as HTMLElement;
-  mainHtml.classList.add('center-page');
-  mainHtml.classList.add('flex-center');
-  console.log(state.wordsStatistic);
 
   const html = `
-  <div class="words-wrapper flex-center flex-column">
-    ${state.wordsStatistic.map((word) => renderAnswer(word)).join('')}
+  <div class="answer-wrapper flex-center flex-column">
+    <div class="answers flex-column">
+      <p class="">Не знаю <span class="unknown-words">${state.falseAnswers.length}</span></p>
+        ${state.falseAnswers.map((word) => renderAnswer(word)).join('')}
+    </div>
+    <div class="answers flex-column">
+      <p class="">Знаю <span class="known-words">${state.trueAnswers.length}</span></p>
+        ${state.trueAnswers.map((word) => renderAnswer(word)).join('')}
+    </div>
   </div>
+
   `;
   mainHtml.innerHTML = html;
+  listenerStatistic();
 }
