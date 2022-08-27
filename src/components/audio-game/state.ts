@@ -1,5 +1,6 @@
 import { State } from '../../types';
 
+// eslint-disable-next-line import/prefer-default-export
 export const state: State = {
   page: 0,
   group: 0,
@@ -8,12 +9,9 @@ export const state: State = {
   trueWordAudio: '',
   trueWordAudioExample: '',
   imageSrc: '',
-  countAnswer: 18,
+  countAnswer: 0,
   wordTranslate: '',
   trueAnswers: [],
   falseAnswers: [],
   isButtonActive: false,
-
 };
-
-export const a = 1;
