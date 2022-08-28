@@ -24,6 +24,7 @@ export type AnswerWord = {
 }
 
 export type State = {
+  prevPage: string,
   page: number,
   group: number,
   trueWordId: string,
