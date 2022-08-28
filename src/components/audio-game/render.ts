@@ -2,7 +2,7 @@ import { AnswerWord, Word } from '../../types';
 import { getWords } from './api';
 import { getWordsArray, playAudio } from './game';
 import { listenerAnswer, listenerChooseGroup, listenerStatistic } from './listener';
-import { state } from './state';
+import { audioGameState } from './state';
 import './style.scss';
 
 export function renderStartGame() {
@@ -40,13 +40,13 @@ export async function renderWords(page: number, group: number) {
 
   const words = await getWords(page, group);
   const wordsArray = getWordsArray(words);
-  state.isButtonActive = false;
+  audioGameState.isButtonActive = false;
 
   const html = `
-  <div class="counter">${state.countAnswer}/20</div>
+  <div class="counter">${audioGameState.countAnswer}/20</div>
   <div class="audio-wrapper flex-center flex-column">
     <img src="../../assets/img/Sound-Audio.png" class="audio-img">
-    <audio src="../../assets/${state.trueWordAudioExample}" class="audio">
+    <audio src="../../assets/${audioGameState.trueWordAudioExample}" class="audio">
     </audio>
     <p id="true-word" class="true-word"></p>
       <div class="wrapper-words">
@@ -77,12 +77,12 @@ export function endGame() {
   const html = `
   <div class="answer-wrapper flex-center flex-column">
     <div class="answers flex-column">
-      <p class="">Не знаю <span class="unknown-words">${state.falseAnswers.length}</span></p>
-        ${state.falseAnswers.map((word) => renderAnswer(word)).join('')}
+      <p class="">Не знаю <span class="unknown-words">${audioGameState.falseAnswers.length}</span></p>
+        ${audioGameState.falseAnswers.map((word) => renderAnswer(word)).join('')}
     </div>
     <div class="answers flex-column">
-      <p class="">Знаю <span class="known-words">${state.trueAnswers.length}</span></p>
-        ${state.trueAnswers.map((word) => renderAnswer(word)).join('')}
+      <p class="">Знаю <span class="known-words">${audioGameState.trueAnswers.length}</span></p>
+        ${audioGameState.trueAnswers.map((word) => renderAnswer(word)).join('')}
     </div>
   </div>
 

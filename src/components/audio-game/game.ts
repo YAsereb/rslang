@@ -1,12 +1,12 @@
 import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
-import { state } from './state';
+import { audioGameState } from './state';
 
 export function setRandomStatePage() {
   const min = 0;
   const max = 30;
   const page = Math.floor(Math.random() * (max - min));
-  state.page = page;
+  audioGameState.page = page;
 }
 
 export function getRandomIndex(words: Words) {
@@ -18,12 +18,12 @@ export function getWordsArray(words: Words) {
   const trueIndex = getRandomIndex(words);
   const trueWord = words[trueIndex];
 
-  state.trueWordId = trueWord.id;
-  state.trueWord = trueWord.word;
-  state.trueWordAudio = trueWord.audio;
-  state.trueWordAudioExample = trueWord.audioExample;
-  state.imageSrc = trueWord.image;
-  state.wordTranslate = trueWord.wordTranslate;
+  audioGameState.trueWordId = trueWord.id;
+  audioGameState.trueWord = trueWord.word;
+  audioGameState.trueWordAudio = trueWord.audio;
+  audioGameState.trueWordAudioExample = trueWord.audioExample;
+  audioGameState.imageSrc = trueWord.image;
+  audioGameState.wordTranslate = trueWord.wordTranslate;
 
   let i = 0;
   const wordsArray: Words = [trueWord];
@@ -43,41 +43,41 @@ export function setChosenToStateGroup(event: Event) {
   const target = event.target as HTMLElement;
   if (!target.classList.contains('group-level')) return;
   const group = target.textContent as string;
-  state.group = +group;
+  audioGameState.group = +group;
 }
 
 export function handleGroup(event: Event) {
   setChosenToStateGroup(event);
   setRandomStatePage();
 
-  renderWords(state.page, state.group);
+  renderWords(audioGameState.page, audioGameState.group);
 }
 
 async function handleAnswer() {
   const img = document.querySelector('.audio-img') as HTMLImageElement;
   const trueWordParagraph = document.querySelector('#true-word') as HTMLElement;
-  trueWordParagraph.textContent = state.trueWord;
+  trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
 
-  img.src = `../../assets/${state.imageSrc}`;
+  img.src = `../../assets/${audioGameState.imageSrc}`;
   setRandomStatePage();
 
-  state.countAnswer += 1;
+  audioGameState.countAnswer += 1;
   setTimeout(await renderWords, 2000);
 }
 
 function addTrueWord({ trueWord, trueWordAudio, wordTranslate }: AnswerWord) {
-  state.trueAnswers.push({ trueWord, trueWordAudio, wordTranslate });
+  audioGameState.trueAnswers.push({ trueWord, trueWordAudio, wordTranslate });
 }
 
 function addFalseWord({ trueWord, trueWordAudio, wordTranslate }: AnswerWord) {
-  state.falseAnswers.push({ trueWord, trueWordAudio, wordTranslate });
+  audioGameState.falseAnswers.push({ trueWord, trueWordAudio, wordTranslate });
 }
 
 function isTrueWord(element: HTMLElement) {
   element.classList.add('winner-word');
 
-  const { trueWord, trueWordAudio, wordTranslate } = state;
+  const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
   handleAnswer();
@@ -86,26 +86,26 @@ function isTrueWord(element: HTMLElement) {
 function isFalseWord(element: HTMLElement) {
   element.classList.add('lose-word');
 
-  const { trueWord, trueWordAudio, wordTranslate } = state;
+  const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
   handleAnswer();
 }
 
 export function handleAudioGame(event: Event) {
-  if (state.isButtonActive) return;
+  if (audioGameState.isButtonActive) return;
   const target = event.target as HTMLElement;
 
   if (!target.hasAttribute('id')) return;
 
   const id = target.getAttribute('id');
 
-  if (id === state.trueWordId) {
+  if (id === audioGameState.trueWordId) {
     isTrueWord(target);
-    state.isButtonActive = true;
+    audioGameState.isButtonActive = true;
   } else {
     isFalseWord(target);
-    state.isButtonActive = true;
+    audioGameState.isButtonActive = true;
   }
 }
 

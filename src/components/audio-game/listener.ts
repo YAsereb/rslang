@@ -2,7 +2,7 @@ import {
   handleAudioGame, handleGroup, handlePlayAudio, playAudioEndGame
 } from './game';
 import { endGame } from './render';
-import { state } from './state';
+import { audioGameState } from './state';
 
 export function listenerChooseGroup() {
   const groupButton = document.querySelector('#group') as HTMLElement;
@@ -13,7 +13,7 @@ export function listenerAnswer() {
   const wordsButtons = document.querySelector('.wrapper-words') as HTMLElement;
   const audioButton = document.querySelector('.audio-img ') as HTMLElement;
 
-  if (state.countAnswer > 19) {
+  if (audioGameState.countAnswer > 19) {
     endGame();
   }
 
