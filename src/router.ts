@@ -1,5 +1,7 @@
-import renderDictionaryPage from './components/DictionaryPage';
+import renderAuthentication from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
+import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
+import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
 
 function getHash() {
   const hash: string = window.location.hash
@@ -10,15 +12,19 @@ function getHash() {
 
 function handleRouter() {
   const href = getHash();
+  const { body } = document;
+
+  body.innerHTML = '';
+
   switch (href) {
-    case 'sign-in':
-      console.log('sign-in');
+    case 'auth':
+      renderAuthentication();
       break;
-    case 'electronic-book':
+    case 'book':
+      renderBookPage();
+      break;
+    case 'dictionary':
       renderDictionaryPage();
-      break;
-    case 'list-of-words':
-      console.log('list-of-words');
       break;
     case 'audio-game':
       console.log('audio-game');

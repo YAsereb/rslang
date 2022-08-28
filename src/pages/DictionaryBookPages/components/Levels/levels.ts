@@ -1,5 +1,6 @@
-import { dictionaryVariables } from '..';
-import renderWordsList from '../WordsList';
+import dicAndBookVars from '../..';
+import renderBoardBook from '../../BookPage/components/BookBoard/bookBoard';
+
 import './style.scss';
 
 function renderLevels() {
@@ -54,7 +55,7 @@ function handleLevelsListeners() {
 
 function handleLevelsState() {
   const activeLevel = document.querySelector(
-    `[data-group="${dictionaryVariables.currentGroup}"]`
+    `[data-group="${dicAndBookVars.currentGroup}"]`
   );
 
   activeLevel?.classList.add('active-level');
@@ -68,11 +69,11 @@ function changeLevel(event: Event) {
 
     const groupNumber = card.getAttribute('data-group') as string;
 
-    if (groupNumber !== dictionaryVariables.currentGroup) {
-      dictionaryVariables.currentGroup = groupNumber;
-      dictionaryVariables.currentPage = 1;
+    if (Number(groupNumber) !== dicAndBookVars.currentGroup) {
+      dicAndBookVars.currentGroup = Number(groupNumber);
+      dicAndBookVars.currentPage = 1;
       addActiveStyle(card);
-      renderWordsList();
+      renderBoardBook();
     }
   }
 }

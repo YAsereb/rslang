@@ -3,7 +3,8 @@ interface IWordCard {
   audioExample: string;
   audioMeaning: string;
   group: number;
-  id: string;
+  id?: string;
+  _id?: string;
   image: string;
   page: number;
   textExample: string;
@@ -13,6 +14,12 @@ interface IWordCard {
   transcription: string;
   word: string;
   wordTranslate: string;
+  userWord: { optional: IUserWord };
 }
+
+type IUserWord = {
+  hard: boolean;
+  isDeleted: boolean;
+};
 
 export default IWordCard;

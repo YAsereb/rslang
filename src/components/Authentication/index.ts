@@ -16,37 +16,43 @@ function renderAuthentication() {
 }
 
 function renderHtmlAuth() {
-  const body = document.querySelector('body') as HTMLElement;
+  const { body } = document;
 
-  body.innerHTML = '';
+  const wrapper = document.createElement('div');
 
-  const block = document.createElement('div');
+  wrapper.classList.add('authentication-wrapper');
 
-  block.classList.add('authentication-block');
-
-  block.innerHTML = `
-                    <h3 id="authentication-title">${
-                      authVariables.isSignUp ? 'Sign In' : 'Sign Up'
-                    }</h3>
-                    <form class="authentication-form" id="authentication-form">
-                        <input type="email" value="" placeholder="E-mail" id="email-input" />
-                        <input type="password" value="" placeholder="Password" id="password-input" />
-                        <button id="authentication-btn">${
-                          authVariables.isSignUp ? 'SIGN IN' : 'SIGN UP'
-                        }</button>
-                    </form>
-                    <div class="authentication-text">
-                      <p id="authentication-text">${
-                        authVariables.isSignUp
-                          ? 'Dont have an account?'
-                          : 'Already have an account?'
-                      }</p><span id="change-authentication">${
+  wrapper.innerHTML = `
+                    
+                    <div class="authentication-block">
+                      <button class="close-btn">
+                        <svg>
+                          <use xlink:href="./assets/svg/sprite/wordCard.svg#delete"></use>
+                        </svg>
+                      </button>
+                      <h3 id="authentication-title">${
+                        authVariables.isSignUp ? 'Sign In' : 'Sign Up'
+                      }</h3>
+                      <form class="authentication-form" id="authentication-form">
+                          <input type="email" value="" placeholder="E-mail" id="email-input" />
+                          <input type="password" value="" placeholder="Password" id="password-input" />
+                          <button id="authentication-btn">${
+                            authVariables.isSignUp ? 'SIGN IN' : 'SIGN UP'
+                          }</button>
+                      </form>
+                      <div class="authentication-text">
+                        <p id="authentication-text">${
+                          authVariables.isSignUp
+                            ? 'Dont have an account?'
+                            : 'Already have an account?'
+                        }</p><span id="change-authentication">${
     authVariables.isSignUp ? 'Sign up' : 'Sign in'
   }</span>
+                      </div>
                     </div>
                     `;
 
-  body.append(block);
+  body.append(wrapper);
 }
 
 function handleListeners() {
@@ -62,6 +68,7 @@ function handleListeners() {
   authVariables.passwordInput = document.getElementById(
     'password-input'
   ) as HTMLInputElement;
+  const closeBtn = document.querySelector('.close-btn');
 
   authVariables.authBtn.addEventListener('click', handleForm);
   changeAuthBtn.addEventListener('click', toggleAuthentication);
@@ -71,6 +78,8 @@ function handleListeners() {
   authVariables.passwordInput.addEventListener('input', () => {
     deleteErrors('Password', 'password');
   });
+
+  closeBtn?.addEventListener('click', closeModal);
 }
 
 function toggleAuthentication(e: Event) {
@@ -195,6 +204,12 @@ export function showTextError(textError: string) {
     titleAuth.insertAdjacentElement('afterend', element);
     (authVariables.authBtn as HTMLButtonElement).disabled = true;
   }
+}
+
+export function closeModal() {
+  const prevHash = window.history;
+
+  prevHash.back();
 }
 
 export default renderAuthentication;

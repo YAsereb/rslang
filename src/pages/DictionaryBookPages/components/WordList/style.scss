@@ -1,7 +1,7 @@
 .words-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   li {
     width: 40rem;
     overflow: hidden;
@@ -11,24 +11,65 @@
   }
 }
 
+.hard-word__card {
+  border: 4px solid red;
+}
+
 .card-header {
   height: 26rem;
   width: auto;
   background-size: cover;
-  h3 {
-    font-size: 4rem;
-    font-weight: bold;
-  }
 }
 
 .card-header__overlay {
   display: flex;
-  text-align: right;
-  align-items: flex-end;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  padding: 0 2rem 1rem 0;
+  padding: 2rem 2rem 1rem;
   background: linear-gradient(transparent, rgb(195, 188, 152));
+}
+
+.buttons-block {
+  display: flex;
+  justify-content: space-between;
+  button {
+    background-color: transparent;
+    svg {
+      display: block;
+      height: 2.5rem;
+      width: 2.5rem;
+      transition: ease 0.3s;
+    }
+  }
+}
+
+.add-word__btn {
+  &:hover {
+    fill: green;
+  }
+}
+
+.back_word_btn {
+  &:hover {
+    fill: yellow;
+  }
+}
+
+.remove-word__btn {
+  &:hover {
+    fill: red;
+  }
+}
+
+.card-header__block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  h3 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
 }
 
 .card-header__info {

@@ -1,4 +1,5 @@
 import {
+  closeModal,
   handleErrorEmailInput,
   showTextError,
 } from '../../components/Authentication';
@@ -36,5 +37,10 @@ export async function loginUser(user: { email: string; password: string }) {
 
   if (response.status === 404 || response.status === 403) {
     showTextError('Invalid Email or Password!');
+  } else if (response.status === 200) {
+    const userData = await response.json();
+
+    localStorage.setItem('userData', JSON.stringify(userData));
+    closeModal();
   }
 }
