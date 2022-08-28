@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .RSschool {
+    width: 10rem;
+    height: 100%;
+  }
+
+  .school-icon {
+    width: 10rem;
+  }
+
+  .developer {
+    width: 10rem;
+    height: 5rem;
+  }
+
+  .gitHub-icon {
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+  }
+}

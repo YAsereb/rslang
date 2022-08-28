@@ -1,11 +1,8 @@
-import audioGameStart from './components/audio-game';
-import { audioGameState } from './components/audio-game/state';
+import { routeInit } from './router';
+import './style.css';
 
 function start() {
-  const { href } = window.location;
-  audioGameState.prevPage = href;
-
-  audioGameStart();
+  routeInit();
 }
 
 start();
