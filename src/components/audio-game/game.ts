@@ -59,7 +59,7 @@ async function handleAnswer() {
   trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
 
-  img.src = `../../assets/${audioGameState.imageSrc}`;
+  img.src = `../../${audioGameState.imageSrc}`;
   setRandomStatePage();
 
   audioGameState.countAnswer += 1;
