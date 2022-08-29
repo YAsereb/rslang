@@ -1,12 +1,12 @@
 import renderHeader from '../../../components/main-page/components/header/header';
 import renderNavigation from '../../../components/main-page/components/navigation/render-navigation';
+import renderBoard from '../components/Board/board';
 import renderLevels from '../components/Levels/levels';
-import renderBoardBook from './components/BookBoard/bookBoard';
 
 function renderBookPage() {
   renderHtml();
   renderLevels();
-  renderBoardBook();
+  renderBoard();
 }
 
 function renderHtml() {

@@ -26,7 +26,8 @@
     "indent": "off",
     "no-use-before-define": ["error", { "functions": false, "classes": false }],
     "operator-linebreak": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-nested-ternary": "off"
   },
   "settings": {
     "import/resolver": {

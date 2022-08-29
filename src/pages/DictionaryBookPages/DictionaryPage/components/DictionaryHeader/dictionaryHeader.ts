@@ -1,7 +1,9 @@
-import renderBoardDictionary, {
-  dictionaryState,
-} from '../DictionaryBoard/dictionaryBoard';
+import renderBoard from '../../../components/Board/board';
 import './style.scss';
+
+export const dictionaryHeaderState = {
+  typeDictionary: 'hard',
+};
 
 function renderDictionaryHeader() {
   return `
@@ -24,14 +26,14 @@ function handleFilterDictionaryWords(event: Event) {
   const target = event.target as HTMLElement;
 
   if (target.textContent === 'Удаленные') {
-    dictionaryState.typeDictionary = 'deleted';
-    renderBoardDictionary();
+    dictionaryHeaderState.typeDictionary = 'deleted';
+    renderBoard();
   } else if (target.textContent === 'Изучаемые') {
-    dictionaryState.typeDictionary = 'hard';
-    renderBoardDictionary();
+    dictionaryHeaderState.typeDictionary = 'hard';
+    renderBoard();
   } else if (target.textContent === 'Сложные') {
-    dictionaryState.typeDictionary = 'hard';
-    renderBoardDictionary();
+    dictionaryHeaderState.typeDictionary = 'hard';
+    renderBoard();
   }
 }
 

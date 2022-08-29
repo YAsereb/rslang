@@ -32,7 +32,6 @@
 
 .buttons-block {
   display: flex;
-  justify-content: space-between;
   button {
     background-color: transparent;
     svg {
@@ -50,7 +49,7 @@
   }
 }
 
-.back_word_btn {
+.back-word__btn {
   &:hover {
     fill: yellow;
   }

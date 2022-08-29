@@ -41,8 +41,28 @@ export async function postFilterUserWord(
   token: string,
   wordId: string
 ) {
-  await fetch(`${url}/users/${id}/words/${wordId}`, {
+  const response = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(filterState.filter),
+  });
+
+  if (response.status === 417) {
+    putFilterUserWord(id, token, wordId);
+  }
+}
+
+export async function putFilterUserWord(
+  id: string,
+  token: string,
+  wordId: string
+) {
+  await fetch(`${url}/users/${id}/words/${wordId}`, {
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
@@ -52,7 +72,7 @@ export async function postFilterUserWord(
   });
 }
 
-export async function putFilterUserWord(
+export async function deleteFilterUserWord(
   id: string,
   token: string,
   wordId: string
@@ -66,9 +86,13 @@ export async function putFilterUserWord(
   });
 }
 
-export async function getAggregatedWords(id: number, token: number) {
+export async function getAggregatedWords(
+  id: number,
+  token: number,
+  limit: number
+) {
   const response = await fetch(
-    `${url}/users/${id}/aggregatedWords?filter=${filterState.typeFilter}&wordsPerPage=20`,
+    `${url}/users/${id}/aggregatedWords?filter=${filterState.typeFilter}&wordsPerPage=${limit}`,
     {
       method: 'GET',
       headers: {

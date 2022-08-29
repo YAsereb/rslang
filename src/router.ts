@@ -1,5 +1,6 @@
 import renderAuthentication from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
+import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
 
@@ -21,9 +22,11 @@ function handleRouter() {
       renderAuthentication();
       break;
     case 'book':
+      dicAndBookVars.isBookPage = true;
       renderBookPage();
       break;
     case 'dictionary':
+      dicAndBookVars.isBookPage = false;
       renderDictionaryPage();
       break;
     case 'audio-game':

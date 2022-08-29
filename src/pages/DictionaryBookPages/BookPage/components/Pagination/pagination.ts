@@ -1,5 +1,5 @@
 import dicAndBookVars from '../../..';
-import renderBoardBook from '../BookBoard/bookBoard';
+import renderBoard from '../../../components/Board/board';
 import './style.scss';
 
 function renderPagination() {
@@ -80,7 +80,7 @@ function changePage(event: Event) {
   }
 
   if (dicAndBookVars.currentPage !== dicAndBookVars.prevPage) {
-    renderBoardBook();
+    renderBoard();
   }
 }
 

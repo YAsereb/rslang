@@ -1,5 +1,5 @@
 import dicAndBookVars from '../..';
-import renderBoardBook from '../../BookPage/components/BookBoard/bookBoard';
+import renderBoard from '../Board/board';
 
 import './style.scss';
 
@@ -73,7 +73,7 @@ function changeLevel(event: Event) {
       dicAndBookVars.currentGroup = Number(groupNumber);
       dicAndBookVars.currentPage = 1;
       addActiveStyle(card);
-      renderBoardBook();
+      renderBoard();
     }
   }
 }
