@@ -1,3 +1,4 @@
+import audioGameStart from './components/audio-game';
 import renderAuthentication from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
@@ -30,16 +31,10 @@ function handleRouter() {
       renderDictionaryPage();
       break;
     case 'audio-game':
-      console.log('audio-game');
+      audioGameStart();
       break;
     case 'sprint-game':
       console.log('list-of-words');
-      break;
-    case 'progress':
-      console.log('progress');
-      break;
-    case 'studied-words':
-      console.log('studied-words');
       break;
     case 'statistics':
       console.log('statistics');
