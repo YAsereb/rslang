@@ -5,12 +5,14 @@ import renderMain from './components/main/render-main';
 
 function renderMainPage() {
   const { body } = document;
+
   const html = `
    ${renderHeader()}
    ${renderNavigation()}
    ${renderMain()}
    ${renderFooter()}
   `;
+
   body.innerHTML = html;
 }
 

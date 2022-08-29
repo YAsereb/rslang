@@ -1,4 +1,4 @@
-import { routeInit } from './router';
+import routeInit from './router';
 import './style.css';
 
 function start() {
