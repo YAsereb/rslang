@@ -18,7 +18,7 @@ function handleGeneralStateURL(url: string) {
   generalState.currentURL = url;
 }
 
-function handleRouter() {
+export function handleRouter() {
   const href = getHash();
 
   const { body } = document;
