@@ -4,22 +4,27 @@ import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
-import { generalState } from './types/everydayTypes/gengeralState';
+import { generalState } from './types/everydayTypes/generalState';
 
 function getHash() {
   const hash: string = window.location.hash
     ? window.location.hash.slice(1)
     : '';
-  window.history.pushState({ prevUrl: window.location.hash }, '', '');
   return hash;
+}
+
+function handleGeneralStateURL(url: string) {
+  generalState.previousURL = generalState.currentURL;
+  generalState.currentURL = url;
 }
 
 function handleRouter() {
   const href = getHash();
-  console.log(window.history.state);
+
   const { body } = document;
 
   body.innerHTML = '';
+  handleGeneralStateURL(href);
 
   switch (href) {
     case 'auth':
@@ -38,6 +43,7 @@ function handleRouter() {
       break;
     case 'sprint-game':
       console.log('sprint-game');
+
       break;
     case 'statistics':
       console.log('statistics');

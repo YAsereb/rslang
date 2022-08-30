@@ -1,10 +1,11 @@
-import { renderStartGame } from './render';
-// import { audioGameState } from './state';
+import { generalState } from '../../types/everydayTypes/generalState';
+import { renderStartGame, renderWords } from './render';
 
 export default function audioGameStart() {
-  // const baseLink = 'http://localhost:8000';
-  // if (audioGameState.prevPage === `${baseLink}`) renderStartGame();
-  renderStartGame();
-  // TODO: поменять сравнение;
-  // renderWords(this.page, this.gruop);
+  console.log(generalState.currentURL, generalState.previousURL);
+  if (generalState.previousURL !== 'book') {
+    renderStartGame();
+  } else {
+    renderWords(generalState.currentPage, generalState.currentGroup);
+  }
 }

@@ -8,6 +8,7 @@ import './style.scss';
 
 export function renderStartGame() {
   const { body } = document;
+  console.log('fsdfsfs');
 
   const html = `
     <div class="game-wrapper">
@@ -43,27 +44,32 @@ export function renderWord(word: Word) {
 }
 
 export async function renderWords(page: number, group: number) {
-  const mainHtml = document.querySelector('main') as HTMLElement;
-  mainHtml.classList.add('center-page');
-  mainHtml.classList.add('flex-center');
+  // const mainHtml = document.querySelector('main') as HTMLElement;
+  // mainHtml.classList.add('center-page');
+  // mainHtml.classList.add('flex-center');
+  const { body } = document;
 
   const words = await getWords(page, group);
   const wordsArray = getWordsArray(words);
   audioGameState.isButtonActive = false;
 
   const html = `
-  <div class="counter">${audioGameState.countAnswer}/20</div>
-  <div class="audio-wrapper flex-center flex-column">
-    <img src="../../assets/img/Sound-Audio.png" class="audio-img">
-    <audio src="../../${audioGameState.trueWordAudioExample}" class="audio">
-    </audio>
-    <p id="true-word" class="true-word"></p>
-      <div class="wrapper-words">
-        ${wordsArray.map((word) => renderWord(word)).join('')}
-      </div>
+  <div class="game-wrapper">
+    ${renderHeader()}
+  <main class="main flex-center">
+    <div class="counter">${audioGameState.countAnswer}/20</div>
+    <div class="audio-wrapper flex-center flex-column">
+      <img src="../../assets/img/Sound-Audio.png" class="audio-img">
+      <audio src="../../${audioGameState.trueWordAudioExample}" class="audio">
+      </audio>
+      <p id="true-word" class="true-word"></p>
+        <div class="wrapper-words">
+          ${wordsArray.map((word) => renderWord(word)).join('')}
+        </div>
     </div>
+  </main>
   `;
-  mainHtml.innerHTML = html;
+  body.innerHTML = html;
   setTimeout(playAudio, 800);
   listenerAnswer();
 }
