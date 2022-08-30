@@ -1,3 +1,9 @@
+
+
+const filter = {
+  isNew: true,
+}
+
 export function isNewWord(userId: string, wordId: string): Boolean {
   return false
 }
