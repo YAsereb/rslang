@@ -1,8 +1,10 @@
+import audioGameStart from './components/audio-game';
 import renderAuthPage from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
+import { generalState } from './types/everydayTypes/generalState';
 
 function getHash() {
   const hash: string = window.location.hash
@@ -11,11 +13,18 @@ function getHash() {
   return hash;
 }
 
-export function handleRouter() {
+function handleGeneralStateURL(url: string) {
+  generalState.previousURL = generalState.currentURL;
+  generalState.currentURL = url;
+}
+
+function handleRouter() {
   const href = getHash();
 
   const { body } = document;
+
   body.innerHTML = '';
+  handleGeneralStateURL(href);
 
   switch (href) {
     case 'auth':
@@ -30,7 +39,7 @@ export function handleRouter() {
       renderDictionaryPage();
       break;
     case 'audiocall':
-      console.log('audio-game');
+      audioGameStart();
       break;
     case 'sprint':
       console.log('list-of-words');
