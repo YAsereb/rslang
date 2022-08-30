@@ -3,6 +3,7 @@ import getAllWords, {
   filterState,
   getAggregatedWords,
 } from '../../../../api/Words';
+import { headerState } from '../../../../components/main-page/components/header/header';
 import renderPagination, {
   handlePaginationListeners,
   handlePaginationState,
@@ -35,9 +36,17 @@ export async function renderBoard() {
 
   const html = `
             <div class="board">
-              ${!dicAndBookVars.isBookPage ? renderDictionaryHeader() : ''}
+              ${
+                !dicAndBookVars.isBookPage && !headerState.isLogin
+                  ? '<h4>Нужно зарегаться</h4>'
+                  : ` ${
+                      !dicAndBookVars.isBookPage ? renderDictionaryHeader() : ''
+                    }
+              ${!boardState.words.length ? '<h4>Нету слов</h4>' : ''}
               ${renderWordsList(boardState.words)}
-              ${dicAndBookVars.isBookPage ? renderPagination() : ''}
+              ${dicAndBookVars.isBookPage ? renderPagination() : ''}`
+              }
+             
             </div> 
               `;
 
@@ -83,29 +92,31 @@ async function handleBookData() {
 async function handleDictionaryData() {
   const user = JSON.parse(localStorage.getItem('userData') as string);
 
-  const { userId, token } = user;
+  if (user) {
+    const { userId, token } = user;
 
-  if (dictionaryHeaderState.typeDictionary === 'deleted') {
-    filterState.typeFilter = JSON.stringify({
-      $and: [
-        { 'userWord.optional.isDeleted': true },
-        { group: dicAndBookVars.currentGroup },
-      ],
-    });
-  } else {
-    filterState.typeFilter = JSON.stringify({
-      $and: [
-        { 'userWord.optional.hard': true },
-        { group: dicAndBookVars.currentGroup },
-      ],
-    });
+    if (dictionaryHeaderState.typeDictionary === 'deleted') {
+      filterState.typeFilter = JSON.stringify({
+        $and: [
+          { 'userWord.optional.isDeleted': true },
+          { group: dicAndBookVars.currentGroup },
+        ],
+      });
+    } else {
+      filterState.typeFilter = JSON.stringify({
+        $and: [
+          { 'userWord.optional.hard': true },
+          { group: dicAndBookVars.currentGroup },
+        ],
+      });
+    }
+
+    boardState.words = await getAggregatedWords(
+      userId,
+      token,
+      dicAndBookVars.dictionaryLimit
+    );
   }
-
-  boardState.words = await getAggregatedWords(
-    userId,
-    token,
-    dicAndBookVars.dictionaryLimit
-  );
 }
 
 function handleListeners() {

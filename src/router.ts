@@ -1,5 +1,5 @@
 import audioGameStart from './components/audio-game';
-import renderAuthentication from './components/Authentication';
+import renderAuthPage from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
@@ -28,7 +28,7 @@ function handleRouter() {
 
   switch (href) {
     case 'auth':
-      renderAuthentication();
+      renderAuthPage();
       break;
     case 'book':
       dicAndBookVars.isBookPage = true;
@@ -38,12 +38,11 @@ function handleRouter() {
       dicAndBookVars.isBookPage = false;
       renderDictionaryPage();
       break;
-    case 'audio-game':
+    case 'audiocall':
       audioGameStart();
       break;
-    case 'sprint-game':
-      console.log('sprint-game');
-
+    case 'sprint':
+      console.log('list-of-words');
       break;
     case 'statistics':
       console.log('statistics');

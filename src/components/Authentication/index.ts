@@ -10,13 +10,14 @@ const authVariables: IAuthVariables = {
   passwordInput: '',
 };
 
-function renderAuthentication() {
-  renderHtmlAuth();
-  handleListeners();
+function renderAuthPage() {
+  renderAuth();
 }
 
-function renderHtmlAuth() {
+function renderAuth() {
   const { body } = document;
+
+  body.innerHTML = '';
 
   const wrapper = document.createElement('div');
 
@@ -31,13 +32,15 @@ function renderHtmlAuth() {
                         </svg>
                       </button>
                       <h3 id="authentication-title">${
-                        authVariables.isSignUp ? 'Sign In' : 'Sign Up'
+                        authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
                       }</h3>
                       <form class="authentication-form" id="authentication-form">
-                          <input type="email" value="" placeholder="E-mail" id="email-input" />
-                          <input type="password" value="" placeholder="Password" id="password-input" />
+                          <label>Email</label>
+                          <input type="email" value="" placeholder="Write something" id="email-input" />
+                          <label>Password</label>
+                          <input type="password" value="" placeholder="Write something" id="password-input" />
                           <button id="authentication-btn">${
-                            authVariables.isSignUp ? 'SIGN IN' : 'SIGN UP'
+                            authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
                           }</button>
                       </form>
                       <div class="authentication-text">
@@ -46,13 +49,15 @@ function renderHtmlAuth() {
                             ? 'Dont have an account?'
                             : 'Already have an account?'
                         }</p><span id="change-authentication">${
-    authVariables.isSignUp ? 'Sign up' : 'Sign in'
+    authVariables.isSignUp ? 'Sign up' : 'Log in'
   }</span>
                       </div>
                     </div>
                     `;
 
   body.append(wrapper);
+
+  handleListeners();
 }
 
 function handleListeners() {
@@ -91,11 +96,13 @@ function toggleAuthentication(e: Event) {
     authVariables.isSignUp = true;
   }
 
-  renderAuthentication();
+  renderAuth();
 }
 
 function handleForm(e: Event) {
   e.preventDefault();
+
+  console.log(1);
 
   handleValidate();
 
@@ -108,6 +115,8 @@ function handleForm(e: Event) {
     if (
       (authVariables.authBtn as HTMLButtonElement).textContent === 'SIGN UP'
     ) {
+      console.log(1);
+
       createUser(user);
     } else {
       loginUser(user);
@@ -212,4 +221,4 @@ export function closeModal() {
   prevHash.back();
 }
 
-export default renderAuthentication;
+export default renderAuthPage;
