@@ -4,16 +4,19 @@ import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
+import { generalState } from './types/everydayTypes/gengeralState';
 
 function getHash() {
   const hash: string = window.location.hash
     ? window.location.hash.slice(1)
     : '';
+  window.history.pushState({ prevUrl: window.location.hash }, '', '');
   return hash;
 }
 
 function handleRouter() {
   const href = getHash();
+  console.log(window.history.state);
   const { body } = document;
 
   body.innerHTML = '';
@@ -34,7 +37,7 @@ function handleRouter() {
       audioGameStart();
       break;
     case 'sprint-game':
-      console.log('list-of-words');
+      console.log('sprint-game');
       break;
     case 'statistics':
       console.log('statistics');

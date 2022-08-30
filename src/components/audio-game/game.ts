@@ -1,6 +1,6 @@
 import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
-import { audioGameState } from './state';
+import { audioGameState } from '../../types/everydayTypes/audioGameState';
 
 export function setRandomStatePage() {
   const min = 0;
