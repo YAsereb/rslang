@@ -1,5 +1,5 @@
-export async function isNewWord() {
-  return Boolean
+export function isNewWord(userId: string, wordId: string): Boolean {
+  return false
 }
 
 export async function progressWord() {
