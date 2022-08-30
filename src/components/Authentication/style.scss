@@ -4,22 +4,30 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(184, 167, 163, 0.5);
-  padding: 0 2rem;
+  background: #3494e6;
+  background: -webkit-linear-gradient(to right, #ec6ead, #3494e6);
+  background: linear-gradient(to right, #ec6ead, #3494e6);
+  padding: 0 1rem;
 }
 
 .authentication-block {
   position: relative;
-  max-width: 60rem;
+  max-width: 50rem;
   margin: 5rem auto;
-  padding: 4rem 5rem;
-  background-color: #ffffff;
-  border-radius: 2rem;
+  padding: 14rem 7rem;
+  background: linear-gradient(
+      187.08deg,
+      #7cdcd6 5.52%,
+      rgba(255, 255, 255, 0) 106.67%
+    ),
+    #ecd0d0;
+  border-radius: 1rem;
   h3 {
     text-align: center;
-    font-weight: 500;
-    font-size: 4.8rem;
     line-height: 5rem;
+    font-weight: 500;
+    font-size: 3rem;
+    color: #ffffff;
     margin-bottom: 1.5rem;
   }
 }
@@ -33,43 +41,60 @@
     display: block;
     width: 2rem;
     height: 2rem;
-    fill: #124bcd;
+    fill: #fff;
     transition: ease 0.3s;
     &:hover {
-      fill: #c31162;
+      fill: #f5c8e6;
     }
   }
 }
 
 .authentication-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: inherit;
-  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  label {
+    color: #7e7e7e;
+    line-height: 3rem;
+    font-size: 1.4rem;
+  }
   input {
     width: 100%;
-    padding: 0.8rem 1rem;
+    height: 4rem;
+    padding-left: 1rem;
     margin-bottom: 1rem;
     background: #f7f8f8;
-    border: 2px solid #f7f8f8;
     border-radius: 1rem;
+    font-size: 1.6rem;
     &:focus {
       outline: none;
+      border: 0.1rem solid #67b26f;
+    }
+    &::placeholder {
+      font-size: 1.4rem;
+      opacity: 0.8;
     }
   }
   button {
-    width: 80%;
-    padding: 1rem 0;
-    background-color: #124bcd;
+    display: block;
+    width: 50%;
+    height: 3.5rem;
+    margin: 1rem auto 0;
+    background: linear-gradient(
+        109.78deg,
+        #6ad9cb 36.78%,
+        rgba(255, 255, 255, 0) 195.88%
+      ),
+      linear-gradient(
+        108.83deg,
+        #a9ec9f 164.82%,
+        rgba(255, 255, 255, 0) 210.24%
+      );
     border: none;
-    border-radius: 1.5rem;
-    font-size: 0.875rem;
-    line-height: 1.375rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
     font-weight: 500;
     color: #ffffff;
     &:disabled {
-      background-color: #61739c;
+      background: #7ba19c;
       cursor: default;
     }
   }
@@ -77,28 +102,30 @@
 
 .authentication-text {
   text-align: center;
-  font-size: 0.875rem;
-  line-height: 1.1875rem;
-  color: #c31162;
+  font-size: 1.6rem;
+  color: #7e7e7e;
   p {
     display: inline-flex;
   }
   span {
-    margin-left: 0.25rem;
+    margin-left: 0.5rem;
     cursor: pointer;
     font-weight: 600;
     text-decoration: underline;
+    color: #000;
   }
 }
 
 .auth-error__input {
-  border: 1px solid #c31162 !important;
+  border: 1px solid #f5c8e6 !important;
   &::placeholder {
-    color: #c31162;
+    color: #e72b89;
   }
 }
 
 .auth-error__title {
   text-align: center;
-  color: #c31162;
+  font-size: 1.4rem;
+  color: #9b5176;
+  font-weight: 500;
 }

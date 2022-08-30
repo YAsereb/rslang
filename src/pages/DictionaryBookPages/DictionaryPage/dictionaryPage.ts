@@ -1,5 +1,6 @@
-import renderHeader from '../../../components/main-page/components/header/header';
-import renderNavigation from '../../../components/main-page/components/navigation/render-navigation';
+import renderHeader, {
+  handleHeaderListeners,
+} from '../../../components/main-page/components/header/header';
 import renderBoard from '../components/Board/board';
 import renderLevels from '../components/Levels/levels';
 
@@ -7,6 +8,8 @@ function renderDictionaryPage() {
   renderHtml();
   renderLevels();
   renderBoard();
+
+  handleDictionaryPageListeners();
 }
 
 function renderHtml() {
@@ -14,11 +17,14 @@ function renderHtml() {
 
   const html = `
                 ${renderHeader()}
-                ${renderNavigation()}
                 <main></main>
   `;
 
   body.innerHTML = html;
+}
+
+function handleDictionaryPageListeners() {
+  handleHeaderListeners();
 }
 
 export default renderDictionaryPage;

@@ -1,4 +1,4 @@
-import renderAuthentication from './components/Authentication';
+import renderAuthPage from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
@@ -11,15 +11,15 @@ function getHash() {
   return hash;
 }
 
-function handleRouter() {
+export function handleRouter() {
   const href = getHash();
-  const { body } = document;
 
+  const { body } = document;
   body.innerHTML = '';
 
   switch (href) {
     case 'auth':
-      renderAuthentication();
+      renderAuthPage();
       break;
     case 'book':
       dicAndBookVars.isBookPage = true;
@@ -29,17 +29,11 @@ function handleRouter() {
       dicAndBookVars.isBookPage = false;
       renderDictionaryPage();
       break;
-    case 'audio-game':
+    case 'audiocall':
       console.log('audio-game');
       break;
-    case 'sprint-game':
+    case 'sprint':
       console.log('list-of-words');
-      break;
-    case 'progress':
-      console.log('progress');
-      break;
-    case 'studied-words':
-      console.log('studied-words');
       break;
     case 'statistics':
       console.log('statistics');

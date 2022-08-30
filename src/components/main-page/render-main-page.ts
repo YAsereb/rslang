@@ -1,6 +1,7 @@
 import renderFooter from './components/footer/footer';
-import renderHeader from './components/header/header';
-import renderNavigation from './components/navigation/render-navigation';
+import renderHeader, {
+  handleHeaderListeners,
+} from './components/header/header';
 import renderMain from './components/main/render-main';
 
 function renderMainPage() {
@@ -8,12 +9,17 @@ function renderMainPage() {
 
   const html = `
    ${renderHeader()}
-   ${renderNavigation()}
    ${renderMain()}
    ${renderFooter()}
   `;
 
   body.innerHTML = html;
+
+  handleMainPageListeners();
+}
+
+function handleMainPageListeners() {
+  handleHeaderListeners();
 }
 
 export default renderMainPage;

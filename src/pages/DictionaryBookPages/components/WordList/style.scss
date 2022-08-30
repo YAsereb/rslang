@@ -5,19 +5,29 @@
   li {
     width: 40rem;
     overflow: hidden;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     border-radius: 2.5rem;
-    background: rgb(195, 188, 152);
+    background: rgb(172, 134, 113);
   }
 }
 
-.hard-word__card {
-  border: 4px solid red;
+.words-list .hard-word__card {
+  background: #fff355 !important;
+  .card-header__overlay {
+    background: linear-gradient(transparent, #fff355);
+  }
+}
+
+.deleted-word__card {
+  background: #7b7b7b !important;
+  .card-header__overlay {
+    background: linear-gradient(transparent, #7b7b7b);
+  }
 }
 
 .card-header {
   height: 26rem;
-  width: auto;
+  width: 100%;
   background-size: cover;
 }
 
@@ -27,7 +37,7 @@
   justify-content: space-between;
   height: 100%;
   padding: 2rem 2rem 1rem;
-  background: linear-gradient(transparent, rgb(195, 188, 152));
+  background: linear-gradient(transparent, rgb(172, 134, 113));
 }
 
 .buttons-block {
@@ -40,24 +50,33 @@
       width: 2.5rem;
       transition: ease 0.3s;
     }
+    &:nth-child(1) {
+      margin-right: 0.5rem;
+    }
   }
 }
 
 .add-word__btn {
   &:hover {
-    fill: green;
+    fill: #a1ffce;
   }
 }
 
 .back-word__btn {
   &:hover {
-    fill: yellow;
+    fill: #faffd1;
   }
 }
 
 .remove-word__btn {
   &:hover {
-    fill: red;
+    fill: #de6161;
+  }
+}
+
+.save-word__btn {
+  &:hover {
+    fill: #a770ef;
   }
 }
 
@@ -65,6 +84,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: auto;
   h3 {
     font-size: 4rem;
     font-weight: bold;
@@ -73,9 +93,22 @@
 
 .card-header__info {
   display: flex;
+  align-items: center;
   font-size: 2rem;
   div {
     margin-right: 1.5rem;
+  }
+  button {
+    background-color: transparent;
+    svg {
+      display: block;
+      height: 2.5rem;
+      width: 2.5rem;
+      transition: 0.3s ease-in-out;
+      &:hover {
+        fill: #fff;
+      }
+    }
   }
 }
 
