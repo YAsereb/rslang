@@ -2,7 +2,7 @@ import {
   handleAudioGame, handleGroup, handlePlayAudio, playAudioEndGame
 } from './game';
 import { endGame } from './render';
-import { audioGameState } from './state';
+import { audioGameState } from '../../types/everydayTypes/audioGameState';
 
 export function listenerChooseGroup() {
   const groupButton = document.querySelector('#group') as HTMLElement;
