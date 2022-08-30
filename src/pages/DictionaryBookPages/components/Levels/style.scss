@@ -1,0 +1,82 @@
+.levels-list {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.level-card {
+  width: 20rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  background-color: #f3f4f8;
+  border-radius: 0.5rem;
+  color: #2c2647;
+  font-size: 1.6rem;
+  opacity: 0.4;
+  transition: ease 0.3s;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.level-card__left {
+  margin-right: 2rem;
+  font-size: 2rem;
+}
+
+.level-card__right {
+  z-index: 2;
+  font-size: 2.4rem;
+  color: #fff;
+}
+
+.circle {
+  position: absolute;
+  right: -5rem;
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+}
+
+.level-card {
+  &:nth-child(1) {
+    .circle {
+      background-color: #80ed99;
+    }
+  }
+  &:nth-child(2) {
+    .circle {
+      background-color: #fee440;
+    }
+  }
+  &:nth-child(3) {
+    .circle {
+      background-color: #ff9f1c;
+    }
+  }
+  &:nth-child(4) {
+    .circle {
+      background-color: #e71d36;
+    }
+  }
+  &:nth-child(5) {
+    .circle {
+      background-color: #9e2a2b;
+    }
+  }
+  &:nth-child(6) {
+    .circle {
+      background-color: #662e9b;
+    }
+  }
+}
+
+.active-level {
+  opacity: 1;
+}

@@ -1,0 +1,17 @@
+.dictionary-header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4rem;
+  button {
+    background-color: transparent;
+    color: rgba(100, 100, 100, 0.692);
+    font-size: 2.5rem;
+    padding: 1rem 2rem;
+    transition: ease 0.3s;
+  }
+  .acitive-btn {
+    color: #333;
+    font-weight: 700;
+    box-shadow: 0 3px 0 0 #333;
+  }
+}
