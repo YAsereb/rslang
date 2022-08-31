@@ -1,13 +1,11 @@
 .pagination {
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
-  background-color: #20b2aa;
   ul {
     display: flex;
     padding: 1rem;
     border-radius: 4rem;
-    background-color: #fff;
+    border: 2px solid #3f51b5;
     li {
       text-align: center;
       margin: 0 0.5rem;
@@ -31,13 +29,15 @@
   padding: 0 2rem;
   border-radius: 4rem;
   &:hover {
-    background: #20b2aa;
+    background: #3f51b5;
+    color: #fff;
   }
 }
 
 .pagination ul li .numb {
   &:hover {
-    background: #20b2aa;
+    background: #3f51b5;
+    color: #fff;
   }
 }
 
@@ -47,5 +47,6 @@
 }
 
 .active-page {
-  background-color: #20b2aa;
+  background-color: #3f51b5;
+  color: #fff;
 }

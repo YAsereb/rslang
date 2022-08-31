@@ -25,7 +25,7 @@ export async function getUserWordById(userId: string, wordId: string) {
 }
 
 // eslint-disable-next-line max-len
-export async function aggregatedWords(userId: string, _gruop?: string, _page?: string, _wordsPerPage?: string, _filter?: string) {
-  const words = await (await fetch(`${baseLink}/users/${userId}/aggregatedWords`)).json();
-  return words;
-}
+// export async function aggregatedWords(userId: string, _gruop?: string, _page?: string, _wordsPerPage?: string, _filter?: string) {
+//   const words = await (await fetch(`${baseLink}/users/${userId}/aggregatedWords`)).json();
+//   return words;
+// }
