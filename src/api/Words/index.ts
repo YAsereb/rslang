@@ -36,6 +36,11 @@ export async function getAllUserWords(id: number, token: number) {
   return data;
 }
 
+export async function getUserWordById(id: string, wordId: string) {
+  const word = await (await fetch(`${url}/users/${id}/words/${wordId}`)).json();
+  return word;
+}
+
 export async function postFilterUserWord(
   id: string,
   token: string,
