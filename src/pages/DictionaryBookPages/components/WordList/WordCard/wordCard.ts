@@ -51,8 +51,8 @@ function renderWordCard(word: IWordCard) {
               <button class="sound-word__btn" >
                 <svg>
                 <use xlink: href = "./assets/svg/sprite/wordCard.svg#volume" > </use>
-                  < /svg>
-                  < audio class="audio-word" src = "./${word.audio}" >
+                  </svg>
+                  <audio class="audio-word" src = "./${word.audio}" >
                     <audio class="audio-example" src = "./${word.audioExample}" >
                       <audio class="audio-meaning" src = "./${word.audioMeaning}" ></audio>
               </button>
