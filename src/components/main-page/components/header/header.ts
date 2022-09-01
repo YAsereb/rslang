@@ -1,4 +1,5 @@
 import { handleRouter } from '../../../../router';
+import { generalState } from '../../../../states/generalState';
 import './header.scss';
 
 export const headerState = {
@@ -44,9 +45,9 @@ function renderHeader() {
 }
 
 export function handleHeaderListeners() {
-  const logoutBtn = document.getElementById('sign-up');
+  const logoutBtn = document.getElementById('sign-up') as HTMLElement;
 
-  logoutBtn?.addEventListener('click', handleAuth);
+  logoutBtn.addEventListener('click', handleAuth);
 }
 
 function handleAuth(event: Event) {
@@ -62,10 +63,12 @@ function handleAuth(event: Event) {
 }
 
 function checkSsLogin() {
-  const user = localStorage.getItem('userData');
+  const user = localStorage.getItem('userData') as string;
 
   if (user) {
     headerState.isLogin = true;
+    generalState.token = JSON.parse(user).token;
+    generalState.userId = JSON.parse(user).userId;
   }
 }
 

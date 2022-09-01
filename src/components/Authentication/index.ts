@@ -1,4 +1,4 @@
-import { createUser, loginUser } from '../../api/Authentication';
+import { createUser, loginUser } from '../../api/Authentication/authApi';
 import { IAuthVariables } from '../../types/everydayTypes/authentication';
 import './style.scss';
 
@@ -31,26 +31,22 @@ function renderAuth() {
                           <use xlink:href="./assets/svg/sprite/wordCard.svg#delete"></use>
                         </svg>
                       </button>
-                      <h3 id="authentication-title">${
-                        authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
-                      }</h3>
+                      <h3 id="authentication-title">${authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
+    }</h3>
                       <form class="authentication-form" id="authentication-form">
                           <label>Email</label>
                           <input type="email" value="" placeholder="Write something" id="email-input" />
                           <label>Password</label>
                           <input type="password" value="" placeholder="Write something" id="password-input" />
-                          <button id="authentication-btn">${
-                            authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
-                          }</button>
+                          <button id="authentication-btn">${authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
+    }</button>
                       </form>
                       <div class="authentication-text">
-                        <p id="authentication-text">${
-                          authVariables.isSignUp
-                            ? 'Dont have an account?'
-                            : 'Already have an account?'
-                        }</p><span id="change-authentication">${
-    authVariables.isSignUp ? 'Sign up' : 'Log in'
-  }</span>
+                        <p id="authentication-text">${authVariables.isSignUp
+      ? 'Dont have an account?'
+      : 'Already have an account?'
+    }</p><span id="change-authentication">${authVariables.isSignUp ? 'Sign up' : 'Log in'
+    }</span>
                       </div>
                     </div>
                     `;
