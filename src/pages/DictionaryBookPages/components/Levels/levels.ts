@@ -41,7 +41,7 @@ function renderLevels() {
             </div> 
              `;
 
-  main.insertAdjacentHTML('afterbegin', html);
+  main.insertAdjacentHTML('beforeend', html);
 
   handleLevelsListeners();
   handleLevelsState();

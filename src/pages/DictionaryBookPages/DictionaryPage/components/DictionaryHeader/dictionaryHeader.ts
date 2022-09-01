@@ -6,14 +6,20 @@ export const dictionaryHeaderState = {
 };
 
 function renderDictionaryHeader() {
-  return `
-            <div class="dictionary-header">
-                <button class="acitive-btn">Изучаемые</button>
-                <button>Сложные</button>
-                <button>Удаленные</button>
-            </div>
+  const main = document.querySelector('main') as HTMLElement;
 
-            `;
+  const html = `
+                <div class="dictionary-header">
+                  <button data-type="studied">Изучаемые</button>
+                  <button data-type="hard">Сложные</button>
+                  <button data-type="deleted">Удаленные</button>
+                </div>
+              `;
+
+  main.insertAdjacentHTML('beforeend', html);
+
+  handleDictionaryHeaderListeners();
+  handleDictionaryHeaderState();
 }
 
 export function handleDictionaryHeaderListeners() {
@@ -22,19 +28,31 @@ export function handleDictionaryHeaderListeners() {
   filterMenu?.addEventListener('click', handleFilterDictionaryWords);
 }
 
+function handleDictionaryHeaderState() {
+  const activeBtn = document.querySelector(
+    `[data-type="${dictionaryHeaderState.typeDictionary}"]`
+  );
+
+  activeBtn?.classList.add('active-btn');
+}
+
 function handleFilterDictionaryWords(event: Event) {
   const target = event.target as HTMLElement;
+  const headerBtns = document.querySelectorAll('.dictionary-header button');
 
   if (target.textContent === 'Удаленные') {
     dictionaryHeaderState.typeDictionary = 'deleted';
-    renderBoard();
   } else if (target.textContent === 'Изучаемые') {
-    dictionaryHeaderState.typeDictionary = 'hard';
-    renderBoard();
+    dictionaryHeaderState.typeDictionary = 'studied';
   } else if (target.textContent === 'Сложные') {
     dictionaryHeaderState.typeDictionary = 'hard';
-    renderBoard();
+  } else {
+    return;
   }
+
+  headerBtns.forEach((btn) => btn.classList.remove('active-btn'));
+  target.classList.add('active-btn');
+  renderBoard();
 }
 
 export default renderDictionaryHeader;

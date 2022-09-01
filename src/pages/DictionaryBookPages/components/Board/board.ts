@@ -7,10 +7,7 @@ import renderPagination, {
   handlePaginationListeners,
   handlePaginationState,
 } from '../../BookPage/components/Pagination/pagination';
-import renderDictionaryHeader, {
-  dictionaryHeaderState,
-  handleDictionaryHeaderListeners,
-} from '../../DictionaryPage/components/DictionaryHeader/dictionaryHeader';
+import { dictionaryHeaderState } from '../../DictionaryPage/components/DictionaryHeader/dictionaryHeader';
 import { handleCardListeners } from '../WordList/WordCard/wordCard';
 import renderWordsList from '../WordList/wordList';
 
@@ -35,15 +32,13 @@ export async function renderBoard() {
 
   const html = `
             <div class="board">
-              ${!dicAndBookVars.isBookPage && !headerState.isLogin
-      ? '<h4>Нужно зарегаться</h4>'
-      : ` ${!dicAndBookVars.isBookPage ? renderDictionaryHeader() : ''
-      }
-              ${!boardState.words.length ? '<h4>Нету слов</h4>' : ''}
-              ${renderWordsList(boardState.words)}
-              ${dicAndBookVars.isBookPage ? renderPagination() : ''}`
-    }
-             
+              ${
+                !boardState.words.length
+                  ? '<h4>Нету слов</h4>'
+                  : `${renderWordsList(boardState.words)}
+              ${dicAndBookVars.isBookPage ? renderPagination() : ''}    `
+              }
+                       
             </div> 
               `;
 
@@ -63,7 +58,12 @@ async function handleBookData() {
       $and: [
         { page: dicAndBookVars.currentPage - 1 },
         { group: dicAndBookVars.currentGroup },
-        { $or: [{ 'userWord.optional.isDeleted': false }, { 'userWord.optional.isDeleted': null }] },
+        {
+          $or: [
+            { 'userWord.optional.isDeleted': false },
+            { 'userWord.optional.isDeleted': null },
+          ],
+        },
 
         {
           $or: [
@@ -122,7 +122,6 @@ async function handleDictionaryData() {
 
 function handleListeners() {
   handlePaginationListeners();
-  handleDictionaryHeaderListeners();
   handleCardListeners();
 }
 
