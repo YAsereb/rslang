@@ -3,10 +3,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  background-color: #3f51b5;
-  color: #fff;
+  background-color: #fff;
+  color: rgb(72, 72, 72);
+  box-shadow: 1px 1px 4px #b7bfcf;
+  background-color: #fff;
   svg {
-    fill: #fff;
+    fill: rgb(6, 1, 1);
   }
 }
 
@@ -16,7 +18,7 @@
     width: 2.5rem;
     transition: 0.3s ease-in-out;
     &:hover {
-      fill: #cf8bf3;
+      fill: #491863;
     }
   }
 }

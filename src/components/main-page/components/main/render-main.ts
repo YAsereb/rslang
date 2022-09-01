@@ -33,6 +33,9 @@ function renderMain() {
         </div>
       </div>
     </article>
+    <article class="article"> <p>Как работает наше приложение</p>
+      <div class="content">
+<iframe width="700" height="400" src="https://www.youtube.com/embed/SmM0653YvXU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>      </article>
     <article class="article">
       <h2 class="article-header">Наша команда</h2>
       <div class="wrapper">

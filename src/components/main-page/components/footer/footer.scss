@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: auto;
-  background:#3f51b5; ;
+  box-shadow: 1px 1px 4px #b7bfcf;
+  background-color: #fff;
 
   .link {
     width: 100%;
@@ -32,7 +32,7 @@
   }
 
   .link-name {
-    color: white;
+    color: rgb(106, 106, 106);
 
   }
 
