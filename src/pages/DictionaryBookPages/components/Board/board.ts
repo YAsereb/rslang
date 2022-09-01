@@ -2,7 +2,6 @@ import dicAndBookVars from '../..';
 import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
-import { headerState } from '../../../../components/main-page/components/header/header';
 import renderPagination, {
   handlePaginationListeners,
   handlePaginationState,

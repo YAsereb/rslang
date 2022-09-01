@@ -1,4 +1,4 @@
-import getAllWords from '../../../../api/Words';
+import getAllWords from '../../../../api/Words/WordsAPI';
 import IWordCard from '../../../../types/interfaces/words';
 import renderSprintWindowGame from '../SprintWindowGame/sprintWindowGame';
 import './style.scss';

@@ -1,13 +1,18 @@
 import { getUserWordById } from '../../api/Words/WordsAPI';
-import { IUserWord } from '../../types/interfaces/words';
 
 // import getUserId from '../../utils';
 // const filter = {
 //   isNew: true,
 // };
 
-export default async function handleProgress(userId: string, wordId: string, token: string) {
+export default async function handleProgress(
+  userId: string,
+  wordId: string,
+  token: string
+) {
   const word = await getUserWordById(userId, wordId, token);
+  console.log(word);
+
   // if (word) {
 
   // }

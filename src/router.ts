@@ -5,7 +5,7 @@ import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
 import renderSprintGamePage from './pages/SprintGamePage/sprintGamePage';
-import { generalState } from './types/everydayTypes/generalState';
+import { generalState } from './states/generalState';
 
 function getHash() {
   const hash: string = window.location.hash
