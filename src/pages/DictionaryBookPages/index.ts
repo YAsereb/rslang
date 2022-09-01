@@ -1,5 +1,3 @@
-import './style.scss';
-
 const dicAndBookVars = {
   isBookPage: true,
   currentGroup: 0,
