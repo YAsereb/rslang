@@ -4,6 +4,7 @@ import renderMainPage from './components/main-page/render-main-page';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
+import renderSprintGamePage from './pages/SprintGamePage/sprintGamePage';
 import { generalState } from './types/everydayTypes/generalState';
 
 function getHash() {
@@ -42,7 +43,7 @@ export function handleRouter() {
       audioGameStart();
       break;
     case 'sprint':
-      console.log('list-of-words');
+      renderSprintGamePage();
       break;
     case 'statistics':
       console.log('statistics');
