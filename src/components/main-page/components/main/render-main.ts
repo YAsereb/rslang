@@ -40,16 +40,19 @@ function renderMain() {
       <h2 class="article-header">Наша команда</h2>
       <div class="wrapper">
         <div class="developer-card">
-          <h3 class="developer-name">Yasereb</h3>
-          <img class="developer-img">
+          <h3 class="developer-name">Yaroslav Serebrenikov</h3>
+          <img src="../../../../../assets/img/proger1.png"class="developer-img" alt="developer_YAsereb">
+          <p class="developer-description"><br>Team Lead frontend developer</br></p>
         </div>
         <div class="developer-card">
-          <h3 class="developer-name">SEvk4a</h3>
-          <img class="developer-img">
+          <h3 class="developer-name">Usevalad Kunski</h3>
+          <img src="../../../../../assets/img/proger2.png"class="developer-img" alt="developer_SEvk4a">
+          <p class="developer-description"><br>Team Full stack developer</br></p>
         </div>
         <div class="developer-card">
-          <h3 class="developer-name">zhentosmak</h3>
-          <img class="developer-img">
+          <h3 class="developer-name">Yauhen Makarevich</h3>
+          <img src="../../../../../assets/img/proger3.png"class="developer-img" alt="developer_zhentosmak">
+          <p class="developer-description"><br>Frontend developer</br> </p>
         </div>
       </div>
     </article>
