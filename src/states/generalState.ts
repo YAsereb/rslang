@@ -1,12 +1,5 @@
-import dicAndBookVars from '../../pages/DictionaryBookPages';
-
-type GlobalState = {
-  currentPage: number,
-  currentGroup: number,
-  currentURL: string,
-  previousURL: string,
-
-}
+import dicAndBookVars from '../pages/DictionaryBookPages';
+import { GlobalState } from '../types/everydayTypes/GlobalState';
 
 // eslint-disable-next-line import/prefer-default-export
 export const generalState: GlobalState = {
@@ -14,4 +7,6 @@ export const generalState: GlobalState = {
   currentGroup: dicAndBookVars.currentGroup,
   currentURL: '',
   previousURL: '',
+  token: '',
+  userId: '',
 };

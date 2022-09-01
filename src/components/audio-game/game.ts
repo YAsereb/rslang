@@ -1,6 +1,9 @@
 import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
-import { audioGameState } from '../../types/everydayTypes/audioGameState';
+import { audioGameState } from '../../states/audioGameState';
+import { getUserToken, getUserId } from '../../utils';
+import { getUserWordById } from '../../api/Words/WordsAPI';
+import handleProgress from '../progress/progress';
 
 export function setRandomStatePage() {
   const min = 0;
@@ -58,6 +61,10 @@ async function handleAnswer() {
   const trueWordParagraph = document.querySelector('#true-word') as HTMLElement;
   trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
+
+  const userId = await getUserId();
+  const token = getUserToken();
+  const word = await handleProgress(userId, audioGameState.trueWordId, token);
 
   img.src = `../../${audioGameState.imageSrc}`;
   setRandomStatePage();

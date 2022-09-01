@@ -1,8 +1,8 @@
 import dicAndBookVars from '../..';
 import getAllWords, {
-  filterState,
   getAggregatedWords,
-} from '../../../../api/Words';
+} from '../../../../api/Words/WordsAPI';
+import { headerState } from '../../../../components/main-page/components/header/header';
 import renderPagination, {
   handlePaginationListeners,
   handlePaginationState,
@@ -54,15 +54,22 @@ async function handleBookData() {
   if (user) {
     const { userId, token } = user;
 
-    filterState.typeFilter = JSON.stringify({
+    const filter = JSON.stringify({
       $and: [
         { page: dicAndBookVars.currentPage - 1 },
         { group: dicAndBookVars.currentGroup },
         {
           $or: [
+            { 'userWord.optional.isDeleted': false },
+            { 'userWord.optional.isDeleted': null },
+          ],
+        },
+
+        {
+          $or: [
             { userWord: null },
-            { 'userWord.optional.hard': true },
-            { 'userWord.optional.hard': false },
+            { 'userWord.difficulty': 'hard' },
+            { 'userWord.difficulty': 'easy' },
           ],
         },
       ],
@@ -71,7 +78,8 @@ async function handleBookData() {
     boardState.words = await getAggregatedWords(
       userId,
       token,
-      dicAndBookVars.bookLimit
+      dicAndBookVars.bookLimit,
+      filter
     );
   } else {
     boardState.words = await getAllWords(
@@ -86,18 +94,18 @@ async function handleDictionaryData() {
 
   if (user) {
     const { userId, token } = user;
-
+    let filter: string;
     if (dictionaryHeaderState.typeDictionary === 'deleted') {
-      filterState.typeFilter = JSON.stringify({
+      filter = JSON.stringify({
         $and: [
           { 'userWord.optional.isDeleted': true },
           { group: dicAndBookVars.currentGroup },
         ],
       });
     } else {
-      filterState.typeFilter = JSON.stringify({
+      filter = JSON.stringify({
         $and: [
-          { 'userWord.optional.hard': true },
+          { 'userWord.difficulty': 'hard' },
           { group: dicAndBookVars.currentGroup },
         ],
       });
@@ -106,7 +114,8 @@ async function handleDictionaryData() {
     boardState.words = await getAggregatedWords(
       userId,
       token,
-      dicAndBookVars.dictionaryLimit
+      dicAndBookVars.dictionaryLimit,
+      filter
     );
   }
 }
