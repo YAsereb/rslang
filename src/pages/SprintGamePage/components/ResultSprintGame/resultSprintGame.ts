@@ -1,4 +1,4 @@
-import getAllWords from '../../../../api/Words';
+import getAllWords from '../../../../api/Words/WordsAPI';
 import renderResultWord from '../ResultWord/resultWord';
 import renderSprintWindowGame, {
   sprintGameState,
