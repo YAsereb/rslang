@@ -25,10 +25,10 @@ function renderFooter() {
     <div class="developer">
       <a href="https://github.com/zhentosmak"  class="link">
         <img src="${gitHubIcon}" class="gitHub-icon" alt="gitHub-icon">
-        <p class="link-name">zhentosmak</p>
+        <p class="link-name">zhentosmakarevich</p>
       </a>
     </div>
-    <p class="link-name">@2022</p>
+    <p class="link-name">RS lang 2022</p>
   </footer>
   `;
 }

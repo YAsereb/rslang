@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: auto;
+  background:#3f51b5; ;
 
   .link {
     width: 100%;
@@ -27,5 +29,14 @@
     display: inline-block;
     width: 5rem;
     height: 5rem;
+  }
+
+  .link-name {
+    color: white;
+
+  }
+
+  .gitHub-icon {
+    background: #3f51b5;
   }
 }

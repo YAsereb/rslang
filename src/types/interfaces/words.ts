@@ -1,3 +1,7 @@
+type IUserWord = {
+  hard: boolean;
+  isDeleted: boolean;
+};
 interface IWordCard {
   audio: string;
   audioExample: string;
@@ -16,10 +20,5 @@ interface IWordCard {
   wordTranslate: string;
   userWord: { optional: IUserWord };
 }
-
-type IUserWord = {
-  hard: boolean;
-  isDeleted: boolean;
-};
 
 export default IWordCard;
