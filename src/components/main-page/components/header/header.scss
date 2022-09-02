@@ -1,14 +1,22 @@
 .header {
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 6rem;
-  padding: 0 2rem;
-  background-color: #3f51b5;
-  color: #fff;
+  padding: 1.5rem 2rem;
+  background-color: #fff;
+  color: rgb(72, 72, 72);
+  box-shadow: 1px 1px 4px #b7bfcf;
+  background-color: #fff;
+
   svg {
-    fill: #fff;
+    fill: rgb(6, 1, 1);
   }
+}
+
+.header-container{
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-home {
@@ -17,7 +25,7 @@
     width: 2.5rem;
     transition: 0.3s ease-in-out;
     &:hover {
-      fill: #cf8bf3;
+      fill: #7e7e7e;
     }
   }
 }
@@ -32,7 +40,7 @@
   font-size: 2rem;
   a {
     margin: 0 1.5rem;
-    color: rgb(214, 209, 209);
+    color: rgb(0, 0, 0);
     transition: color 0.5s ease;
     &:hover {
       color: #fff;
@@ -42,7 +50,7 @@
 
 .navigation-games {
   position: relative;
-  color: rgb(214, 209, 209);
+  color: rgb(14, 14, 14);
   cursor: pointer;
   margin: 0 1.5rem;
   svg {
@@ -88,13 +96,13 @@
     }
     li {
       margin: 0.3rem 0;
-      background-color: #6441a5;
+      background-color: #777777;
       border-radius: 0.5rem;
       padding: 0.3rem 0.7rem;
       width: 10rem;
       transition: all 0.3s ease-in-out;
       &:hover {
-        background-color: #cf8bf3;
+        background-color: #363636;
       }
     }
   }
@@ -108,7 +116,7 @@
   margin-left: 2rem;
   a {
     padding: 0.8rem 1.4rem;
-    color: #fff;
+    color: rgb(12, 12, 12);
     font-size: 1.6rem;
     border: 2px solid #fff;
     border-radius: 1rem;
