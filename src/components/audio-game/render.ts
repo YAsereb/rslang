@@ -3,12 +3,11 @@ import renderHeader from '../main-page/components/header/header';
 import { getWords } from './api';
 import { getWordsArray, playAudio } from './game';
 import { listenerAnswer, listenerChooseGroup, listenerStatistic } from './listener';
-import { audioGameState } from '../../types/everydayTypes/audioGameState';
+import { audioGameState } from '../../states/audioGameState';
 import './style.scss';
 
 export function renderStartGame() {
   const { body } = document;
-  console.log('fsdfsfs');
 
   const html = `
     <div class="game-wrapper">

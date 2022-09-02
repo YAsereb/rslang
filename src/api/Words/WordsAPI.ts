@@ -1,8 +1,6 @@
+import { UserWord } from '../../types/everydayTypes/userWord';
+
 const url = 'http://localhost:8000';
-export const filterState = {
-  typeFilter: {},
-  filter: {},
-};
 
 export default async function getAllWords(numGroup: number, page: number) {
   const response = await fetch(
@@ -22,7 +20,7 @@ export async function getWord(id: string) {
   return data;
 }
 
-export async function getAllUserWords(id: number, token: number) {
+export async function getAllUserWords(id: string, token: string) {
   const response = await fetch(`${url}/users/${id}/words`, {
     method: 'GET',
     headers: {
@@ -36,10 +34,24 @@ export async function getAllUserWords(id: number, token: number) {
   return data;
 }
 
+export async function getUserWordById(id: string, wordId: string, token: string) {
+  const resp = await fetch(`${url}/users/${id}/words/${wordId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    },
+  });
+  if (resp.status === 404) return false;
+  const word = await resp.json();
+  return word;
+}
+
 export async function postFilterUserWord(
   id: string,
   token: string,
-  wordId: string
+  wordId: string,
+  optional: UserWord
 ) {
   const response = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'POST',
@@ -48,18 +60,19 @@ export async function postFilterUserWord(
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(filterState.filter),
+    body: JSON.stringify(optional),
   });
 
   if (response.status === 417) {
-    putFilterUserWord(id, token, wordId);
+    putFilterUserWord(id, token, wordId, optional);
   }
 }
 
 export async function putFilterUserWord(
   id: string,
   token: string,
-  wordId: string
+  wordId: string,
+  optional: UserWord
 ) {
   await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'PUT',
@@ -68,7 +81,7 @@ export async function putFilterUserWord(
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(filterState.filter),
+    body: JSON.stringify(optional),
   });
 }
 
@@ -87,12 +100,13 @@ export async function deleteFilterUserWord(
 }
 
 export async function getAggregatedWords(
-  id: number,
-  token: number,
-  limit: number
+  id: string,
+  token: string,
+  limit: number,
+  filter: string,
 ) {
   const response = await fetch(
-    `${url}/users/${id}/aggregatedWords?filter=${filterState.typeFilter}&wordsPerPage=${limit}`,
+    `${url}/users/${id}/aggregatedWords?filter=${filter}&wordsPerPage=${limit}`,
     {
       method: 'GET',
       headers: {

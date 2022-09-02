@@ -1,8 +1,15 @@
-type IUserWord = {
-  hard: boolean;
-  isDeleted: boolean;
+import { UserWord } from '../everydayTypes/userWord';
+
+export type IUserWord = {
+  hard: boolean,
+  isDeleted?: boolean,
+  isLastTrueAnswer?: boolean,
+  countTrueAnswerInRow?: number,
+  countTrueAnswer?: number,
+  countAttempt?: number,
 };
-interface IWordCard {
+
+export interface IWordCard {
   audio: string;
   audioExample: string;
   audioMeaning: string;
@@ -18,7 +25,7 @@ interface IWordCard {
   transcription: string;
   word: string;
   wordTranslate: string;
-  userWord: { optional: IUserWord };
+  userWord: UserWord;
 }
 
 export default IWordCard;
