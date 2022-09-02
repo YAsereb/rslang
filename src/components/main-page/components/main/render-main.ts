@@ -8,7 +8,9 @@ function renderMain() {
   return `
   <main class="main">
     <article class="article">
+      <div class="home-background-img">
       <p>Добро пожаловать в приложения  Rslang - приложение для изучения английского языка в игровой форме.</p>
+      </div>
       <h2 class="article-header">Наши возможности</h2>
       <div  class="wrapper">
         <div class="advantages-item">

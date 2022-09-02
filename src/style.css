@@ -82,3 +82,10 @@ h6 {
 button {
   cursor: pointer;
 }
+
+
+.centered-container {
+  width: 1200px;
+  margin: 0 auto;
+
+}
