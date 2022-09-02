@@ -1,23 +1,45 @@
-import { getUserWordById } from '../../api/Words/WordsAPI';
-import { IUserWord } from '../../types/interfaces/words';
+import { getUserWordById, postFilterUserWord } from '../../api/Words/WordsAPI';
+import { generalState } from '../../states/generalState';
+import { UserWord } from '../../types/everydayTypes/userWord';
 
-// import getUserId from '../../utils';
-// const filter = {
-//   isNew: true,
-// };
+export default async function handleProgress(
+  userId: string,
+  wordId: string,
+  token: string,
+  answer: boolean
+) {
+  const word = await getUserWordById(
+    (generalState.userId as string),
+    wordId,
+    (generalState.token as string),
 
-export default async function handleProgress(userId: string, wordId: string, token: string) {
-  const word = await getUserWordById(userId, wordId, token);
-  // if (word) {
+  );
+  let userWord: UserWord;
 
-  // }
+  if (!word) {
+    userWord = {
+      difficulty: 'easy',
+      optional: {
+        isDeleted: false,
+        isLastTrueAnswer: answer,
+        countTrueAnswerInRow: +answer,
+        countTrueAnswer: +answer,
+        countAttempt: 1
+      }
+    };
+  } else {
+    userWord = {
+      difficulty: word.difficulty,
+      optional: {
+        isDeleted: word.optional.isDeleted,
+        isLastTrueAnswer: answer,
+        countTrueAnswerInRow: answer ? (word.optional.countTrueAnswerInRow as number) + 1 : 0,
+        countTrueAnswer: answer ? (word.optional.countTrueAnswer as number) + 1
+          : word.optional.countTrueAnswer,
+        countAttempt: (word.optional.countAttempt as number) + 1
+      }
+    };
+  }
 
-  return false;
+  postFilterUserWord(userId, token, wordId, userWord);
 }
-
-// export function addWord() {
-// }
-
-// export async function progressWord() {
-//   return { word.guessCount, word.totalAttempt }
-// }
