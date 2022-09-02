@@ -12,7 +12,6 @@ export default async function handleProgress(
     (generalState.userId as string),
     wordId,
     (generalState.token as string),
-
   );
   let userWord: UserWord;
 
