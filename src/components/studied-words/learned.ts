@@ -6,7 +6,6 @@ async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
-      isDeleted: userWord.optional.isDeleted,
       isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
       countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
       countTrueAnswer: userWord.optional.countTrueAnswer,
@@ -32,7 +31,6 @@ export async function setUnlearnedStatusWord(wordId: string) {
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {
-      isDeleted: userWord.optional.isDeleted,
       isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
       countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
       countTrueAnswer: userWord.optional.countTrueAnswer,

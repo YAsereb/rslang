@@ -6,11 +6,15 @@ function renderStatisticPerDay(): string {
 }
 
 function renderStatisticMiniGames(): string {
-  return '';
+  return `
+  <div class="statistic-item"></div>
+  `;
 }
 
 function renderStatisticWords(): string {
-  return '';
+  return `
+  <div class="statistic-item"></div>
+  `;
 }
 
 export default function renderStatistic(): void {

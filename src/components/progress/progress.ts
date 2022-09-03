@@ -19,7 +19,6 @@ export default async function handleProgress(
     userWord = {
       difficulty: 'easy',
       optional: {
-        isDeleted: false,
         isLastTrueAnswer: answer,
         countTrueAnswerInRow: +answer,
         countTrueAnswer: +answer,
@@ -30,7 +29,6 @@ export default async function handleProgress(
     userWord = {
       difficulty: word.difficulty,
       optional: {
-        isDeleted: word.optional.isDeleted,
         isLastTrueAnswer: answer,
         countTrueAnswerInRow: answer ? (word.optional.countTrueAnswerInRow as number) + 1 : 0,
         countTrueAnswer: answer ? (word.optional.countTrueAnswer as number) + 1
