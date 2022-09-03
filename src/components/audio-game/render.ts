@@ -10,13 +10,16 @@ export function renderStartGame() {
   const { body } = document;
 
   const html = `
+
     <div class="game-wrapper">
       ${renderHeader()}
+      <div class="start-screen-img">
       <main class="main flex-center">
+
         <div class="flex-center flex-column">
           <div class="game-description">
             <h3 class="audio-header">Игра аудиовызов</h3>
-            <p class="text">Эта игра развивает понимание слов на слух</p> 
+            <p class="text">Эта игра развивает понимание слов на слух</p>
             <p class="text">Вам будет предложено 20 попыток, в которых нужно выбрать слово, звучащее в аудиодорожке</p>
             <p class="text">Выберите уровень сложности от 1 до 6</p>
           </div>
@@ -27,9 +30,10 @@ export function renderStartGame() {
             <div class="group-level flex-center">4</div>
             <div class="group-level flex-center">5</div>
             <div class="group-level flex-center">6</div>
-          </div> 
-        </div> 
+          </div>
+        </div>
       </main>
+    </div>
     </div>
   `;
   body.innerHTML = html;

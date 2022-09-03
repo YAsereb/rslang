@@ -21,8 +21,9 @@ function renderStartSprintScreen() {
   console.log(generalState.currentData);
 
   const html = `
-             "<div class="start-screen-img">
+             <div class="start-screen-img">
                 <div class="start-screen">
+                 <div class="start-screen-window">
                    <div class="start-screen__header">
                         <p class="start-screen__title">Sprint</p>
                         <p class="start-screen__text">Sprint is a speed training. Try to guess as many words as possible in 60 seconds.</p>
