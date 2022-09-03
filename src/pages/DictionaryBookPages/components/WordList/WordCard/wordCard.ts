@@ -1,4 +1,5 @@
 import { postFilterUserWord, deleteFilterUserWord } from '../../../../../api/Words/WordsAPI';
+import { headerState } from '../../../../../components/main-page/components/header/header';
 import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
 import IWordCard from '../../../../../types/interfaces/words';
@@ -85,7 +86,8 @@ function renderWordCard(word: IWordCard) {
       : word.userWord?.difficulty === 'hard' ? 'hard-word__card' : ''}>
     <div class="card-header" style = "background-image: url(./${word.image})">
       <div class="card-header__overlay">
-        ${renderHandleWordCardButton(word)}
+      ${headerState.isLogin ? renderHandleWordCardButton(word) : ''}
+    
         ${renderWordCardHeader(word)}
       </div>
     </div>

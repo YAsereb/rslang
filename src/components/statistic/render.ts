@@ -2,18 +2,18 @@ import renderFooter from '../main-page/components/footer/footer';
 import renderHeader from '../main-page/components/header/header';
 
 function renderStatisticPerDay(): string {
-
+  return '';
 }
 
-function renderStatisticMiniGames() {
-
+function renderStatisticMiniGames(): string {
+  return '';
 }
 
-function renderStatisticWords() {
-
+function renderStatisticWords(): string {
+  return '';
 }
 
-export function renderStatistic() {
+export default function renderStatistic(): void {
   const { body } = document;
 
   body.innerHTML = `

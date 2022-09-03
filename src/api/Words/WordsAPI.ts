@@ -123,14 +123,3 @@ export async function getAggregatedWords(
 
   return arr;
 }
-
-export async function getUserSettings(userId: string, token: string) {
-  const resp = await fetch(`${url}/users/${userId}/settings`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
-    },
-  });
-  const statistic = await resp.json();
-}

@@ -1,4 +1,4 @@
-import { Statistic } from '../../types/everydayTypes/statistic';
+import { Statistic } from '../../types/everydayTypes/statisticType';
 
 const url = 'http://localhost:8000';
 
