@@ -1,3 +1,4 @@
+
 .sprint-wrapper {
   display: flex;
   flex-direction: column;
@@ -48,6 +49,7 @@
 .sprint-answers {
   display: flex;
   padding: 2rem 0;
+
   div {
     width: 2rem;
     height: 2rem;
@@ -75,6 +77,7 @@
 .sprint-footer__block {
   display: flex;
   justify-content: space-around;
+
   button {
     width: 12rem;
     height: 4rem;

@@ -59,7 +59,6 @@ function renderSprintWindowGame() {
                         </div>
                     </div>
                 </div>
-
   `;
 
   main.insertAdjacentHTML('beforeend', html);
