@@ -31,12 +31,11 @@ export async function renderBoard() {
 
   const html = `
             <div class="board">
-              ${
-                !boardState.words.length
-                  ? '<h4>Нету слов</h4>'
-                  : `${renderWordsList(boardState.words)}
+              ${!boardState.words.length
+      ? '<h4>Вы пока не добавили слова </h4>'
+      : `${renderWordsList(boardState.words)}
               ${dicAndBookVars.isBookPage ? renderPagination() : ''}    `
-              }
+    }
                        
             </div> 
               `;
@@ -97,7 +96,7 @@ async function handleDictionaryData() {
     if (dictionaryHeaderState.typeDictionary === 'deleted') {
       filter = JSON.stringify({
         $and: [
-          { 'userWord.optional.isDeleted': true },
+          { 'userWord.optional.isLearned': true },
           { group: dicAndBookVars.currentGroup },
         ],
       });
