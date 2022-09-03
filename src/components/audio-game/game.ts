@@ -1,8 +1,13 @@
 import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
+<<<<<<< HEAD
 // import { getUserToken, getUserId } from '../../utils';
 // import handleProgress from '../progress/progress';
+=======
+import handleProgress from '../progress/progress';
+import { generalState } from '../../states/generalState';
+>>>>>>> 1038f0aa66b8eb849d214e2098b66566d70507d5
 
 export function setRandomStatePage() {
   const min = 0;
@@ -55,15 +60,25 @@ export function handleGroup(event: Event) {
   renderWords(audioGameState.page, audioGameState.group);
 }
 
-async function handleAnswer() {
+async function handleAnswer(answer: boolean) {
   const img = document.querySelector('.audio-img') as HTMLImageElement;
   const trueWordParagraph = document.querySelector('#true-word') as HTMLElement;
   trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
 
+<<<<<<< HEAD
   // const userId = await getUserId();
   // const token = getUserToken();
   // const word = await handleProgress(userId, audioGameState.trueWordId, token);
+=======
+  const { userId, token } = generalState;
+  await handleProgress(
+    (userId as string),
+    audioGameState.trueWordId, (
+    token as string),
+    answer
+  );
+>>>>>>> 1038f0aa66b8eb849d214e2098b66566d70507d5
 
   img.src = `../../${audioGameState.imageSrc}`;
   setRandomStatePage();
@@ -80,25 +95,25 @@ function addFalseWord({ trueWord, trueWordAudio, wordTranslate }: AnswerWord) {
   audioGameState.falseAnswers.push({ trueWord, trueWordAudio, wordTranslate });
 }
 
-function isTrueWord(element: HTMLElement) {
+async function isTrueWord(element: HTMLElement) {
   element.classList.add('winner-word');
 
   const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
-  handleAnswer();
+  await handleAnswer(true);
 }
 
-function isFalseWord(element: HTMLElement) {
+async function isFalseWord(element: HTMLElement) {
   element.classList.add('lose-word');
 
   const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
-  handleAnswer();
+  await handleAnswer(false);
 }
 
-export function handleAudioGame(event: Event) {
+export async function handleAudioGame(event: Event) {
   if (audioGameState.isButtonActive) return;
   const target = event.target as HTMLElement;
 
@@ -107,10 +122,10 @@ export function handleAudioGame(event: Event) {
   const id = target.getAttribute('id');
 
   if (id === audioGameState.trueWordId) {
-    isTrueWord(target);
+    await isTrueWord(target);
     audioGameState.isButtonActive = true;
   } else {
-    isFalseWord(target);
+    await isFalseWord(target);
     audioGameState.isButtonActive = true;
   }
 }

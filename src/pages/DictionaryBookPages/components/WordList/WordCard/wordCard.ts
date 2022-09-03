@@ -91,10 +91,12 @@ function renderWordCard(word: IWordCard) {
                         word.audioMeaning
                       }" ></audio>
               </button>
-            </div>
-          </div>
-          </div>
         </div>
+    </div>
+    ${word.userWord ? `<div class="progress-word">
+    ${word?.userWord?.optional?.countTrueAnswer} / ${word?.userWord?.optional?.countAttempt}</div>
+    </div>` : ''}
+    </div>
         <div class="card-content" >
           <div class="card-content__block" >
           <div class="card-content__example" > ${word.textExample} </div>
