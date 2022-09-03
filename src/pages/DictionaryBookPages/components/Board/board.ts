@@ -2,6 +2,7 @@ import dicAndBookVars from '../..';
 import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
+import { generalState } from '../../../../states/generalState';
 import renderPagination, {
   handlePaginationListeners,
   handlePaginationState,
@@ -9,10 +10,6 @@ import renderPagination, {
 import { dictionaryHeaderState } from '../../DictionaryPage/components/DictionaryHeader/dictionaryHeader';
 import { handleCardListeners } from '../WordList/WordCard/wordCard';
 import renderWordsList from '../WordList/wordList';
-
-const boardState = {
-  words: [],
-};
 
 export async function renderBoard() {
   if (dicAndBookVars.isBookPage) {
@@ -32,9 +29,9 @@ export async function renderBoard() {
   const html = `
             <div class="board">
               ${
-                !boardState.words.length
-                  ? '<h4>Нету слов</h4>'
-                  : `${renderWordsList(boardState.words)}
+                !generalState.currentData.length
+                  ? '<h4>Вы пока не добавили слова</h4>'
+                  : `${renderWordsList(generalState.currentData)}
               ${dicAndBookVars.isBookPage ? renderPagination() : ''}    `
               }
                        
@@ -59,8 +56,9 @@ async function handleBookData() {
         { group: dicAndBookVars.currentGroup },
         {
           $or: [
-            { 'userWord.optional.isDeleted': false },
-            { 'userWord.optional.isDeleted': null },
+            { 'userWord.optional.isLearned': true },
+            { 'userWord.optional.isLearned': false },
+            { 'userWord.optional.isLearned': null },
           ],
         },
 
@@ -74,14 +72,14 @@ async function handleBookData() {
       ],
     });
 
-    boardState.words = await getAggregatedWords(
+    generalState.currentData = await getAggregatedWords(
       userId,
       token,
       dicAndBookVars.bookLimit,
       filter
     );
   } else {
-    boardState.words = await getAllWords(
+    generalState.currentData = await getAllWords(
       dicAndBookVars.currentGroup,
       dicAndBookVars.currentPage
     );
@@ -97,7 +95,7 @@ async function handleDictionaryData() {
     if (dictionaryHeaderState.typeDictionary === 'deleted') {
       filter = JSON.stringify({
         $and: [
-          { 'userWord.optional.isDeleted': true },
+          { 'userWord.optional.isLearned': true },
           { group: dicAndBookVars.currentGroup },
         ],
       });
@@ -110,7 +108,7 @@ async function handleDictionaryData() {
       });
     }
 
-    boardState.words = await getAggregatedWords(
+    generalState.currentData = await getAggregatedWords(
       userId,
       token,
       dicAndBookVars.dictionaryLimit,

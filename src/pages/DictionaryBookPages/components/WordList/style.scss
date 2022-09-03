@@ -21,10 +21,10 @@
 }
 
 .deleted-word__card {
-  background: #7b7b7b !important;
+  background: #5dd85f !important;
 
   .card-header__overlay {
-    background: linear-gradient(transparent, #7b7b7b);
+    background: linear-gradient(transparent, #5dd85f);
   }
 }
 
@@ -114,8 +114,8 @@
 
     svg {
       display: block;
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 2rem;
+      width: 2rem;
       transition: 0.3s ease-in-out;
 
       &:hover {

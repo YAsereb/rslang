@@ -3,6 +3,7 @@ import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
 import handleProgress from '../progress/progress';
 import { generalState } from '../../states/generalState';
+import learnedWord, { setUnlearnedStatusWord } from '../studied-words/learned';
 
 export function setRandomStatePage() {
   const min = 0;
@@ -12,7 +13,7 @@ export function setRandomStatePage() {
 }
 
 export function getRandomIndex(words: Words) {
-  const randomIndex = Math.floor((Math.random() * words.length));
+  const randomIndex = Math.floor(Math.random() * words.length);
   return randomIndex;
 }
 
@@ -63,9 +64,9 @@ async function handleAnswer(answer: boolean) {
 
   const { userId, token } = generalState;
   await handleProgress(
-    (userId as string),
-    audioGameState.trueWordId, (
-    token as string),
+    userId as string,
+    audioGameState.trueWordId,
+    token as string,
     answer
   );
 
@@ -90,6 +91,7 @@ async function isTrueWord(element: HTMLElement) {
   const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
+  await learnedWord(audioGameState.trueWordId);
   await handleAnswer(true);
 }
 
@@ -99,6 +101,7 @@ async function isFalseWord(element: HTMLElement) {
   const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
+  await setUnlearnedStatusWord(audioGameState.trueWordId);
   await handleAnswer(false);
 }
 

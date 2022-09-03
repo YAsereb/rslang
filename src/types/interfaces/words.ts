@@ -1,12 +1,12 @@
 import { UserWord } from '../everydayTypes/userWord';
 
 export type IUserWord = {
-  hard: boolean,
-  isDeleted?: boolean,
-  isLastTrueAnswer?: boolean,
-  countTrueAnswerInRow?: number,
-  countTrueAnswer?: number,
-  countAttempt?: number,
+  hard: boolean;
+  isDeleted?: boolean;
+  isLastTrueAnswer?: boolean;
+  countTrueAnswerInRow?: number;
+  countTrueAnswer?: number;
+  countAttempt?: number;
 };
 
 export interface IWordCard {

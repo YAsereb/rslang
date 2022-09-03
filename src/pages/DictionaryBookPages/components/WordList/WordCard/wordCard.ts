@@ -1,5 +1,5 @@
 import { postFilterUserWord, deleteFilterUserWord } from '../../../../../api/Words/WordsAPI';
-import { headerState } from '../../../../../components/main-page/components/header/header';
+import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
 import IWordCard from '../../../../../types/interfaces/words';
 import renderBoard from '../../Board/board';
@@ -14,65 +14,82 @@ export const filterState = {
   filter: {},
 };
 
+function renderAddLearnedButton(word: IWordCard): string {
+  let html = '';
+  if (!word.userWord?.optional?.isLearned) {
+    html = `
+    <button class="remove-word__btn">
+      <svg>
+        <use xlink:href="./assets/svg/sprite/wordCard.svg#delete"></use>
+      </svg>
+    </button>
+    `;
+  }
+
+  return html;
+}
+
+function renderHandleWordCardButton(word: IWordCard): string {
+  const html = `
+  <div class="buttons-block">
+    <button class=${word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'}>
+      <svg>
+        <use xlink:href="./assets/svg/sprite/wordCard.svg#${word.userWord?.difficulty === 'hard' ? 'minus' : 'add'}"></use>
+      </svg>
+    </button>
+    ${renderAddLearnedButton(word)}
+  </div>
+  `;
+
+  return html;
+}
+
+function renderWordCardHeader(word: IWordCard) {
+  return `
+  <div class="card-header__block">
+    <h3>${word.word} </h3>
+    <div class="card-header__info">
+      <div>${word.wordTranslate} </div>
+      <div> ${word.transcription} </div>
+      <button class="sound-word__btn">
+        <svg>
+          <use xlink: href="./assets/svg/sprite/wordCard.svg#volume"> </use>
+        </svg>
+        <audio class="audio-word" src="./${word.audio}">
+          <audio class="audio-example" src="./${word.audioExample}">
+            <audio class="audio-meaning" src="./${word.audioMeaning}"></audio>
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderWordCardContent(word: IWordCard) {
+  return `
+  <div class="card-content">
+    <div class="card-content__block">
+    <div class="card-content__example"> ${word.textExample} </div>
+    <div class="card-content__example"> ${word.textMeaning} </div>
+  </div>
+  <div class="card-content__block">
+    <div class="card-content__example"> ${word.textExampleTranslate} </div>
+  </div>
+  <div class="card-content__example"> ${word.textMeaningTranslate} </div>
+</div>
+  `;
+}
+
 function renderWordCard(word: IWordCard) {
   return `
-  <li data-id="${word.id || word._id}" class=${word.userWord?.optional?.isDeleted === true ? 'deleted-word__card'
+
+  <li data-id="${word.id || word._id}" class=${word.userWord?.optional?.isLearned === true ? 'deleted-word__card'
       : word.userWord?.difficulty === 'hard' ? 'hard-word__card' : ''}>
     <div class="card-header" style = "background-image: url(./${word.image})">
       <div class="card-header__overlay">
-        ${headerState.isLogin ? `<div class="buttons-block">
-                  ${word.userWord ? word.userWord?.optional?.isDeleted ? ''
-        : `<button class=${word.userWord?.difficulty ? 'back-word__btn' : 'add-word__btn'}>
-                <svg>
-                  <use xlink:href="./assets/svg/sprite/wordCard.svg#${word.userWord?.difficulty ? 'minus' : 'add'}"></use>
-                </svg>
-              </button>`
-        : `<button class="add-word__btn">
-                <svg>
-                  <use xlink:href="./assets/svg/sprite/wordCard.svg#add"></use>
-                </svg>
-              </button>`}
-                  ${word.userWord ? `<button class=${word.userWord?.optional?.isDeleted === true ? 'save-word__btn' : 'remove-word__btn'}>
-                <svg>
-                  <use xlink:href="./assets/svg/sprite/wordCard.svg#${word.userWord?.optional?.isDeleted ? 'save' : 'delete'}"></use>
-                </svg>
-              </button>`
-        : `<button class="remove-word__btn">
-                <svg>
-                  <use xlink:href="./assets/svg/sprite/wordCard.svg#delete"></use>
-                </svg>
-              </button>`}
-      </div>` : ''}
-    <div class="card-header__block">
-      <h3>${word.word} </h3>
-        <div class="card-header__info">
-          <div>${word.wordTranslate} </div>
-            <div> ${word.transcription} </div>
-              <button class="sound-word__btn" >
-                <svg>
-                <use xlink: href = "./assets/svg/sprite/wordCard.svg#volume" > </use>
-                  </svg>
-                  <audio class="audio-word" src = "./${word.audio}" >
-                    <audio class="audio-example" src = "./${word.audioExample}" >
-                      <audio class="audio-meaning" src = "./${word.audioMeaning}" ></audio>
-              </button>
-        </div>
-    </div>
-    ${word.userWord ? `<div class="progress-word">
-    ${word?.userWord?.optional?.countTrueAnswer} / ${word?.userWord?.optional?.countAttempt}</div>
-    </div>` : ''}
-    </div>
-        <div class="card-content" >
-          <div class="card-content__block" >
-          <div class="card-content__example" > ${word.textExample} </div>
-          <div class="card-content__example" > ${word.textMeaning} </div>
-        </div>
-        <div class="card-content__block" >
-          <div class="card-content__example" > ${word.textExampleTranslate} 
-        </div>
+        ${renderHandleWordCardButton(word)}
+        ${renderWordCardHeader(word)}
       </div>
-    <div class="card-content__example"> ${word.textMeaningTranslate} </div>
-  </div>
+    </div>
+      ${renderWordCardContent(word)}
   </li>
   `;
 }
@@ -88,8 +105,7 @@ export function handleCardListeners() {
 async function handleBookWordCard(event: Event) {
   const target = event.target as HTMLElement;
   const currentTarget = event.currentTarget as HTMLElement;
-  const user = JSON.parse(localStorage.getItem('userData') as string);
-  const { userId, token } = user;
+  const { userId, token } = generalState;
 
   const WordId = currentTarget.getAttribute('data-id') as string;
   let options: UserWord;
@@ -97,29 +113,29 @@ async function handleBookWordCard(event: Event) {
   if (target.closest('.add-word__btn')) {
     options = {
       difficulty: 'hard',
-      optional: {}
+      optional: {},
     };
 
-    await postFilterUserWord(userId, token, WordId, options);
+    await postFilterUserWord((userId as string), (token as string), WordId, options);
 
     renderBoard();
   } else if (target.closest('.remove-word__btn')) {
     options = {
       difficulty: 'easy',
       optional: {
-        isDeleted: true
+        isLearned: true
       }
     };
 
-    await postFilterUserWord(userId, token, WordId, options);
+    await postFilterUserWord((userId as string), (token as string), WordId, options);
 
     renderBoard();
   } else if (target.closest('.back-word__btn')) {
-    await deleteFilterUserWord(userId, token, WordId);
+    await deleteFilterUserWord((userId as string), (token as string), WordId);
 
     renderBoard();
   } else if (target.closest('.save-word__btn')) {
-    await deleteFilterUserWord(userId, token, WordId);
+    await deleteFilterUserWord((userId as string), (token as string), WordId);
 
     renderBoard();
   } else if (target.closest('.sound-word__btn')) {
