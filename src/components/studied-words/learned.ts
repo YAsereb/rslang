@@ -1,9 +1,52 @@
-import { getUserStatistic } from '../../api/statistic/statistic';
-import { getUserWordById, getWord } from '../../api/Words/WordsAPI';
+import { getUserWordById, putFilterUserWord } from '../../api/Words/WordsAPI';
 import { generalState } from '../../states/generalState';
-import { OptionalStatistic, Statistic } from '../../types/everydayTypes/statistic';
 import { UserWord } from '../../types/everydayTypes/userWord';
-import IWordCard from '../../types/interfaces/words';
+
+async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
+  const optional: UserWord = {
+    difficulty: 'easy',
+    optional: {
+      isDeleted: userWord.optional.isDeleted,
+      isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
+      countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
+      countTrueAnswer: userWord.optional.countTrueAnswer,
+      countAttempt: userWord.optional.countAttempt,
+      isLearned: true,
+    }
+  };
+  await putFilterUserWord(
+    (generalState.userId as string),
+    (generalState.token as string),
+    wordId,
+    optional
+  );
+}
+
+export async function setUnlearnedStatusWord(wordId: string) {
+  const userWord: UserWord = await getUserWordById(
+    (generalState.userId as string),
+    wordId,
+    (generalState.token as string)
+  );
+
+  const optional: UserWord = {
+    difficulty: userWord.difficulty,
+    optional: {
+      isDeleted: userWord.optional.isDeleted,
+      isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
+      countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
+      countTrueAnswer: userWord.optional.countTrueAnswer,
+      countAttempt: userWord.optional.countAttempt,
+      isLearned: false,
+    }
+  };
+  await putFilterUserWord(
+    (generalState.userId as string),
+    (generalState.token as string),
+    wordId,
+    optional
+  );
+}
 
 export default async function learnedWord(wordId: string) {
   const userWord: UserWord = await getUserWordById(
@@ -12,20 +55,9 @@ export default async function learnedWord(wordId: string) {
     (generalState.token as string)
   );
 
-  if ((userWord.optional.countTrueAnswerInRow as number) >= 3) {
-    const word = await getWord(wordId);
-
-
-    //   const userStatistic = await getUserStatistic(
-    //     (generalState.userId as string),
-    //     (generalState.token as string)
-    //   );
-
-    //   const statisticWords = userStatistic.optional?.words?.concat(word);
-
-    //   const statistic: Statistic = {
-    //     learnedWords: userStatistic.learnedWords + 1,
-    //     optional: statisticWords,
-    //   };
-    // }
-  }
+  if ((userWord.difficulty === 'easy'
+    && (userWord.optional.countTrueAnswerInRow as number) >= 3)
+    || (userWord.difficulty === 'hard'
+      && (userWord.optional.countTrueAnswerInRow as number) >= 5)
+  ) await setLearnedStatusWord(wordId, userWord);
+}
