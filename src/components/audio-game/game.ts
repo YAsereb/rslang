@@ -1,13 +1,8 @@
 import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
-<<<<<<< HEAD
-// import { getUserToken, getUserId } from '../../utils';
-// import handleProgress from '../progress/progress';
-=======
 import handleProgress from '../progress/progress';
 import { generalState } from '../../states/generalState';
->>>>>>> 1038f0aa66b8eb849d214e2098b66566d70507d5
 
 export function setRandomStatePage() {
   const min = 0;
@@ -66,19 +61,13 @@ async function handleAnswer(answer: boolean) {
   trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
 
-<<<<<<< HEAD
-  // const userId = await getUserId();
-  // const token = getUserToken();
-  // const word = await handleProgress(userId, audioGameState.trueWordId, token);
-=======
   const { userId, token } = generalState;
   await handleProgress(
-    (userId as string),
-    audioGameState.trueWordId, (
-    token as string),
+    userId as string,
+    audioGameState.trueWordId,
+    token as string,
     answer
   );
->>>>>>> 1038f0aa66b8eb849d214e2098b66566d70507d5
 
   img.src = `../../${audioGameState.imageSrc}`;
   setRandomStatePage();
