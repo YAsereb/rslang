@@ -34,7 +34,8 @@ export async function getAllUserWords(id: string, token: string) {
   return data;
 }
 
-export async function getUserWordById(id: string, wordId: string, token: string) {
+export async function getUserWordById(id: string, wordId: string, token: string):
+  Promise<UserWord | null> {
   const resp = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'GET',
     headers: {
@@ -42,7 +43,7 @@ export async function getUserWordById(id: string, wordId: string, token: string)
       Accept: 'application/json',
     },
   });
-  if (resp.status === 404) return false;
+  if (resp.status === 404) return null;
   const word = await resp.json();
   return word;
 }
@@ -52,7 +53,7 @@ export async function postFilterUserWord(
   token: string,
   wordId: string,
   optional: UserWord
-) {
+): Promise<void> {
   const response = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'POST',
     headers: {
@@ -73,7 +74,7 @@ export async function putFilterUserWord(
   token: string,
   wordId: string,
   optional: UserWord
-) {
+): Promise<void> {
   await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'PUT',
     headers: {
@@ -89,7 +90,7 @@ export async function deleteFilterUserWord(
   id: string,
   token: string,
   wordId: string
-) {
+): Promise<void> {
   await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'DELETE',
     headers: {
