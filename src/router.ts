@@ -1,6 +1,7 @@
 import audioGameStart from './components/audio-game';
 import renderAuthPage from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
+import { renderStatistic } from './components/statistic/render';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
@@ -46,7 +47,7 @@ export function handleRouter() {
       renderSprintGamePage();
       break;
     case 'statistics':
-      console.log('statistics');
+      renderStatistic();
       break;
     default:
       renderMainPage();
