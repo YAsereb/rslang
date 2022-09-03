@@ -4,6 +4,7 @@ export type OptionalWord = {
   countTrueAnswerInRow: number,
   countTrueAnswer: number,
   countAttempt: number,
+  isLearned: boolean,
 };
 
 export type UserWord = {

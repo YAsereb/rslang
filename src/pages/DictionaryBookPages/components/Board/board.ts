@@ -28,12 +28,11 @@ export async function renderBoard() {
 
   const html = `
             <div class="board">
-              ${
-                !generalState.currentData.length
-                  ? '<h4>Нету слов</h4>'
-                  : `${renderWordsList(generalState.currentData)}
+              ${!generalState.currentData.length
+      ? '<h4>Вы пока не добавили слова</h4>'
+      : `${renderWordsList(generalState.currentData)}
               ${dicAndBookVars.isBookPage ? renderPagination() : ''}    `
-              }
+    }
                        
             </div> 
               `;
@@ -56,8 +55,8 @@ async function handleBookData() {
         { group: dicAndBookVars.currentGroup },
         {
           $or: [
-            { 'userWord.optional.isDeleted': false },
-            { 'userWord.optional.isDeleted': null },
+            { 'userWord.optional.isLearned': false },
+            { 'userWord.optional.isLearned': null },
           ],
         },
 
@@ -94,7 +93,7 @@ async function handleDictionaryData() {
     if (dictionaryHeaderState.typeDictionary === 'deleted') {
       filter = JSON.stringify({
         $and: [
-          { 'userWord.optional.isDeleted': true },
+          { 'userWord.optional.isLearned': true },
           { group: dicAndBookVars.currentGroup },
         ],
       });

@@ -12,8 +12,8 @@ export default async function getAllWords(numGroup: number, page: number) {
   return data;
 }
 
-export async function getWord(id: string) {
-  const response = await fetch(`${url}/words/${id}`);
+export async function getWord(wordId: string) {
+  const response = await fetch(`${url}/words/${wordId}`);
 
   const data = await response.json();
 
