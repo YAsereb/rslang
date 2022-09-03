@@ -11,35 +11,39 @@ function renderHeader() {
 
   return `
     <header class="header">
-      <div class="header-home">
-        <a href="#" class="home-button">
-          <svg>
-            <use xlink:href="./assets/svg/sprite/header.svg#home"></use>
-          </svg>
-        </a>
-      </div>
-      <nav class="navigation" id="navigation">
-        <div class="navigation-list">
-          ${headerState.isLogin ? '<a href="#dictionary">Dictionary</a>' : ''}
-          <a href="#book">Textbook</a>
-          <div class="navigation-games">
-          <div class="games-item">
-            <span>Games</span>
+    <div class="centered-container">
+      <div class="header-container">
+        <div class="header-home">
+          <a href="#" class="home-button">
             <svg>
-              <use xlink:href="./assets/svg/sprite/header.svg#arrow"></use>
+              <use xlink:href="./assets/svg/sprite/header.svg#home"></use>
             </svg>
-          </div>
-            <ul class="games-list">
-              <a href="#audiocall"><li>AudioCall</li></a>
-              <a href="#sprint"><li>Sprint</li></a>
-            </ul>
-          </div>
-          <a href="#statistics">Statistics</a>
+          </a>
         </div>
-        <div class="navigation-auth">
-          <a id="sign-up">${headerState.isLogin ? 'LOGOUT' : 'LOGIN'}</a>
+        <nav class="navigation" id="navigation">
+          <div class="navigation-list">
+            ${headerState.isLogin ? '<a href="#dictionary">Dictionary</a>' : ''}
+            <a href="#book">Textbook</a>
+            <div class="navigation-games">
+            <div class="games-item">
+              <span>Games</span>
+              <svg>
+                <use xlink:href="./assets/svg/sprite/header.svg#arrow"></use>
+              </svg>
+            </div>
+              <ul class="games-list">
+                <a href="#audiocall"><li>AudioCall</li></a>
+                <a href="#sprint"><li>Sprint</li></a>
+              </ul>
+            </div>
+            <a href="#statistics">Statistics</a>
+          </div>
+          <div class="navigation-auth">
+            <a id="sign-up">${headerState.isLogin ? 'LOGOUT' : 'LOGIN'}</a>
+          </div>
+        </nav>
         </div>
-      </nav>
+      </div>
     </header>
  `;
 }

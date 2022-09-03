@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 1px 1px 4px #b7bfcf;
+  background-color: #fff;
 
   .link {
     width: 100%;
@@ -28,4 +30,19 @@
     width: 5rem;
     height: 5rem;
   }
+
+  .link-name {
+    color: rgb(106, 106, 106);
+
+  }
+
+  .gitHub-icon {
+    background: #3f51b5;
+  }
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

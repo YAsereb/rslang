@@ -1,13 +1,14 @@
 .main {
   width: 100%;
   margin: 0 auto;
+  flex: 1 1 auto;
+  max-width: 1200px;
 }
 
 .article {
   font-size: 2rem;
   text-align: center;
 }
-
 .wrapper {
   display: flex;
   justify-content: space-around;
@@ -31,3 +32,36 @@
   height: 10rem;
   margin: 1rem;
 }
+
+.video {
+  height: auto;
+    margin: 24px 0px;
+    display: flex;
+    position: relative;
+    max-width: 1232px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.video-item {
+
+  width: 22%;
+    border-radius: 0.5rem;
+    transition: 0.2s;
+    box-shadow: 0 0.3rem 1rem 0.1rem rgb(0, 0, 0, 0.3);
+}
+
+.developer-card {
+  width: 22%;
+  border-radius: 0.5rem;
+  transition: 0.2s;
+  box-shadow: 0 0.3rem 1rem 0.1rem rgb(0, 0, 0, 0.3);
+}
+
+.developer-img {
+  width: 10rem;
+    height: 10rem;
+    margin: 1rem;
+}
+
