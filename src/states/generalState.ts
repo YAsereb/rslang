@@ -9,4 +9,5 @@ export const generalState: GlobalState = {
   previousURL: '',
   token: '',
   userId: '',
+  currentData: [],
 };
