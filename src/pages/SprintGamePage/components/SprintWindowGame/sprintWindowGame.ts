@@ -1,6 +1,14 @@
+import getAllWords, {
+  getAggregatedWords,
+} from '../../../../api/Words/WordsAPI';
+import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
+import dicAndBookVars from '../../../DictionaryBookPages';
 import renderResultSprintGame from '../ResultSprintGame/resultSprintGame';
-import { sprintState } from '../StartScreenSprint/startScreenSprint';
+import {
+  handleRandomData,
+  sprintState,
+} from '../StartScreenSprint/startScreenSprint';
 import './style.scss';
 
 export const sprintGameState = {
@@ -9,6 +17,8 @@ export const sprintGameState = {
   score: 0,
   level: 1,
   indexRight: 0,
+  indexPrevPage: 0,
+  idInterval: '' as NodeJS.Timer | string,
   trueData: [] as IWordCard[],
   falseData: [] as IWordCard[],
 };
@@ -21,6 +31,7 @@ function renderSprintWindowGame() {
   sprintGameState.indexRight = 0;
   sprintGameState.trueData = [];
   sprintGameState.falseData = [];
+  sprintGameState.indexPrevPage = 0;
 
   main.innerHTML = '';
 
@@ -71,11 +82,19 @@ function handleSprintGameState() {
 function startTimer() {
   const timerElement = document.querySelector('.sprint-timer') as HTMLElement;
   let totalSeconds = Number(timerElement.textContent);
-  const idInterval = setInterval(() => {
+  sprintGameState.idInterval = setInterval(() => {
     totalSeconds -= 1;
     timerElement.textContent = String(totalSeconds);
+    window.addEventListener(
+      'hashchange',
+      () => {
+        clearInterval(sprintGameState.idInterval as NodeJS.Timer);
+      },
+      { once: true }
+    );
+
     if (totalSeconds === 0) {
-      clearInterval(idInterval);
+      clearInterval(sprintGameState.idInterval as NodeJS.Timer);
       renderResultSprintGame();
     }
   }, 1000);
@@ -85,37 +104,102 @@ function getRandomNumber(max: number) {
   return Math.floor(Math.random() * max);
 }
 
-function handleWord() {
-  const number = getRandomNumber(sprintState.data.length);
+async function handleWord() {
+  if (!sprintState.sprintData.length) {
+    sprintGameState.indexPrevPage += 1;
+    await handleSprintData();
 
-  const currentWord = sprintState.data[number];
-  sprintGameState.currentWord = currentWord;
+    if (!sprintState.sprintData.length) {
+      renderResultSprintGame();
+      clearInterval(sprintGameState.idInterval as NodeJS.Timer);
+      return;
+    }
+  }
 
-  sprintState.data = sprintState.data.filter(
-    (word) => word.id !== currentWord.id
-  );
+  const number = getRandomNumber(sprintState.sprintData.length);
 
-  handleRandomWord(currentWord);
-  handleTranslatedData(currentWord);
+  sprintGameState.currentWord = sprintState.sprintData[number];
+
+  handleRandomWord();
+  handleTranslatedData();
   handleRandomTranslatedWord();
+
+  sprintState.sprintData = sprintState.sprintData.filter(
+    (word) => word.word !== sprintGameState.currentWord.word
+  );
 }
 
-function handleRandomWord(currentWord: IWordCard) {
+export async function handleSprintData() {
+  if (generalState.previousURL === 'book') {
+    if (generalState.token) {
+      const filter = JSON.stringify({
+        $and: [
+          {
+            page:
+              dicAndBookVars.currentPage - 1 - sprintGameState.indexPrevPage,
+          },
+          { group: dicAndBookVars.currentGroup },
+          {
+            $or: [
+              { 'userWord.optional.isDeleted': false },
+              { 'userWord.optional.isDeleted': null },
+            ],
+          },
+
+          {
+            $or: [
+              { userWord: null },
+              { 'userWord.difficulty': 'hard' },
+              { 'userWord.difficulty': 'easy' },
+            ],
+          },
+        ],
+      });
+
+      sprintState.sprintData = await getAggregatedWords(
+        generalState.userId as string,
+        generalState.token as string,
+        dicAndBookVars.bookLimit,
+        filter
+      );
+    } else {
+      console.log(sprintState.cuurentPage);
+
+      sprintState.sprintData = await getAllWords(
+        dicAndBookVars.currentGroup,
+        dicAndBookVars.currentPage - sprintGameState.indexPrevPage
+      );
+    }
+  } else if (generalState.previousURL === 'dictionary') {
+    sprintState.sprintData = [];
+  } else {
+    await handleRandomData();
+  }
+}
+
+function handleRandomWord() {
   const word = document.querySelector('.sprint-word__original') as HTMLElement;
 
-  word.setAttribute('data-translate', currentWord.wordTranslate);
+  word.setAttribute(
+    'data-translate',
+    sprintGameState.currentWord.wordTranslate
+  );
 
-  word.textContent = currentWord.word;
+  word.textContent = sprintGameState.currentWord.word;
 }
 
-function handleTranslatedData(currentWord: IWordCard) {
+function handleTranslatedData() {
   sprintGameState.translatedWords = [];
 
-  sprintGameState.translatedWords.push(currentWord.wordTranslate);
+  sprintGameState.translatedWords.push(
+    sprintGameState.currentWord.wordTranslate
+  );
 
-  const number = getRandomNumber(sprintState.data.length);
+  const number = getRandomNumber(sprintState.sprintData.length);
 
-  const translatedWord = sprintState.data[number].wordTranslate;
+  console.log(sprintState.sprintData);
+
+  const translatedWord = sprintState.sprintData[number].wordTranslate;
 
   sprintGameState.translatedWords.push(translatedWord);
 }
@@ -185,8 +269,6 @@ function handleFalseAnswer() {
 }
 
 function handleAnswer(isRight: boolean) {
-  console.log(1);
-
   if (isRight) {
     sprintGameState.indexRight += 1;
 
