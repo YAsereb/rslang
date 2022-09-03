@@ -36,6 +36,8 @@ body {
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  display: flex;
+  flex-direction: column;
 }
 input,
 button,
@@ -79,4 +81,11 @@ h6 {
 
 button {
   cursor: pointer;
+}
+
+
+.centered-container {
+  width: 1200px;
+  margin: 0 auto;
+
 }

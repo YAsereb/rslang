@@ -41,6 +41,8 @@
   height: 100%;
   padding: 2rem 2rem 1rem;
   background: linear-gradient(transparent, rgb(172, 134, 113));
+
+  position: relative;
 }
 
 .buttons-block {
@@ -112,8 +114,8 @@
 
     svg {
       display: block;
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 2rem;
+      width: 2rem;
       transition: 0.3s ease-in-out;
 
       &:hover {
@@ -147,4 +149,14 @@
   &:nth-child(1) {
     margin-bottom: 0.5rem;
   }
+}
+
+.progress-word {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  padding: 0 0.5rem;
+  font-size: 2rem;
+  background-color: #d9c6f2;
+  border-radius: 0.3rem;
 }

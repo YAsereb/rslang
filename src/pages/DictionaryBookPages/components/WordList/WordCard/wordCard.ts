@@ -113,7 +113,7 @@ async function handleBookWordCard(event: Event) {
   if (target.closest('.add-word__btn')) {
     options = {
       difficulty: 'hard',
-      optional: {}
+      optional: {},
     };
 
     await postFilterUserWord((userId as string), (token as string), WordId, options);

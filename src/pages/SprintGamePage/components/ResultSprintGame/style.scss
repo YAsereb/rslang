@@ -40,20 +40,21 @@
   margin-bottom: 3rem;
 }
 
-.result-true__list {
+.result-sprint__list {
   margin-bottom: 4rem;
   li {
     display: flex;
     align-items: center;
     margin: 2rem 0;
-  }
-}
-
-.result-false__list {
-  li {
-    display: flex;
-    align-items: center;
-    margin: 2rem 0;
+    button {
+      background-color: transparent;
+      margin-right: 0.4rem;
+      svg {
+        display: block;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
   }
 }
 
