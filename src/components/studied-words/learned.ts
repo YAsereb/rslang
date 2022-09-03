@@ -12,22 +12,22 @@ async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: true,
-    }
+    },
   };
   await putFilterUserWord(
-    (generalState.userId as string),
-    (generalState.token as string),
+    generalState.userId as string,
+    generalState.token as string,
     wordId,
     optional
   );
 }
 
 export async function setUnlearnedStatusWord(wordId: string) {
-  const userWord: UserWord = await getUserWordById(
-    (generalState.userId as string),
+  const userWord: UserWord = (await getUserWordById(
+    generalState.userId as string,
     wordId,
-    (generalState.token as string)
-  );
+    generalState.token as string
+  )) as UserWord;
 
   const optional: UserWord = {
     difficulty: userWord.difficulty,
@@ -38,26 +38,29 @@ export async function setUnlearnedStatusWord(wordId: string) {
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: false,
-    }
+    },
   };
   await putFilterUserWord(
-    (generalState.userId as string),
-    (generalState.token as string),
+    generalState.userId as string,
+    generalState.token as string,
     wordId,
     optional
   );
 }
 
 export default async function learnedWord(wordId: string) {
-  const userWord: UserWord = await getUserWordById(
-    (generalState.userId as string),
+  const userWord = (await getUserWordById(
+    generalState.userId as string,
     wordId,
-    (generalState.token as string)
-  );
+    generalState.token as string
+  )) as UserWord;
 
-  if ((userWord.difficulty === 'easy'
-    && (userWord.optional.countTrueAnswerInRow as number) >= 3)
-    || (userWord.difficulty === 'hard'
-      && (userWord.optional.countTrueAnswerInRow as number) >= 5)
-  ) await setLearnedStatusWord(wordId, userWord);
+  if (
+    (userWord.difficulty === 'easy' &&
+      (userWord.optional.countTrueAnswerInRow as number) >= 3) ||
+    (userWord.difficulty === 'hard' &&
+      (userWord.optional.countTrueAnswerInRow as number) >= 5)
+  ) {
+    await setLearnedStatusWord(wordId, userWord);
+  }
 }

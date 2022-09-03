@@ -28,11 +28,12 @@ export async function renderBoard() {
 
   const html = `
             <div class="board">
-              ${!generalState.currentData.length
-      ? '<h4>Вы пока не добавили слова</h4>'
-      : `${renderWordsList(generalState.currentData)}
+              ${
+                !generalState.currentData.length
+                  ? '<h4>Вы пока не добавили слова</h4>'
+                  : `${renderWordsList(generalState.currentData)}
               ${dicAndBookVars.isBookPage ? renderPagination() : ''}    `
-    }
+              }
                        
             </div> 
               `;
@@ -55,6 +56,7 @@ async function handleBookData() {
         { group: dicAndBookVars.currentGroup },
         {
           $or: [
+            { 'userWord.optional.isLearned': true },
             { 'userWord.optional.isLearned': false },
             { 'userWord.optional.isLearned': null },
           ],
