@@ -1,7 +1,7 @@
-import IWordCard from '../interfaces/words';
-
 export type OptionalStatistic = {
-  words: IWordCard[]
+  audioWords: string[]
+  sprintWords: string[]
+  cardWords: string[]
 }
 
 export type Statistic = {

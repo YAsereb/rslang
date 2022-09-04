@@ -1,19 +1,26 @@
 import { getUserWordById, putFilterUserWord } from '../../api/Words/WordsAPI';
 import { generalState } from '../../states/generalState';
-import { UserWord } from '../../types/everydayTypes/userWord';
+import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
 
-async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
+const date = new Date();
+export async function setLearnedStatusWord(
+  wordId: string,
+  userWord: UserWord,
+  whereLearned: PlaceLearnedWord
+) {
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
-      isDeleted: userWord.optional.isDeleted,
       isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
       countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: true,
+      whenLearnedDate: date,
+      whereLearned
     },
   };
+
   await putFilterUserWord(
     generalState.userId as string,
     generalState.token as string,
@@ -22,7 +29,7 @@ async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
   );
 }
 
-export async function setUnlearnedStatusWord(wordId: string) {
+export async function setUnlearnedStatusWord(wordId: string, whereLearned: PlaceLearnedWord) {
   const userWord: UserWord = (await getUserWordById(
     generalState.userId as string,
     wordId,
@@ -32,14 +39,16 @@ export async function setUnlearnedStatusWord(wordId: string) {
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {
-      isDeleted: userWord.optional.isDeleted,
       isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
       countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: false,
+      whenLearnedDate: date,
+      whereLearned
     },
   };
+
   await putFilterUserWord(
     generalState.userId as string,
     generalState.token as string,
@@ -48,12 +57,12 @@ export async function setUnlearnedStatusWord(wordId: string) {
   );
 }
 
-export default async function learnedWord(wordId: string) {
-  const userWord = (await getUserWordById(
+export default async function learnedWord(wordId: string, whereLearned: PlaceLearnedWord) {
+  const userWord = await getUserWordById(
     generalState.userId as string,
     wordId,
     generalState.token as string
-  )) as UserWord;
+  ) as UserWord;
 
   if (
     (userWord.difficulty === 'easy' &&
@@ -61,6 +70,6 @@ export default async function learnedWord(wordId: string) {
     (userWord.difficulty === 'hard' &&
       (userWord.optional.countTrueAnswerInRow as number) >= 5)
   ) {
-    await setLearnedStatusWord(wordId, userWord);
+    await setLearnedStatusWord(wordId, userWord, whereLearned);
   }
 }

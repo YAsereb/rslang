@@ -63,6 +63,7 @@ async function handleAnswer(answer: boolean) {
   trueWordParagraph.hidden = false;
 
   const { userId, token } = generalState;
+
   await handleProgress(
     userId as string,
     audioGameState.trueWordId,
@@ -92,7 +93,7 @@ async function isTrueWord(element: HTMLElement) {
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
   await handleAnswer(true);
-  await learnedWord(audioGameState.trueWordId);
+  await learnedWord(audioGameState.trueWordId, 'audio-game');
 }
 
 async function isFalseWord(element: HTMLElement) {
@@ -102,7 +103,7 @@ async function isFalseWord(element: HTMLElement) {
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
   await handleAnswer(false);
-  await setUnlearnedStatusWord(audioGameState.trueWordId);
+  await setUnlearnedStatusWord(audioGameState.trueWordId, 'audio-game');
 }
 
 export async function handleAudioGame(event: Event) {

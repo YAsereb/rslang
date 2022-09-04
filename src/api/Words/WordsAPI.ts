@@ -20,7 +20,7 @@ export async function getWord(wordId: string) {
   return data;
 }
 
-export async function getAllUserWords(id: string, token: string) {
+export async function getAllUserWords(id: string, token: string): Promise<UserWord[]> {
   const response = await fetch(`${url}/users/${id}/words`, {
     method: 'GET',
     headers: {
@@ -103,8 +103,8 @@ export async function deleteFilterUserWord(
 export async function getAggregatedWords(
   id: string,
   token: string,
-  limit: number,
-  filter: string,
+  limit?: number,
+  filter?: string,
 ) {
   const response = await fetch(
     `${url}/users/${id}/aggregatedWords?filter=${filter}&wordsPerPage=${limit}`,

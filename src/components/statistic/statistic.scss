@@ -1,0 +1,22 @@
+.statistic {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.statistic-item {
+  width: 100%;
+  height: 100%;
+  padding-top: 1rem;
+  font-size: 2rem;
+}
+
+.statistic-item__header {
+  text-align: center;
+}
+
+.statistic-item__game {
+  padding: 1rem 5rem;
+}
