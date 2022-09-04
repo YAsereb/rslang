@@ -3,6 +3,7 @@ import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
 import { generalState } from '../../../../states/generalState';
+import IWordCard from '../../../../types/interfaces/words';
 import renderPagination, {
   handlePaginationListeners,
   handlePaginationState,
@@ -30,7 +31,9 @@ export async function renderBoard() {
             <div class="board">
               ${
                 !generalState.currentData.length
-                  ? '<h4>Вы пока не добавили слова</h4>'
+                  ? !generalState.userId
+                    ? '<h4>Вам нужно авторизоваться</h4>'
+                    : '<h4>Вы пока не добавили слова</h4>'
                   : `${renderWordsList(generalState.currentData)}
               ${dicAndBookVars.isBookPage ? renderPagination() : ''}    `
               }
@@ -45,11 +48,7 @@ export async function renderBoard() {
 }
 
 async function handleBookData() {
-  const user = JSON.parse(localStorage.getItem('userData') as string);
-
-  if (user) {
-    const { userId, token } = user;
-
+  if (generalState.userId) {
     const filter = JSON.stringify({
       $and: [
         { page: dicAndBookVars.currentPage - 1 },
@@ -72,12 +71,12 @@ async function handleBookData() {
       ],
     });
 
-    generalState.currentData = await getAggregatedWords(
-      userId,
-      token,
+    generalState.currentData = (await getAggregatedWords(
+      generalState.userId,
+      generalState.token as string,
       dicAndBookVars.bookLimit,
       filter
-    );
+    )) as IWordCard[];
   } else {
     generalState.currentData = await getAllWords(
       dicAndBookVars.currentGroup,
@@ -87,12 +86,9 @@ async function handleBookData() {
 }
 
 async function handleDictionaryData() {
-  const user = JSON.parse(localStorage.getItem('userData') as string);
-
-  if (user) {
-    const { userId, token } = user;
+  if (generalState.userId) {
     let filter: string;
-    if (dictionaryHeaderState.typeDictionary === 'deleted') {
+    if (dictionaryHeaderState.typeDictionary === 'learned') {
       filter = JSON.stringify({
         $and: [
           { 'userWord.optional.isLearned': true },
@@ -108,12 +104,12 @@ async function handleDictionaryData() {
       });
     }
 
-    generalState.currentData = await getAggregatedWords(
-      userId,
-      token,
+    generalState.currentData = (await getAggregatedWords(
+      generalState.userId,
+      generalState.token as string,
       dicAndBookVars.dictionaryLimit,
       filter
-    );
+    )) as IWordCard[];
   }
 }
 

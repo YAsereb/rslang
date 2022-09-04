@@ -18,8 +18,6 @@ function renderStartSprintScreen() {
     sprintState.sprintData = [...generalState.currentData];
   }
 
-  console.log(generalState.currentData);
-
   const html = `
              <div class="start-screen-img">
                 <div class="start-screen">

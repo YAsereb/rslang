@@ -6,6 +6,7 @@ export type GlobalState = {
   currentURL: string;
   previousURL: string;
   token: string | null;
+  refreshToken: string | null;
   userId: string | null;
   currentData: IWordCard[];
 };

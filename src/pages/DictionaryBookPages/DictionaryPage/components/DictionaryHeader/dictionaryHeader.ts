@@ -10,9 +10,8 @@ function renderDictionaryHeader() {
 
   const html = `
                 <div class="dictionary-header">
-                  <button data-type="studied">Изучаемые</button>
                   <button data-type="hard">Сложные</button>
-                  <button data-type="deleted">Изученные</button>
+                  <button data-type="learned">Изученные</button>
                 </div>
               `;
 
@@ -41,9 +40,7 @@ function handleFilterDictionaryWords(event: Event) {
   const headerBtns = document.querySelectorAll('.dictionary-header button');
 
   if (target.textContent === 'Изученные') {
-    dictionaryHeaderState.typeDictionary = 'deleted';
-  } else if (target.textContent === 'Изучаемые') {
-    dictionaryHeaderState.typeDictionary = 'studied';
+    dictionaryHeaderState.typeDictionary = 'learned';
   } else if (target.textContent === 'Сложные') {
     dictionaryHeaderState.typeDictionary = 'hard';
   } else {

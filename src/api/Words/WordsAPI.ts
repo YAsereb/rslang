@@ -1,4 +1,6 @@
+import { generalState } from '../../states/generalState';
 import { UserWord } from '../../types/everydayTypes/userWord';
+import IWordCard from '../../types/interfaces/words';
 
 const url = 'http://localhost:8000';
 
@@ -20,7 +22,10 @@ export async function getWord(wordId: string) {
   return data;
 }
 
-export async function getAllUserWords(id: string, token: string): Promise<UserWord[]> {
+export async function getAllUserWords(
+  id: string,
+  token: string
+): Promise<UserWord[]> {
   const response = await fetch(`${url}/users/${id}/words`, {
     method: 'GET',
     headers: {
@@ -34,8 +39,11 @@ export async function getAllUserWords(id: string, token: string): Promise<UserWo
   return data;
 }
 
-export async function getUserWordById(id: string, wordId: string, token: string):
-  Promise<UserWord | null> {
+export async function getUserWordById(
+  id: string,
+  wordId: string,
+  token: string
+): Promise<UserWord | null> {
   const resp = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'GET',
     headers: {
@@ -103,23 +111,54 @@ export async function deleteFilterUserWord(
 export async function getAggregatedWords(
   id: string,
   token: string,
-  limit?: number,
-  filter?: string,
-) {
-  const response = await fetch(
-    `${url}/users/${id}/aggregatedWords?filter=${filter}&wordsPerPage=${limit}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-      },
-    }
-  );
+  limit: number,
+  filter: string
+): Promise<IWordCard[]> {
+  let data: IWordCard[] = [];
+  try {
+    const response = await fetch(
+      `${url}/users/${id}/aggregatedWords?filter=${filter}&wordsPerPage=${limit}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    const paginatedResult = await response.json();
+
+    data = paginatedResult[0].paginatedResults;
+
+    return data;
+  } catch (err) {
+    await updateToken();
+
+    data = await getAggregatedWords(
+      id,
+      generalState.token as string,
+      limit,
+      filter
+    );
+
+    return data;
+  }
+}
+
+async function updateToken() {
+  const response = await fetch(`${url}/users/${generalState.userId}/tokens`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${generalState.refreshToken}`,
+      Accept: 'application/json',
+    },
+  });
 
   const data = await response.json();
 
-  const arr = data[0].paginatedResults;
-
-  return arr;
+  localStorage.setItem('token', JSON.stringify(data.token));
+  localStorage.setItem('refreshToken', JSON.stringify(data.refreshToken));
+  generalState.token = data.token;
+  generalState.refreshToken = data.refreshToken;
 }
