@@ -38,11 +38,11 @@ export async function loginUser(user: { email: string; password: string }) {
   if (response.status === 404 || response.status === 403) {
     showTextError('Invalid Email or Password!');
   } else if (response.status === 200) {
-    console.log('okay');
-
     const userData = await response.json();
 
-    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('token', JSON.stringify(userData.token));
+    localStorage.setItem('userId', JSON.stringify(userData.userId));
+    localStorage.setItem('refreshToken', JSON.stringify(userData.refreshToken));
     closeModal();
   }
 }

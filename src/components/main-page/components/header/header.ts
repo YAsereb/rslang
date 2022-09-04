@@ -58,21 +58,38 @@ function handleAuth(event: Event) {
   const currentTarget = event.currentTarget as HTMLElement;
 
   if (currentTarget.textContent === 'LOGOUT') {
-    localStorage.removeItem('userData');
-    headerState.isLogin = false;
-    handleRouter();
+    handleLogOut();
   } else if (currentTarget.textContent === 'LOGIN') {
     window.location.href = '#auth';
   }
 }
 
-function checkSsLogin() {
-  const user = localStorage.getItem('userData') as string;
+export function handleLogOut() {
+  localStorage.removeItem('userId');
+  localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
+  headerState.isLogin = false;
+  generalState.userId = '';
+  generalState.token = '';
+  generalState.refreshToken = '';
+  generalState.currentData = [];
 
-  if (user) {
+  console.log(generalState.token);
+
+  handleRouter();
+}
+
+function checkSsLogin() {
+  const userId = localStorage.getItem('userId') as string;
+
+  if (userId) {
+    const token = localStorage.getItem('token') as string;
+    const refreshToken = localStorage.getItem('refreshToken') as string;
+
     headerState.isLogin = true;
-    generalState.token = JSON.parse(user).token;
-    generalState.userId = JSON.parse(user).userId;
+    generalState.token = JSON.parse(token);
+    generalState.userId = JSON.parse(userId);
+    generalState.refreshToken = JSON.parse(refreshToken);
   }
 }
 

@@ -156,12 +156,12 @@ export async function handleSprintData() {
         ],
       });
 
-      sprintState.sprintData = await getAggregatedWords(
+      sprintState.sprintData = (await getAggregatedWords(
         generalState.userId as string,
         generalState.token as string,
         dicAndBookVars.bookLimit,
         filter
-      );
+      )) as IWordCard[];
     } else {
       console.log(sprintState.cuurentPage);
 
