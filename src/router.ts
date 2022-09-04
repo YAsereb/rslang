@@ -46,7 +46,6 @@ export function handleRouter() {
       renderSprintGamePage();
       break;
     case 'statistics':
-      console.log('statistics');
       break;
     default:
       renderMainPage();

@@ -163,8 +163,6 @@ export async function handleSprintData() {
         filter
       )) as IWordCard[];
     } else {
-      console.log(sprintState.cuurentPage);
-
       sprintState.sprintData = await getAllWords(
         dicAndBookVars.currentGroup,
         dicAndBookVars.currentPage - sprintGameState.indexPrevPage
@@ -196,8 +194,6 @@ function handleTranslatedData() {
   );
 
   const number = getRandomNumber(sprintState.sprintData.length);
-
-  console.log(sprintState.sprintData);
 
   const translatedWord = sprintState.sprintData[number].wordTranslate;
 

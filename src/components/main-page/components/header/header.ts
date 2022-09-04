@@ -74,8 +74,6 @@ export function handleLogOut() {
   generalState.refreshToken = '';
   generalState.currentData = [];
 
-  console.log(generalState.token);
-
   handleRouter();
 }
 

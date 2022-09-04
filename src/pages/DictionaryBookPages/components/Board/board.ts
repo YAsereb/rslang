@@ -25,8 +25,6 @@ export async function renderBoard() {
     board.remove();
   }
 
-  console.log(generalState.currentData);
-
   const main = document.querySelector('main') as HTMLElement;
 
   const html = `
@@ -88,8 +86,6 @@ async function handleBookData() {
 }
 
 async function handleDictionaryData() {
-  console.log(generalState.userId);
-
   if (generalState.userId) {
     let filter: string;
     if (dictionaryHeaderState.typeDictionary === 'learned') {

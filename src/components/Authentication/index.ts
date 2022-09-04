@@ -31,22 +31,26 @@ function renderAuth() {
                           <use xlink:href="./assets/svg/sprite/wordCard.svg#delete"></use>
                         </svg>
                       </button>
-                      <h3 id="authentication-title">${authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
-    }</h3>
+                      <h3 id="authentication-title">${
+                        authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
+                      }</h3>
                       <form class="authentication-form" id="authentication-form">
                           <label>Email</label>
                           <input type="email" value="" placeholder="Write something" id="email-input" />
                           <label>Password</label>
                           <input type="password" value="" placeholder="Write something" id="password-input" />
-                          <button id="authentication-btn">${authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
-    }</button>
+                          <button id="authentication-btn">${
+                            authVariables.isSignUp ? 'LOG IN' : 'SIGN UP'
+                          }</button>
                       </form>
                       <div class="authentication-text">
-                        <p id="authentication-text">${authVariables.isSignUp
-      ? 'Dont have an account?'
-      : 'Already have an account?'
-    }</p><span id="change-authentication">${authVariables.isSignUp ? 'Sign up' : 'Log in'
-    }</span>
+                        <p id="authentication-text">${
+                          authVariables.isSignUp
+                            ? 'Dont have an account?'
+                            : 'Already have an account?'
+                        }</p><span id="change-authentication">${
+    authVariables.isSignUp ? 'Sign up' : 'Log in'
+  }</span>
                       </div>
                     </div>
                     `;
@@ -98,8 +102,6 @@ function toggleAuthentication(e: Event) {
 function handleForm(e: Event) {
   e.preventDefault();
 
-  console.log(1);
-
   handleValidate();
 
   if (authVariables.isValidate) {
@@ -111,8 +113,6 @@ function handleForm(e: Event) {
     if (
       (authVariables.authBtn as HTMLButtonElement).textContent === 'SIGN UP'
     ) {
-      console.log(1);
-
       createUser(user);
     } else {
       loginUser(user);
