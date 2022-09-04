@@ -38,7 +38,8 @@ function renderSprintWindowGame() {
   main.innerHTML = '';
 
   const html = `
-                <div class="sprint-wrapper">
+                <div class="start-screen-img">
+                  <div class="sprint-wrapper">
                     <div class="sprint-window">
                         <div class="score-sprint">Score: <span>0</span></div>
                         <div class="sprint-block">
@@ -61,7 +62,7 @@ function renderSprintWindowGame() {
                         </div>
                     </div>
                 </div>
-
+                </div>
   `;
 
   main.insertAdjacentHTML('beforeend', html);

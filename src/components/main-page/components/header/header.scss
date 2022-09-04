@@ -1,22 +1,15 @@
 .header {
-  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
-  background-color: #fff;
-  color: rgb(72, 72, 72);
-  box-shadow: 1px 1px 4px #b7bfcf;
-  background-color: #fff;
+  height: 6rem;
+  padding: 0 2rem;
+  background-color: #3f51b5;
+  color: #fff;
 
   svg {
-    fill: rgb(6, 1, 1);
+    fill: #fff;
   }
-}
-
-.header-container{
-  display: flex;
-  justify-content: space-between;
 }
 
 .header-home {
@@ -24,8 +17,9 @@
     height: 2.5rem;
     width: 2.5rem;
     transition: 0.3s ease-in-out;
+
     &:hover {
-      fill: #7e7e7e;
+      fill: #cf8bf3;
     }
   }
 }
@@ -38,10 +32,12 @@
 .navigation-list {
   display: flex;
   font-size: 2rem;
+
   a {
     margin: 0 1.5rem;
-    color: rgb(0, 0, 0);
+    color: rgb(214, 209, 209);
     transition: color 0.5s ease;
+
     &:hover {
       color: #fff;
     }
@@ -50,9 +46,10 @@
 
 .navigation-games {
   position: relative;
-  color: rgb(14, 14, 14);
+  color: rgb(214, 209, 209);
   cursor: pointer;
   margin: 0 1.5rem;
+
   svg {
     height: 1.3rem;
     width: 1.3rem;
@@ -61,11 +58,14 @@
     margin-top: 0.3rem;
     transition: 0.2s ease-in-out;
   }
+
   &:hover {
     color: #fff;
+
     .games-list {
       display: flex;
     }
+
     svg {
       transform: none;
     }
@@ -75,6 +75,7 @@
 .games-item {
   display: flex;
   align-items: center;
+
   span {
     display: block;
     margin-right: 0.5rem;
@@ -87,22 +88,26 @@
   top: 50%;
   display: none;
   flex-direction: column;
+
   a {
     margin: 0;
     padding: 0;
     color: #fff;
+
     &:nth-child(1) {
       margin-top: 1.5rem;
     }
+
     li {
       margin: 0.3rem 0;
-      background-color: #777777;
+      background-color: #6441a5;
       border-radius: 0.5rem;
       padding: 0.3rem 0.7rem;
       width: 10rem;
       transition: all 0.3s ease-in-out;
+
       &:hover {
-        background-color: #363636;
+        background-color: #cf8bf3;
       }
     }
   }
@@ -114,14 +119,16 @@
 
 .navigation-auth {
   margin-left: 2rem;
+
   a {
     padding: 0.8rem 1.4rem;
-    color: rgb(12, 12, 12);
+    color: #fff;
     font-size: 1.6rem;
     border: 2px solid #fff;
     border-radius: 1rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+
     &:hover {
       color: #cf8bf3;
       background-color: #fff;
