@@ -50,7 +50,6 @@ export function setChosenToStateGroup(event: Event) {
 export function handleGroup(event: Event) {
   setChosenToStateGroup(event);
   setRandomStatePage();
-  console.log(audioGameState.group);
 
   renderWords(audioGameState.page, audioGameState.group);
 }
