@@ -28,16 +28,14 @@ aside {
 
 html,
 body {
+  position: relative;
   height: 100%;
   width: 100%;
   font-size: 100%;
-  line-height: 1;
   font-size: 10px;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  display: flex;
-  flex-direction: column;
 }
 input,
 button,
@@ -81,11 +79,4 @@ h6 {
 
 button {
   cursor: pointer;
-}
-
-
-.centered-container {
-  width: 1200px;
-  margin: 0 auto;
-
 }
