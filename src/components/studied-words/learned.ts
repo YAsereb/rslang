@@ -91,11 +91,11 @@ export async function setUnlearnedStatusWord(wordId: string) {
 }
 
 export default async function learnedWord(wordId: string) {
-  const userWord = (await getUserWordById(
+  const userWord = await getUserWordById(
     generalState.userId as string,
     wordId,
     generalState.token as string
-  )) as UserWord;
+  ) as UserWord;
 
   if (
     (userWord.difficulty === 'easy' &&

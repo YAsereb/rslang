@@ -91,8 +91,8 @@ async function isTrueWord(element: HTMLElement) {
   const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
-  await learnedWord(audioGameState.trueWordId);
   await handleAnswer(true);
+  await learnedWord(audioGameState.trueWordId);
 }
 
 async function isFalseWord(element: HTMLElement) {
@@ -101,8 +101,8 @@ async function isFalseWord(element: HTMLElement) {
   const { trueWord, trueWordAudio, wordTranslate } = audioGameState;
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
-  await setUnlearnedStatusWord(audioGameState.trueWordId);
   await handleAnswer(false);
+  await setUnlearnedStatusWord(audioGameState.trueWordId);
 }
 
 export async function handleAudioGame(event: Event) {

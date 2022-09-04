@@ -1,6 +1,7 @@
 import IWordCard from '../interfaces/words';
 
 export type OptionalSettings = {
+
   words: IWordCard[]
 }
 

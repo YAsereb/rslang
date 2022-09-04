@@ -34,7 +34,6 @@ async function renderStatisticWords(): Promise<string> {
   return `
   <div class="statistic-item">
     <h3 class="statistic-item__header">Word statistic</h3>
-
   </div>
   `;
 }
