@@ -3,10 +3,9 @@ import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
 import handleProgress from '../progress/progress';
 import { generalState } from '../../states/generalState';
-import learnedWord, { setUnlearnedStatusWord } from '../studied-words/learned';
 
 export function setRandomStatePage() {
-  const min = 0;
+  const min = 1;
   const max = 30;
   const page = Math.floor(Math.random() * (max - min));
   audioGameState.page = page;
@@ -24,7 +23,6 @@ export function getWordsArray(words: Words) {
   audioGameState.trueWordId = trueWord.id;
   audioGameState.trueWord = trueWord.word;
   audioGameState.trueWordAudio = trueWord.audio;
-  audioGameState.trueWordAudioExample = trueWord.audioExample;
   audioGameState.imageSrc = trueWord.image;
   audioGameState.wordTranslate = trueWord.wordTranslate;
 
@@ -52,6 +50,7 @@ export function setChosenToStateGroup(event: Event) {
 export function handleGroup(event: Event) {
   setChosenToStateGroup(event);
   setRandomStatePage();
+  console.log(audioGameState.group);
 
   renderWords(audioGameState.page, audioGameState.group);
 }

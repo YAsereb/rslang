@@ -19,6 +19,7 @@ export default async function handleProgress(
   let userWord: UserWord;
 
   if (!word) {
+    console.log('нет слова');
     userWord = {
       difficulty: 'easy',
       optional: {
@@ -32,8 +33,8 @@ export default async function handleProgress(
       }
     };
     await postFilterUserWord(userId, token, wordId, userWord);
-    console.log('нет слова');
   } else {
+    console.log(word);
     console.log('есть слово');
     if (answer) {
       console.log('правильный ответ');

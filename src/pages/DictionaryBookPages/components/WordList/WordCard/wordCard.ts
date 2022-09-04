@@ -1,4 +1,4 @@
-import { postFilterUserWord, deleteFilterUserWord, getUserWordById } from '../../../../../api/Words/WordsAPI';
+import { postFilterUserWord, getUserWordById } from '../../../../../api/Words/WordsAPI';
 import { headerState } from '../../../../../components/main-page/components/header/header';
 import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
@@ -121,16 +121,16 @@ async function handleBookWordCard(event: Event) {
   const WordId = currentTarget.getAttribute('data-id') as string;
   let options: UserWord;
   const userWord = await getUserWordById(userId as string, WordId, token as string);
-  console.log(userWord);
 
   if (target.closest('.add-word__btn')) {
+    console.log('добавить в сложные');
     options = {
       difficulty: 'hard',
       optional: {
-        isLastTrueAnswer: false,
-        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow,
-        countTrueAnswer: userWord?.optional.countTrueAnswer,
-        countAttempt: userWord?.optional.countAttempt,
+        isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
+        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
+        countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
+        countAttempt: userWord?.optional.countAttempt || 0,
         isLearned: false,
       },
     };
@@ -139,10 +139,14 @@ async function handleBookWordCard(event: Event) {
 
     renderBoard();
   } else if (target.closest('.remove-word__btn')) {
+    console.log('добавить в изученные ');
     options = {
       difficulty: 'easy',
       optional: {
         isLearned: true,
+        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow,
+        countTrueAnswer: userWord?.optional.countTrueAnswer,
+        countAttempt: userWord?.optional.countAttempt,
         whereLearned: 'book',
         whenLearnedDate: new Date(),
       }
@@ -152,11 +156,20 @@ async function handleBookWordCard(event: Event) {
 
     renderBoard();
   } else if (target.closest('.back-word__btn')) {
-    await deleteFilterUserWord((userId as string), (token as string), WordId);
+    console.log('убрать из сложных ');
+    options = {
+      difficulty: 'easy',
+      optional: {
+        isLearned: false,
+        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow,
+        countTrueAnswer: userWord?.optional.countTrueAnswer,
+        countAttempt: userWord?.optional.countAttempt,
+        whereLearned: 'book',
+        whenLearnedDate: new Date(),
+      }
+    };
 
-    renderBoard();
-  } else if (target.closest('.save-word__btn')) {
-    await deleteFilterUserWord((userId as string), (token as string), WordId);
+    await postFilterUserWord((userId as string), (token as string), WordId, options);
 
     renderBoard();
   } else if (target.closest('.sound-word__btn')) {

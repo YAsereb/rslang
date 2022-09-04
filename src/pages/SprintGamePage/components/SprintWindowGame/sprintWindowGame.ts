@@ -2,7 +2,6 @@ import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
 import handleProgress from '../../../../components/progress/progress';
-import learnedWord, { setUnlearnedStatusWord } from '../../../../components/studied-words/learned';
 import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
 import dicAndBookVars from '../../../DictionaryBookPages';
@@ -242,11 +241,11 @@ function handleTrueAnswer() {
 
     handleProgress(
       generalState.userId as string,
+      sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
       generalState.token as string,
-      sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string,
-      true
+      true,
+      'sprint-game'
     );
-    learnedWord(sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string, 'sprint-game');
   } else {
     sprintGameState.falseData.push(sprintGameState.currentWord);
     isRight = false;
@@ -270,11 +269,11 @@ function handleFalseAnswer() {
 
     handleProgress(
       generalState.userId as string,
+      sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
       generalState.token as string,
-      sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string,
-      false
+      false,
+      'sprint-game'
     );
-    setUnlearnedStatusWord(sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string, 'sprint-game');
   } else {
     isRight = false;
     sprintGameState.falseData.push(sprintGameState.currentWord);

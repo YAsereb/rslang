@@ -1,5 +1,3 @@
-import { getUserWordById, putFilterUserWord } from '../../api/Words/WordsAPI';
-import { generalState } from '../../states/generalState';
 import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
 
 const date = new Date();
@@ -32,6 +30,7 @@ export function setUnlearnedStatusWord(
   userWord: UserWord
 ) {
   console.log('неправильный ответ');
+  console.log(userWord);
 
   const optional: UserWord = {
     difficulty: userWord.difficulty,

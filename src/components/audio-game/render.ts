@@ -1,10 +1,10 @@
 import { AnswerWord, Word } from '../../types';
 import renderHeader, { handleHeaderListeners } from '../main-page/components/header/header';
-import { getWords } from './api';
 import { getWordsArray, playAudio } from './game';
 import { listenerAnswer, listenerChooseGroup, listenerStatistic } from './listener';
 import { audioGameState } from '../../states/audioGameState';
 import './style.scss';
+import { getWords } from './api';
 
 export function renderStartGame() {
   const { body } = document;
@@ -48,10 +48,10 @@ export function renderWord(word: Word) {
   `;
 }
 
-export async function renderWords(page: number, group: number) {
+export async function renderWords(group: number, page: number) {
   const { body } = document;
 
-  const words = await getWords(page, group);
+  const words = await getWords(group, page);
   const wordsArray = getWordsArray(words);
   audioGameState.isButtonActive = false;
 
