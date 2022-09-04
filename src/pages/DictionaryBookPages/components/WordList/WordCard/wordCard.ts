@@ -132,6 +132,8 @@ async function handleBookWordCard(event: Event) {
         countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
         countAttempt: userWord?.optional.countAttempt || 0,
         isLearned: false,
+        whenLearnedDate: new Date(),
+        whereLearned: 'book'
       },
     };
 
@@ -144,11 +146,12 @@ async function handleBookWordCard(event: Event) {
       difficulty: 'easy',
       optional: {
         isLearned: true,
-        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow,
-        countTrueAnswer: userWord?.optional.countTrueAnswer,
-        countAttempt: userWord?.optional.countAttempt,
-        whereLearned: 'book',
+        isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
+        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
+        countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
+        countAttempt: userWord?.optional.countAttempt || 0,
         whenLearnedDate: new Date(),
+        whereLearned: 'book',
       }
     };
 
@@ -161,11 +164,12 @@ async function handleBookWordCard(event: Event) {
       difficulty: 'easy',
       optional: {
         isLearned: false,
-        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow,
-        countTrueAnswer: userWord?.optional.countTrueAnswer,
-        countAttempt: userWord?.optional.countAttempt,
-        whereLearned: 'book',
+        isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
+        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
+        countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
+        countAttempt: userWord?.optional.countAttempt || 0,
         whenLearnedDate: new Date(),
+        whereLearned: 'book',
       }
     };
 

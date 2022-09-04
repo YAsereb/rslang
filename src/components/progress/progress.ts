@@ -15,6 +15,7 @@ export default async function handleProgress(
     wordId,
     (generalState.token as string),
   );
+  console.log(word);
 
   let userWord: UserWord;
 
@@ -34,7 +35,6 @@ export default async function handleProgress(
     };
     await postFilterUserWord(userId, token, wordId, userWord);
   } else {
-    console.log(word);
     console.log('есть слово');
     if (answer) {
       console.log('правильный ответ');
@@ -51,10 +51,11 @@ export default async function handleProgress(
         }
       };
 
-      userWord = learnedWord(wordId, whereLearned, word);
+      userWord = learnedWord(whereLearned, word);
     } else {
-      userWord = setUnlearnedStatusWord(wordId, whereLearned, word);
+      userWord = setUnlearnedStatusWord(whereLearned, word);
     }
+    // console.log(use-rWord);
     await putFilterUserWord(userId, token, wordId, userWord);
   }
 }

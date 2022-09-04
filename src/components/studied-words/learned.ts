@@ -3,7 +3,6 @@ import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
 const date = new Date();
 
 export function setLearnedStatusWord(
-  wordId: string,
   userWord: UserWord,
   whereLearned: PlaceLearnedWord
 ) {
@@ -25,30 +24,28 @@ export function setLearnedStatusWord(
 }
 
 export function setUnlearnedStatusWord(
-  wordId: string,
   whereLearned: PlaceLearnedWord,
   userWord: UserWord
 ) {
   console.log('неправильный ответ');
-  console.log(userWord);
 
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {
       isLastTrueAnswer: false,
       countTrueAnswerInRow: 0,
-      countTrueAnswer: userWord.optional.countTrueAnswer as number,
-      countAttempt: (userWord.optional.countAttempt as number) + 1 || 0,
+      countTrueAnswer: userWord.optional.countTrueAnswer || 0,
+      countAttempt: userWord.optional.countAttempt + 1 || 0,
       isLearned: false,
       whenLearnedDate: date,
       whereLearned
     },
   };
+
   return optional;
 }
 
 export function learnedWord(
-  wordId: string,
   whereLearned: PlaceLearnedWord,
   userWord: UserWord
 ) {
@@ -59,7 +56,7 @@ export function learnedWord(
     (userWord.difficulty === 'hard' &&
       (userWord.optional.countTrueAnswerInRow as number) >= 5)
   ) {
-    optional = setLearnedStatusWord(wordId, userWord, whereLearned);
+    optional = setLearnedStatusWord(userWord, whereLearned);
   } optional = userWord;
 
   return optional;
