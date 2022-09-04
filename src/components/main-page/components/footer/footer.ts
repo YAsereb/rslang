@@ -28,7 +28,7 @@ function renderFooter() {
         <p class="link-name">zhentosmak</p>
       </a>
     </div>
-    <p class="link-name">@2022</p>
+    <p class="link-name">RSlang&nbsp2022</p>
   </footer>
   `;
 }

@@ -11,9 +11,9 @@ export default async function handleProgress(
   whereLearned: PlaceLearnedWord,
 ) {
   const word = await getUserWordById(
-    (generalState.userId as string),
+    generalState.userId as string,
     wordId,
-    (generalState.token as string),
+    generalState.token as string
   );
   console.log(word);
 

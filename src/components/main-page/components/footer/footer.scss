@@ -1,17 +1,19 @@
 .footer {
+  position: fixed;
+  z-index: 10001;
+  background-color: #fff;
+  bottom: 0;
+  width: 100%;
+  height: 6rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0 0.3rem 1rem 0.1rem rgb(0, 0, 0, 0.3);
 
   .link {
     width: 100%;
     display: flex;
     align-items: center;
-  }
-
-  .RSschool {
-    width: 10rem;
-    height: 100%;
   }
 
   .school-icon {
@@ -28,4 +30,14 @@
     width: 5rem;
     height: 5rem;
   }
+}
+
+.link-name {
+  color: #000;
+  font-size: 180%;
+}
+
+.link-name:hover {
+  color: #8b8b8b;
+  transform: scale(1.03);
 }

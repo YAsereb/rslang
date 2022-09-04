@@ -12,14 +12,12 @@ import {
 import './style.scss';
 
 function renderResultSprintGame() {
-  const main = document.querySelector('main') as HTMLElement;
+  const sprint = document.querySelector('.sprint-game') as HTMLElement;
 
-  main.innerHTML = '';
+  sprint.innerHTML = '';
 
   const html = `
-             <div class="start-screen-img">
-                <div class="result-wrapper">
-                  <div class="result-window">
+                <div class="result-window">
                     <div class="result-title">RESULT: <span>${
                       sprintGameState.score
                     }</span></div>
@@ -57,14 +55,11 @@ function renderResultSprintGame() {
                             : ''
                         }
                     </div>
-                    <button class="play-again__btn">Again</button>
+                    <button class="play-again__btn">play again</button>
                   </div>
-                  </div>
-                </div>
-
     `;
 
-  main.insertAdjacentHTML('beforeend', html);
+  sprint.insertAdjacentHTML('beforeend', html);
 
   handleResultSprintListeners();
 }

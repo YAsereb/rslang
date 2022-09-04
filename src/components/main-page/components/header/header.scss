@@ -1,12 +1,14 @@
 .header {
+  position: fixed;
+  z-index: 10000;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 6rem;
   padding: 0 2rem;
   background-color: #3f51b5;
   color: #fff;
-
   svg {
     fill: #fff;
   }

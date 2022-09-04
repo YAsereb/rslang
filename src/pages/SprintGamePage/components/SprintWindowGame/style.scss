@@ -1,41 +1,16 @@
-.start-screen-img {
-  background-image: url(../../../../assets/img/screenBek.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.start-screen-window {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgb(199 199 199 / 65%);
-  border-radius: 2rem;
-  width: 100%;
-  height: 50rem;
-  font-size: 1.6rem;
-}
-
-
-.sprint-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  max-width: 60rem;
-  height: calc(100vh - 6rem);
-  margin: auto;
-  padding: 4rem 0;
-}
-
 .sprint-window {
   width: 100%;
 }
 
 .score-sprint {
-  font-size: 3.2rem;
+  color: #fff;
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
+  span {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #db36a4;
+  }
 }
 
 .sprint-block {
@@ -62,6 +37,7 @@
   border: 2px solid #e7b78f;
   border-radius: 50%;
   font-size: 3rem;
+  font-weight: 600;
 }
 
 .sprint-answers {
@@ -74,11 +50,12 @@
     background-color: #ffffff;
     border-radius: 50%;
     margin: 0 1rem;
+    transition: 0.1s ease-in-out;
   }
 }
 
 .sprint-answers .active-circle {
-  background-color: green;
+  background-color: #c2e59c;
 }
 
 .sprint-word__original {
@@ -105,5 +82,9 @@
     color: #ffffff;
     font-size: 2rem;
     font-weight: 600;
+    transition: 0.1s ease-in-out;
+    &:active {
+      background-color: #0abeb5;
+    }
   }
 }

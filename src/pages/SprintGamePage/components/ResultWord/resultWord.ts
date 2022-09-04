@@ -8,8 +8,8 @@ function renderResultWord(word: IWordCard) {
                 </svg>
                 <audio class="audio-word" src = "http://localhost:8000/${word.audio}" >
                 </button>
-                <span>${word.word}</span>
-                <span>-${word.wordTranslate}</span>
+                <span>${word.word} </span>
+                <span>- ${word.wordTranslate}</span>
             </li>
             `;
 }

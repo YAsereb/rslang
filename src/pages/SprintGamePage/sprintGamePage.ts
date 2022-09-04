@@ -14,7 +14,7 @@ function renderHtml() {
 
   const html = `
                   ${renderHeader()}
-                  <main></main>
+                  <main class="main"></main>
     `;
 
   body.innerHTML = html;

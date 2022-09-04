@@ -1,3 +1,4 @@
+import renderFooter from '../../../components/main-page/components/footer/footer';
 import renderHeader, {
   handleHeaderListeners,
 } from '../../../components/main-page/components/header/header';
@@ -19,7 +20,8 @@ function renderHtml() {
 
   const html = `
                 ${renderHeader()}
-                <main></main>
+                <main class="main"></main>
+                ${renderFooter()}
   `;
 
   body.innerHTML = html;

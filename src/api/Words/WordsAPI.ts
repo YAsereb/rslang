@@ -44,6 +44,8 @@ export async function getUserWordById(
   wordId: string,
   token: string
 ): Promise<UserWord | null> {
+  console.log(3);
+
   const resp = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'GET',
     headers: {
