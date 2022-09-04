@@ -1,5 +1,3 @@
-import IWordCard from '../interfaces/words';
-
 export type OptionalStatistic = {
   audioWords: string[]
   sprintWords: string[]

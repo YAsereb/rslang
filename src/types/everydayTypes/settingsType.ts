@@ -1,8 +1,12 @@
-import IWordCard from '../interfaces/words';
+export type settingsWords = {
+  audioWords: string[],
+  sprintWords: string[],
+  cardWords: string[],
+}
 
 export type OptionalSettings = {
-
-  words: IWordCard[]
+  dayToday: Date,
+  words: Partial<settingsWords>
 }
 
 export type Settings = {

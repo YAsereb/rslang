@@ -1,11 +1,13 @@
-import { getUserStatistic, updateUserStatistic } from '../../api/statistic/statistic-api';
 import { getUserWordById, putFilterUserWord } from '../../api/Words/WordsAPI';
-import { getHash } from '../../router';
 import { generalState } from '../../states/generalState';
-import { OptionalStatistic, Statistic } from '../../types/everydayTypes/statisticType';
-import { UserWord } from '../../types/everydayTypes/userWord';
+import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
 
-async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
+const date = new Date();
+export async function setLearnedStatusWord(
+  wordId: string,
+  userWord: UserWord,
+  whereLearned: PlaceLearnedWord
+) {
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
@@ -14,6 +16,8 @@ async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: true,
+      whenLearnedDate: date,
+      whereLearned
     },
   };
 
@@ -23,48 +27,9 @@ async function setLearnedStatusWord(wordId: string, userWord: UserWord) {
     wordId,
     optional
   );
-
-  const userStatistic = await getUserStatistic(
-    generalState.userId as string,
-    generalState.token as string
-  );
-
-  let statisticOptional: OptionalStatistic;
-  const hash = getHash();
-
-  if (hash === 'audiocall') {
-    statisticOptional = {
-      audioWords: (userStatistic.optional.audioWords as string[]).concat(wordId),
-      sprintWords: userStatistic.optional.sprintWords as string[],
-      cardWords: userStatistic.optional.sprintWords as string[],
-    };
-  }
-  if (hash === 'sprint') {
-    statisticOptional = {
-      audioWords: userStatistic.optional.audioWords as string[],
-      sprintWords: (userStatistic.optional.sprintWords as string[]).concat(wordId),
-      cardWords: userStatistic.optional.sprintWords as string[],
-    };
-  }
-  statisticOptional = {
-    audioWords: userStatistic.optional.audioWords as string[],
-    sprintWords: userStatistic.optional.sprintWords as string[],
-    cardWords: (userStatistic.optional.sprintWords as string[]).concat(wordId),
-  };
-
-  const statistic: Statistic = {
-    learnedWords: userStatistic.learnedWords + 1,
-    optional: statisticOptional,
-  };
-
-  await updateUserStatistic(
-    generalState.userId as string,
-    generalState.token as string,
-    statistic
-  );
 }
 
-export async function setUnlearnedStatusWord(wordId: string) {
+export async function setUnlearnedStatusWord(wordId: string, whereLearned: PlaceLearnedWord) {
   const userWord: UserWord = (await getUserWordById(
     generalState.userId as string,
     wordId,
@@ -79,6 +44,8 @@ export async function setUnlearnedStatusWord(wordId: string) {
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: false,
+      whenLearnedDate: date,
+      whereLearned
     },
   };
 
@@ -90,7 +57,7 @@ export async function setUnlearnedStatusWord(wordId: string) {
   );
 }
 
-export default async function learnedWord(wordId: string) {
+export default async function learnedWord(wordId: string, whereLearned: PlaceLearnedWord) {
   const userWord = await getUserWordById(
     generalState.userId as string,
     wordId,
@@ -103,6 +70,6 @@ export default async function learnedWord(wordId: string) {
     (userWord.difficulty === 'hard' &&
       (userWord.optional.countTrueAnswerInRow as number) >= 5)
   ) {
-    await setLearnedStatusWord(wordId, userWord);
+    await setLearnedStatusWord(wordId, userWord, whereLearned);
   }
 }

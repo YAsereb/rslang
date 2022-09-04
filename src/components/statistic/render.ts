@@ -1,10 +1,8 @@
-import { getUserStatistic } from '../../api/statistic/statistic-api';
-import { generalState } from '../../states/generalState';
 import renderFooter from '../main-page/components/footer/footer';
 import renderHeader from '../main-page/components/header/header';
 import './statistic.scss';
 
-function renderStatisticMiniGames(): string {
+async function renderStatisticMiniGames(): Promise<string> {
   return `
   <div class="statistic-item">
     <h3 class="statistic-item__header">Mini-game statistics</h3>
@@ -24,13 +22,7 @@ function renderStatisticMiniGames(): string {
   `;
 }
 
-async function renderStatisticWords(): Promise<string> {
-  const statistic = await getUserStatistic(
-    generalState.userId as string,
-    generalState.token as string
-  );
-
-  console.log(statistic);
+function renderStatisticWords(): string {
   return `
   <div class="statistic-item">
     <h3 class="statistic-item__header">Word statistic</h3>
@@ -44,7 +36,7 @@ export default async function renderStatistic(): Promise<void> {
   body.innerHTML = `
     ${renderHeader()}
     <div class="statistic">
-      ${renderStatisticMiniGames()}
+      ${await renderStatisticMiniGames()}
       ${renderStatisticWords()}
     </div>
     ${renderFooter()}

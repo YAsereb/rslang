@@ -1,6 +1,7 @@
 import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
+import handleProgress from '../../../../components/progress/progress';
 import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
 import dicAndBookVars from '../../../DictionaryBookPages';
@@ -240,6 +241,13 @@ function handleTrueAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
+
+    handleProgress(
+      generalState.userId as string,
+      generalState.token as string,
+      sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string,
+      true
+    );
   } else {
     sprintGameState.falseData.push(sprintGameState.currentWord);
     isRight = false;
@@ -260,6 +268,13 @@ function handleFalseAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
+
+    handleProgress(
+      generalState.userId as string,
+      generalState.token as string,
+      sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string,
+      false
+    );
   } else {
     isRight = false;
     sprintGameState.falseData.push(sprintGameState.currentWord);
