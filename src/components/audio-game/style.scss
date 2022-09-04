@@ -1,4 +1,5 @@
 .start-screen-img {
+  width: 100%;
   background-image: url(../../assets/img/screenBek.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,17 +17,17 @@
   font-size: 1.6rem;
   color: #fff;
 }
+
 .game-wrapper {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   text-align: center;
   max-width: 60rem;
   height: calc(100vh - 6rem);
-   margin: auto;
-   padding: 4rem 0;
-  }
+  margin: auto;
+  padding: 4rem 0;
+}
 
 .flex-center {
   display: flex;
@@ -46,14 +47,13 @@
 }
 
 .main {
-  width: 100%;
+  min-width: 100%;
   padding: 0;
   position: relative;
   font-size: 2rem;
 
   .game-description {
     text-align: center;
-    padding: 20rem 0 15rem 0;
   }
 
   .game-description>* {
@@ -67,6 +67,15 @@
     top: 5rem;
     left: 8rem;
   }
+
+  .audio-header {
+    padding-top: 4rem;
+    font-size: 7rem;
+  }
+
+  .text {
+    font-size: 2rem;
+  }
 }
 
 
@@ -79,15 +88,24 @@
 }
 
 .group-level {
-  width: 2rem;
-  height: 2rem;
-  border: solid 0.1rem black;
+  width: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+  border: solid 0.2rem black;
   border-radius: 50%;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #3f51b5;
+  }
 }
 
 .audio-wrapper {
   width: 100%;
-  padding: 20rem 0;
+  padding: 5rem 0;
+  background-color: rgba(80, 80, 80, 0.65);
+  border-radius: 2rem;
 
   .audio-img {
     display: block;
@@ -118,12 +136,14 @@
   min-width: 7rem;
   height: 1.5rem;
   padding: 2rem;
-  border: solid 0.1rem black;
+  color: white;
+  border: solid 0.1rem white;
   border-radius: 0.3rem;
   transition: 0.1s;
 
   &:hover {
     cursor: pointer;
+    background-color: #3f51b5;
   }
 }
 
@@ -136,6 +156,11 @@
 }
 
 .answer-wrapper {
+  width: 100%;
+  padding: 5rem 0;
+  background-color: rgba(80, 80, 80, 0.65);
+  border-radius: 2rem;
+  color: white;
 
   .words-wrapper {
     width: 100%;
@@ -152,6 +177,14 @@
 
     .knowledge {
       padding: 1rem 0;
+    }
+
+    .word-card {
+      padding-left: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

@@ -1,10 +1,10 @@
 import renderFooter from '../main-page/components/footer/footer';
 import renderHeader from '../main-page/components/header/header';
-import { handleSettingsWord } from './settings';
+// import { handleSettingsWord } from './settings';
 import './statistic.scss';
 
 async function renderStatisticMiniGames(): Promise<string> {
-  await handleSettingsWord();
+  // await handleSettingsWord();
   return `
   <div class="statistic-item">
     <h3 class="statistic-item__header">Mini-game statistics</h3>
