@@ -3,7 +3,7 @@ import { Statistic } from '../../types/everydayTypes/statisticType';
 const url = 'http://localhost:8000';
 
 export async function getUserStatistic(userId: string, token: string): Promise<Statistic> {
-  const resp = await fetch(`${url}/${userId}/statistic`, {
+  const resp = await fetch(`${url}/users/${userId}/statistics`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -14,12 +14,12 @@ export async function getUserStatistic(userId: string, token: string): Promise<S
   return statistic;
 }
 
-export async function putStatistic(
-  id: string,
+export async function updateUserStatistic(
+  userId: string,
   token: string,
   statistic: Statistic
 ): Promise<void> {
-  await fetch(`${url}/users/${id}/statistic`, {
+  await fetch(`${url}/users/${userId}/statistics`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,

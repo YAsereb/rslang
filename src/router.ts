@@ -8,7 +8,7 @@ import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dic
 import renderSprintGamePage from './pages/SprintGamePage/sprintGamePage';
 import { generalState } from './states/generalState';
 
-function getHash() {
+export function getHash() {
   const hash: string = window.location.hash
     ? window.location.hash.slice(1)
     : '';

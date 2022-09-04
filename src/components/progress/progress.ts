@@ -13,6 +13,7 @@ export default async function handleProgress(
     wordId,
     (generalState.token as string),
   );
+
   let userWord: UserWord;
 
   if (!word) {
@@ -38,5 +39,5 @@ export default async function handleProgress(
     };
   }
 
-  postFilterUserWord(userId, token, wordId, userWord);
+  await postFilterUserWord(userId, token, wordId, userWord);
 }
