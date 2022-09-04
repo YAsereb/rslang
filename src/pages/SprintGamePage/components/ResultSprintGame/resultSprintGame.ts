@@ -17,6 +17,7 @@ function renderResultSprintGame() {
   main.innerHTML = '';
 
   const html = `
+             <div class="start-screen-img">
                 <div class="result-wrapper">
                   <div class="result-window">
                     <div class="result-title">RESULT: <span>${
@@ -50,7 +51,7 @@ function renderResultSprintGame() {
                         <ul class="result-sprint__list">
                            ${sprintGameState.falseData
                              .map((word) => renderResultWord(word))
-                             .join('')}  
+                             .join('')}
                         </ul>
                     </div>`
                             : ''
@@ -58,8 +59,9 @@ function renderResultSprintGame() {
                     </div>
                     <button class="play-again__btn">Again</button>
                   </div>
+                  </div>
                 </div>
-  
+
     `;
 
   main.insertAdjacentHTML('beforeend', html);
