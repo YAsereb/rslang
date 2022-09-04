@@ -35,7 +35,7 @@ export function setUnlearnedStatusWord(
       isLastTrueAnswer: false,
       countTrueAnswerInRow: 0,
       countTrueAnswer: userWord.optional.countTrueAnswer || 0,
-      countAttempt: userWord.optional.countAttempt + 1 || 0,
+      countAttempt: userWord.optional.countAttempt as number + 1 || 0,
       isLearned: false,
       whenLearnedDate: date,
       whereLearned
