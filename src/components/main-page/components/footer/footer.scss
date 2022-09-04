@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0 0.3rem 1rem 0.1rem rgb(0, 0, 0, 0.3);
 
   .link {
     width: 100%;
@@ -28,4 +29,14 @@
     width: 5rem;
     height: 5rem;
   }
+}
+
+.link-name {
+  color: #000;
+  font-size: 180%;
+}
+
+.link-name:hover {
+  color: #8b8b8b;
+  transform: scale(1.03);
 }

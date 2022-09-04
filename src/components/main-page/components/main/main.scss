@@ -69,3 +69,25 @@
   height: 10rem;
   margin: 1rem;
 }
+
+.article-header {
+  color: #000000;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 20px 0px;
+  text-transform: uppercase;
+  line-height: 1;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.article-header:hover {
+  color: #8b8b8b;
+  -webkit-text-shadow: 2px 2px 2px #000;
+  -moz-text-shadow: 2px 2px 2px #000;
+  text-shadow: 2px 2px 2px #000;
+}
+
+.content {
+  margin-top: 40px;
+}
