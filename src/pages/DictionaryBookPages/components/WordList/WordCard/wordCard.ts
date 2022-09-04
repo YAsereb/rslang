@@ -1,4 +1,5 @@
 import { postFilterUserWord, deleteFilterUserWord } from '../../../../../api/Words/WordsAPI';
+import { headerState } from '../../../../../components/main-page/components/header/header';
 import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
 import IWordCard from '../../../../../types/interfaces/words';
@@ -85,7 +86,8 @@ function renderWordCard(word: IWordCard) {
       : word.userWord?.difficulty === 'hard' ? 'hard-word__card' : ''}>
     <div class="card-header" style = "background-image: url(./${word.image})">
       <div class="card-header__overlay">
-        ${renderHandleWordCardButton(word)}
+      ${headerState.isLogin ? renderHandleWordCardButton(word) : ''}
+    
         ${renderWordCardHeader(word)}
       </div>
     </div>
@@ -113,7 +115,9 @@ async function handleBookWordCard(event: Event) {
   if (target.closest('.add-word__btn')) {
     options = {
       difficulty: 'hard',
-      optional: {},
+      optional: {
+        isLearned: false,
+      },
     };
 
     await postFilterUserWord((userId as string), (token as string), WordId, options);
@@ -123,7 +127,9 @@ async function handleBookWordCard(event: Event) {
     options = {
       difficulty: 'easy',
       optional: {
-        isLearned: true
+        isLearned: true,
+        whereLearned: 'book',
+        whenLearnedDate: new Date(),
       }
     };
 

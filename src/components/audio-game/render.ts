@@ -10,26 +10,31 @@ export function renderStartGame() {
   const { body } = document;
 
   const html = `
+
     <div class="game-wrapper">
       ${renderHeader()}
-      <main class="main flex-center">
-        <div class="flex-center flex-column">
-          <div class="game-description">
-            <h3 class="audio-header">Игра аудиовызов</h3>
-            <p class="text">Эта игра развивает понимание слов на слух</p> 
-            <p class="text">Вам будет предложено 20 попыток, в которых нужно выбрать слово, звучащее в аудиодорожке</p>
-            <p class="text">Выберите уровень сложности от 1 до 6</p>
+      <div class="start-screen-img">
+      <div class="start-screen-window">
+        <main class="main flex-center">
+          <div class="flex-center flex-column">
+            <div class="game-description">
+              <h3 class="audio-header">Игра аудиовызов</h3>
+              <p class="text">Эта игра развивает понимание слов на слух</p>
+              <p class="text">Вам будет предложено 20 попыток, в которых нужно выбрать слово, звучащее в аудиодорожке</p>
+              <p class="text">Выберите уровень сложности от 1 до 6</p>
+            </div>
+            <div class="group-wrapper" id="group">
+              <div class="group-level flex-center">1</div>
+              <div class="group-level flex-center">2</div>
+              <div class="group-level flex-center">3</div>
+              <div class="group-level flex-center">4</div>
+              <div class="group-level flex-center">5</div>
+              <div class="group-level flex-center">6</div>
+            </div>
           </div>
-          <div class="group-wrapper" id="group">
-            <div class="group-level flex-center">1</div>
-            <div class="group-level flex-center">2</div>
-            <div class="group-level flex-center">3</div>
-            <div class="group-level flex-center">4</div>
-            <div class="group-level flex-center">5</div>
-            <div class="group-level flex-center">6</div>
-          </div> 
-        </div> 
-      </main>
+        </main>
+        </div>
+    </div>
     </div>
   `;
   body.innerHTML = html;

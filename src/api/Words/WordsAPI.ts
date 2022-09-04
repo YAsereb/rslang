@@ -22,7 +22,10 @@ export async function getWord(wordId: string) {
   return data;
 }
 
-export async function getAllUserWords(id: string, token: string) {
+export async function getAllUserWords(
+  id: string,
+  token: string
+): Promise<UserWord[]> {
   const response = await fetch(`${url}/users/${id}/words`, {
     method: 'GET',
     headers: {

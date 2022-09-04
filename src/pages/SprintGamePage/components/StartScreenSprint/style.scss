@@ -1,3 +1,22 @@
+.start-screen-img {
+  background-image: url(../../../../assets/img/screenBek.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.start-screen-window {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgb(80 80 80 / 65%);
+    border-radius: 2rem;
+    width: 100%;
+    height: 50rem;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
 .start-screen {
   display: flex;
   flex-direction: column;
@@ -57,7 +76,7 @@
 
 .start-screen__btn {
   border: none;
-  background-color: #ffc53d;
+  background-color: #00a098;
   color: #161616;
   font-size: 1.6rem;
   padding: 1rem 3rem;
@@ -70,5 +89,5 @@
 }
 
 .active-sprint__level {
-  background-color: red;
+  background-color: #00a098;
 }
