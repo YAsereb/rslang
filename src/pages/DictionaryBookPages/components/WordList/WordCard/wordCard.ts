@@ -1,4 +1,4 @@
-import { postFilterUserWord, deleteFilterUserWord } from '../../../../../api/Words/WordsAPI';
+import { postFilterUserWord, deleteFilterUserWord, getUserWordById } from '../../../../../api/Words/WordsAPI';
 import { headerState } from '../../../../../components/main-page/components/header/header';
 import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
@@ -14,6 +14,14 @@ export const filterState = {
   typeFilter: {},
   filter: {},
 };
+
+function renderProgress(word: UserWord): string {
+  let html = '';
+  if (word && !word.optional.isLearned && word.optional.countAttempt) {
+    html = `<div class="progress-word">${word.optional?.countTrueAnswer}/${word.optional?.countAttempt}</div>`;
+  }
+  return html;
+}
 
 function renderAddLearnedButton(word: IWordCard): string {
   let html = '';
@@ -86,6 +94,7 @@ function renderWordCard(word: IWordCard) {
       : word.userWord?.difficulty === 'hard' ? 'hard-word__card' : ''}>
     <div class="card-header" style = "background-image: url(./${word.image})">
       <div class="card-header__overlay">
+      ${renderProgress(word.userWord)}
       ${headerState.isLogin ? renderHandleWordCardButton(word) : ''}
     
         ${renderWordCardHeader(word)}
@@ -111,11 +120,17 @@ async function handleBookWordCard(event: Event) {
 
   const WordId = currentTarget.getAttribute('data-id') as string;
   let options: UserWord;
+  const userWord = await getUserWordById(userId as string, WordId, token as string);
+  console.log(userWord);
 
   if (target.closest('.add-word__btn')) {
     options = {
       difficulty: 'hard',
       optional: {
+        isLastTrueAnswer: false,
+        countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow,
+        countTrueAnswer: userWord?.optional.countTrueAnswer,
+        countAttempt: userWord?.optional.countAttempt,
         isLearned: false,
       },
     };

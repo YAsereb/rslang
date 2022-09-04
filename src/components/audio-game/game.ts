@@ -68,7 +68,8 @@ async function handleAnswer(answer: boolean) {
     userId as string,
     audioGameState.trueWordId,
     token as string,
-    answer
+    answer,
+    'audio-game'
   );
 
   img.src = `../../${audioGameState.imageSrc}`;
@@ -93,7 +94,6 @@ async function isTrueWord(element: HTMLElement) {
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
   await handleAnswer(true);
-  await learnedWord(audioGameState.trueWordId, 'audio-game');
 }
 
 async function isFalseWord(element: HTMLElement) {
@@ -103,7 +103,6 @@ async function isFalseWord(element: HTMLElement) {
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
   await handleAnswer(false);
-  await setUnlearnedStatusWord(audioGameState.trueWordId, 'audio-game');
 }
 
 export async function handleAudioGame(event: Event) {
