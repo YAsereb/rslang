@@ -115,7 +115,9 @@ async function handleBookWordCard(event: Event) {
   if (target.closest('.add-word__btn')) {
     options = {
       difficulty: 'hard',
-      optional: {},
+      optional: {
+        isLearned: false,
+      },
     };
 
     await postFilterUserWord((userId as string), (token as string), WordId, options);
@@ -125,7 +127,9 @@ async function handleBookWordCard(event: Event) {
     options = {
       difficulty: 'easy',
       optional: {
-        isLearned: true
+        isLearned: true,
+        whereLearned: 'book',
+        whenLearnedDate: new Date(),
       }
     };
 

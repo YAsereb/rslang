@@ -63,6 +63,7 @@ async function handleAnswer(answer: boolean) {
   trueWordParagraph.hidden = false;
 
   const { userId, token } = generalState;
+
   await handleProgress(
     userId as string,
     audioGameState.trueWordId,
