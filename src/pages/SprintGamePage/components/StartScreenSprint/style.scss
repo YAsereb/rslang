@@ -1,32 +1,32 @@
-.start-screen-img {
+.sprint__wrapper {
   background-image: url(../../../../assets/img/screenBek.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+}
+
+.sprint-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 60rem;
+  height: 100%;
+  margin: auto;
+  padding: 3rem;
 }
 
 .start-screen-window {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgb(80 80 80 / 65%);
-    border-radius: 2rem;
-    width: 100%;
-    height: 50rem;
-    font-size: 1.6rem;
-    color: #fff;
-}
-
-.start-screen {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  text-align: center;
-  max-width: 60rem;
-  height: calc(100vh - 6rem);
-  margin: auto;
-  padding: 4rem 0;
+  justify-content: center;
+  background: rgb(80 80 80 / 65%);
+  border-radius: 2rem;
+  width: 100%;
+  font-size: 1.6rem;
+  color: #fff;
+  padding: 0 1rem;
 }
 
 .start-screen__header {
@@ -67,24 +67,26 @@
     height: 4rem;
     border-radius: 2rem;
     font-size: 1.6rem;
-    opacity: 0.6;
-    border: #000 solid 2px;
+    border: #fff solid 2px;
     margin: 0rem 1rem;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
   }
 }
 
 .start-screen__btn {
   border: none;
   background-color: #00a098;
-  color: #161616;
-  font-size: 1.6rem;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
   padding: 1rem 3rem;
   border-radius: 2rem;
   margin: 4rem 0;
+  transition: 0.3s ease-in-out;
   &:disabled {
     cursor: default;
-    background-color: #7c7971;
+    background-color: #949189;
   }
 }
 
