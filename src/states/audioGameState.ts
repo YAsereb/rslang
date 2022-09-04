@@ -10,7 +10,7 @@ export const audioGameState: State = {
   trueWordAudio: '',
   trueWordAudioExample: '',
   imageSrc: '',
-  countAnswer: 18,
+  countAnswer: 0,
   wordTranslate: '',
   trueAnswers: [],
   falseAnswers: [],

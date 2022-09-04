@@ -2,7 +2,7 @@
   width: 100%;
   background-image: url(../../assets/img/screenBek.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 .start-screen-window {
@@ -74,7 +74,7 @@
   }
 
   .text {
-    font-size: 2rem;
+    font-size: 3rem;
   }
 }
 
