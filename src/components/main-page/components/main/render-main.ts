@@ -9,7 +9,7 @@ function renderMain() {
   <main class="main">
     <article class="article">
       <div class="home-background-img">
-      <p>Добро пожаловать в приложения  Rslang.<br> Наше приложение поможет тебе в игровой форме выучить наиболее распространенные слова английского языка.</p>
+      Добро пожаловать в приложения  Rslang.<br> Наше приложение поможет тебе в игровой форме выучить наиболее распространенные слова английского языка.</p>
       </div>
       <h2 class="article-header">Наши возможности</h2>
       <div  class="wrapper">
@@ -35,26 +35,27 @@ function renderMain() {
         </div>
       </div>
     </article>
-    <article class="article"> <p>Как работает наше приложение</p>
+    <article class="article">
+    <h2 class="article-header">Как работает наше приложение</h2>
       <div class="content">
 <iframe width="700" height="400" src="https://www.youtube.com/embed/SmM0653YvXU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>      </article>
-    <article class="article">
+   <article class="article">
       <h2 class="article-header">Наша команда</h2>
       <div class="wrapper">
         <div class="developer-card">
           <h3 class="developer-name">Yaroslav Serebrenikov</h3>
           <img src="../../../../../assets/img/proger1.png"class="developer-img" alt="developer_YAsereb">
-          <p class="developer-description"><br>Team Lead frontend developer</br></p>
+          <p class="developer-description"><br>Team Lead frontend developer <br>Разработал Аудио игру,список слов,учебник.</br>Координировал команду.</p>
         </div>
         <div class="developer-card">
           <h3 class="developer-name">Usevalad Kunski</h3>
           <img src="../../../../../assets/img/proger2.png"class="developer-img" alt="developer_SEvk4a">
-          <p class="developer-description"><br>Team Full stack developer</br></p>
+          <p class="developer-description"><br>Team Full stack developer <br>Развернул сервер,разработал авторизацию пользователей и роутинг.Разработал игру спринт.Участвовал в разработке статистики и дизайна.</p>
         </div>
         <div class="developer-card">
           <h3 class="developer-name">Yauhen Makarevich</h3>
           <img src="../../../../../assets/img/proger3.png"class="developer-img" alt="developer_zhentosmak">
-          <p class="developer-description"><br>Frontend developer</br> </p>
+          <p class="developer-description"><br>Frontend developer <br> Сделал дизайн и верстку главной страницы. Участвовал в разработке игры Спринт.</br> </p>
         </div>
       </div>
     </article>
