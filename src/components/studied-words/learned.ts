@@ -1,13 +1,13 @@
-import { getUserWordById, putFilterUserWord } from '../../api/Words/WordsAPI';
-import { generalState } from '../../states/generalState';
 import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
 
 const date = new Date();
-export async function setLearnedStatusWord(
-  wordId: string,
+
+export function setLearnedStatusWord(
   userWord: UserWord,
   whereLearned: PlaceLearnedWord
 ) {
+  console.log('слово изучено');
+
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
@@ -20,56 +20,44 @@ export async function setLearnedStatusWord(
       whereLearned
     },
   };
-
-  await putFilterUserWord(
-    generalState.userId as string,
-    generalState.token as string,
-    wordId,
-    optional
-  );
+  return optional;
 }
 
-export async function setUnlearnedStatusWord(wordId: string, whereLearned: PlaceLearnedWord) {
-  const userWord: UserWord = (await getUserWordById(
-    generalState.userId as string,
-    wordId,
-    generalState.token as string
-  )) as UserWord;
+export function setUnlearnedStatusWord(
+  whereLearned: PlaceLearnedWord,
+  userWord: UserWord
+) {
+  console.log('неправильный ответ');
 
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {
-      isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
-      countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
-      countTrueAnswer: userWord.optional.countTrueAnswer,
-      countAttempt: userWord.optional.countAttempt,
+      isLastTrueAnswer: false,
+      countTrueAnswerInRow: 0,
+      countTrueAnswer: userWord.optional.countTrueAnswer || 0,
+      countAttempt: userWord.optional.countAttempt as number + 1 || 0,
       isLearned: false,
       whenLearnedDate: date,
       whereLearned
     },
   };
 
-  await putFilterUserWord(
-    generalState.userId as string,
-    generalState.token as string,
-    wordId,
-    optional
-  );
+  return optional;
 }
 
-export default async function learnedWord(wordId: string, whereLearned: PlaceLearnedWord) {
-  const userWord = await getUserWordById(
-    generalState.userId as string,
-    wordId,
-    generalState.token as string
-  ) as UserWord;
-
+export function learnedWord(
+  whereLearned: PlaceLearnedWord,
+  userWord: UserWord
+) {
+  let optional: UserWord;
   if (
     (userWord.difficulty === 'easy' &&
       (userWord.optional.countTrueAnswerInRow as number) >= 3) ||
     (userWord.difficulty === 'hard' &&
       (userWord.optional.countTrueAnswerInRow as number) >= 5)
   ) {
-    await setLearnedStatusWord(wordId, userWord, whereLearned);
-  }
+    optional = setLearnedStatusWord(userWord, whereLearned);
+  } optional = userWord;
+
+  return optional;
 }

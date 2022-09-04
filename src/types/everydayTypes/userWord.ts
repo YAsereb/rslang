@@ -1,7 +1,6 @@
 export type PlaceLearnedWord = 'audio-game' | 'sprint-game' | 'book'
 
 export type OptionalWord = {
-  isDeleted: boolean,
   isLastTrueAnswer: boolean,
   countTrueAnswerInRow: number,
   countTrueAnswer: number,

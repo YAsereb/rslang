@@ -2,7 +2,7 @@ import { generalState } from '../../states/generalState';
 import { UserWord } from '../../types/everydayTypes/userWord';
 import IWordCard from '../../types/interfaces/words';
 
-const url = 'http://localhost:8000';
+const url = 'https://rs-langtask.herokuapp.com';
 
 export default async function getAllWords(numGroup: number, page: number) {
   const response = await fetch(
@@ -93,20 +93,6 @@ export async function putFilterUserWord(
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(optional),
-  });
-}
-
-export async function deleteFilterUserWord(
-  id: string,
-  token: string,
-  wordId: string
-): Promise<void> {
-  await fetch(`${url}/users/${id}/words/${wordId}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
-    },
   });
 }
 
