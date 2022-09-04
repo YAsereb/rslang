@@ -2,7 +2,9 @@ import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
 import handleProgress from '../../../../components/progress/progress';
-import learnedWord, { setUnlearnedStatusWord } from '../../../../components/studied-words/learned';
+import learnedWord, {
+  setUnlearnedStatusWord,
+} from '../../../../components/studied-words/learned';
 import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
 import dicAndBookVars from '../../../DictionaryBookPages';
@@ -26,7 +28,7 @@ export const sprintGameState = {
 };
 
 function renderSprintWindowGame() {
-  const main = document.querySelector('main') as HTMLElement;
+  const sprint = document.querySelector('.sprint-game') as HTMLElement;
 
   sprintGameState.score = 0;
   sprintGameState.level = 1;
@@ -35,16 +37,14 @@ function renderSprintWindowGame() {
   sprintGameState.falseData = [];
   sprintGameState.indexPrevPage = 0;
 
-  main.innerHTML = '';
+  sprint.innerHTML = '';
 
   const html = `
-                <div class="start-screen-img">
-                  <div class="sprint-wrapper">
                     <div class="sprint-window">
                         <div class="score-sprint">Score: <span>0</span></div>
                         <div class="sprint-block">
                             <div class="sprint-main__block">
-                                <div class="sprint-timer">10</div>
+                                <div class="sprint-timer">30</div>
                                 <div class="sprint-answers">
                                     <div data-right='1'></div>
                                     <div data-right='2'></div>
@@ -58,14 +58,12 @@ function renderSprintWindowGame() {
                             <div class="sprint-footer__block">
                                 <button>True</button>
                                 <button>False</button>
-                            </div>
+                          </div>
                         </div>
                     </div>
-                </div>
-                </div>
   `;
 
-  main.insertAdjacentHTML('beforeend', html);
+  sprint.insertAdjacentHTML('beforeend', html);
 
   handleSprintGameListeners();
   handleSprintGameState();
@@ -243,10 +241,15 @@ function handleTrueAnswer() {
     handleProgress(
       generalState.userId as string,
       generalState.token as string,
-      sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string,
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord.id as string),
       true
     );
-    learnedWord(sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string, 'sprint-game');
+    learnedWord(
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord.id as string),
+      'sprint-game'
+    );
   } else {
     sprintGameState.falseData.push(sprintGameState.currentWord);
     isRight = false;
@@ -271,10 +274,15 @@ function handleFalseAnswer() {
     handleProgress(
       generalState.userId as string,
       generalState.token as string,
-      sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string,
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord.id as string),
       false
     );
-    setUnlearnedStatusWord(sprintGameState.currentWord.id as string || sprintGameState.currentWord.id as string, 'sprint-game');
+    setUnlearnedStatusWord(
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord.id as string),
+      'sprint-game'
+    );
   } else {
     isRight = false;
     sprintGameState.falseData.push(sprintGameState.currentWord);
@@ -285,6 +293,7 @@ function handleFalseAnswer() {
 
 function handleAnswer(isRight: boolean) {
   if (isRight) {
+    playRightSound();
     sprintGameState.indexRight += 1;
 
     const circle = document.querySelector(
@@ -300,14 +309,14 @@ function handleAnswer(isRight: boolean) {
     }
   } else {
     removeActiveCircles();
-
+    playFalseSound();
     sprintGameState.level = 1;
     sprintGameState.indexRight = 0;
   }
 }
 
 function updateScore() {
-  const score = document.querySelector('.score-sprint') as HTMLElement;
+  const score = document.querySelector('.score-sprint span') as HTMLElement;
 
   sprintGameState.score += 10 * sprintGameState.level;
 
@@ -318,6 +327,20 @@ function removeActiveCircles() {
   const circles = document.querySelectorAll('.sprint-answers div');
 
   circles.forEach((circle) => circle.classList.remove('active-circle'));
+}
+
+function playFalseSound() {
+  const url = './assets/sounds/sprint/false.wav';
+  const audioObj = new Audio(url);
+
+  audioObj.play();
+}
+
+function playRightSound() {
+  const url = './assets/sounds/sprint/true.wav';
+  const audioObj = new Audio(url);
+
+  audioObj.play();
 }
 
 export default renderSprintWindowGame;
