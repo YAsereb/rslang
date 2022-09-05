@@ -17,10 +17,12 @@
 .article {
   font-size: 2rem;
   text-align: center;
+
   &:nth-child(3) {
     padding-bottom: 6rem;
   }
 }
+
 .wrapper {
   display: flex;
   justify-content: space-around;
