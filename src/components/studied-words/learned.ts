@@ -19,6 +19,7 @@ export function setLearnedStatusWord(
       isLearned: true,
       whenLearnedDate: today,
       whereLearned
+
     },
   };
   return optional;
@@ -34,7 +35,7 @@ export function setUnlearnedStatusWord(
       isLastTrueAnswer: false,
       countTrueAnswerInRow: 0,
       countTrueAnswer: userWord.optional.countTrueAnswer || 0,
-      countAttempt: userWord.optional.countAttempt as number + 1 || 0,
+      countAttempt: (userWord.optional.countAttempt as number) + 1 || 0,
       isLearned: false,
       whenLearnedDate: today,
       whereLearned
@@ -56,7 +57,8 @@ export function learnedWord(
       (userWord.optional.countTrueAnswerInRow as number) >= 5)
   ) {
     optional = setLearnedStatusWord(userWord, whereLearned);
-  } optional = userWord;
+  }
+  optional = userWord;
 
   return optional;
 }

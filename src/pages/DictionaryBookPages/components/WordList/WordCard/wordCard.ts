@@ -1,9 +1,13 @@
-import { postFilterUserWord, getUserWordById } from '../../../../../api/Words/WordsAPI';
+import {
+  postFilterUserWord,
+  getUserWordById,
+} from '../../../../../api/Words/WordsAPI';
 import { headerState } from '../../../../../components/main-page/components/header/header';
 import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
 import IWordCard from '../../../../../types/interfaces/words';
 import { getDateToday } from '../../../../../utils';
+
 import renderBoard from '../../Board/board';
 
 const cardState = {
@@ -42,9 +46,13 @@ function renderAddLearnedButton(word: IWordCard): string {
 function renderHandleWordCardButton(word: IWordCard): string {
   const html = `
   <div class="buttons-block">
-    <button class=${word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'}>
+    <button class=${
+      word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'
+    }>
       <svg>
-        <use xlink:href="./assets/svg/sprite/wordCard.svg#${word.userWord?.difficulty === 'hard' ? 'minus' : 'add'}"></use>
+        <use xlink:href="./assets/svg/sprite/wordCard.svg#${
+          word.userWord?.difficulty === 'hard' ? 'minus' : 'add'
+        }"></use>
       </svg>
     </button>
     ${renderAddLearnedButton(word)}
@@ -65,9 +73,9 @@ function renderWordCardHeader(word: IWordCard) {
         <svg>
           <use xlink: href="./assets/svg/sprite/wordCard.svg#volume"> </use>
         </svg>
-        <audio class="audio-word" src="./${word.audio}">
-          <audio class="audio-example" src="./${word.audioExample}">
-            <audio class="audio-meaning" src="./${word.audioMeaning}"></audio>
+        <audio class="audio-word" src="${variables.URL}/${word.audio}">
+          <audio class="audio-example" src="${variables.URL}/${word.audioExample}">
+            <audio class="audio-meaning" src="${variables.URL}/${word.audioMeaning}"></audio>
       </button>
     </div>
   </div>`;
@@ -91,9 +99,16 @@ function renderWordCardContent(word: IWordCard) {
 function renderWordCard(word: IWordCard) {
   return `
 
-  <li data-id="${word.id || word._id}" class=${word.userWord?.optional?.isLearned === true ? 'deleted-word__card'
-      : word.userWord?.difficulty === 'hard' ? 'hard-word__card' : ''}>
-    <div class="card-header" style = "background-image: url(./${word.image})">
+  <li data-id="${word.id || word._id}" class=${
+    word.userWord?.optional?.isLearned === true
+      ? 'deleted-word__card'
+      : word.userWord?.difficulty === 'hard'
+      ? 'hard-word__card'
+      : ''
+  }>
+    <div class="card-header" style = "background-image: url(${variables.URL}/${
+    word.image
+  })">
       <div class="card-header__overlay">
       ${renderProgress(word.userWord)}
       ${headerState.isLogin ? renderHandleWordCardButton(word) : ''}
@@ -122,7 +137,11 @@ async function handleBookWordCard(event: Event) {
 
   const WordId = currentTarget.getAttribute('data-id') as string;
   let options: UserWord;
-  const userWord = await getUserWordById(userId as string, WordId, token as string);
+  const userWord = await getUserWordById(
+    userId as string,
+    WordId,
+    token as string
+  );
 
   if (target.closest('.add-word__btn')) {
     console.log('добавить в сложные');
@@ -139,7 +158,12 @@ async function handleBookWordCard(event: Event) {
       },
     };
 
-    await postFilterUserWord((userId as string), (token as string), WordId, options);
+    await postFilterUserWord(
+      userId as string,
+      token as string,
+      WordId,
+      options
+    );
 
     renderBoard();
   } else if (target.closest('.remove-word__btn')) {
@@ -154,10 +178,15 @@ async function handleBookWordCard(event: Event) {
         countAttempt: userWord?.optional.countAttempt || 0,
         whenLearnedDate: today,
         whereLearned: 'book',
-      }
+      },
     };
 
-    await postFilterUserWord((userId as string), (token as string), WordId, options);
+    await postFilterUserWord(
+      userId as string,
+      token as string,
+      WordId,
+      options
+    );
 
     renderBoard();
   } else if (target.closest('.back-word__btn')) {
@@ -172,10 +201,15 @@ async function handleBookWordCard(event: Event) {
         countAttempt: userWord?.optional.countAttempt || 0,
         whenLearnedDate: today,
         whereLearned: 'book',
-      }
+      },
     };
 
-    await postFilterUserWord((userId as string), (token as string), WordId, options);
+    await postFilterUserWord(
+      userId as string,
+      token as string,
+      WordId,
+      options
+    );
 
     renderBoard();
   } else if (target.closest('.sound-word__btn')) {

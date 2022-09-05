@@ -2,7 +2,10 @@ import { Settings } from '../../types/everydayTypes/settingsType';
 
 const url = 'https://rs-langtask.herokuapp.com';
 
-export async function getUserSettings(userId: string, token: string): Promise<Settings> {
+export async function getUserSettings(
+  userId: string,
+  token: string
+): Promise<Settings> {
   const resp = await fetch(`${url}/users/${userId}/settings`, {
     method: 'GET',
     headers: {

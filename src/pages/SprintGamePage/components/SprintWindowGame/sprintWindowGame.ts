@@ -240,6 +240,7 @@ function handleTrueAnswer() {
       true,
       'sprint-game'
     );
+
   } else {
     sprintGameState.falseData.push(sprintGameState.currentWord);
     isRight = false;
@@ -260,12 +261,12 @@ function handleFalseAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
-
     handleProgress(
       sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
       false,
       'sprint-game'
     );
+
   } else {
     isRight = false;
     sprintGameState.falseData.push(sprintGameState.currentWord);
@@ -277,6 +278,14 @@ function handleFalseAnswer() {
 function handleAnswer(isRight: boolean) {
   if (isRight) {
     playRightSound();
+    handleProgress(
+      generalState.userId as string,
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord._id as string),
+      generalState.token as string,
+      true,
+      'sprint-game'
+    );
     sprintGameState.indexRight += 1;
 
     const circle = document.querySelector(
@@ -291,6 +300,14 @@ function handleAnswer(isRight: boolean) {
       removeActiveCircles();
     }
   } else {
+    handleProgress(
+      generalState.userId as string,
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord._id as string),
+      generalState.token as string,
+      false,
+      'sprint-game'
+    );
     removeActiveCircles();
     playFalseSound();
     sprintGameState.level = 1;
