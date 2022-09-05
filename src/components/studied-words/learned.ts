@@ -1,6 +1,7 @@
 import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
+import { getDateToday } from '../../utils';
 
-const date = new Date();
+const today = getDateToday();
 
 export function setLearnedStatusWord(
   userWord: UserWord,
@@ -16,8 +17,9 @@ export function setLearnedStatusWord(
       countTrueAnswer: userWord.optional.countTrueAnswer,
       countAttempt: userWord.optional.countAttempt,
       isLearned: true,
-      whenLearnedDate: date,
-      whereLearned,
+      whenLearnedDate: today,
+      whereLearned
+
     },
   };
   return optional;
@@ -27,8 +29,6 @@ export function setUnlearnedStatusWord(
   whereLearned: PlaceLearnedWord,
   userWord: UserWord
 ) {
-  console.log('неправильный ответ');
-
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {
@@ -37,8 +37,8 @@ export function setUnlearnedStatusWord(
       countTrueAnswer: userWord.optional.countTrueAnswer || 0,
       countAttempt: (userWord.optional.countAttempt as number) + 1 || 0,
       isLearned: false,
-      whenLearnedDate: date,
-      whereLearned,
+      whenLearnedDate: today,
+      whereLearned
     },
   };
 

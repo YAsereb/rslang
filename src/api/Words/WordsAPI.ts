@@ -73,7 +73,7 @@ export async function postFilterUserWord(
   });
 
   if (response.status === 417) {
-    putFilterUserWord(id, token, wordId, optional);
+    await putFilterUserWord(id, token, wordId, optional);
   }
 }
 

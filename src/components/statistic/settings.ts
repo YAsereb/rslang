@@ -1,19 +1,22 @@
-// // import { getUserSettings, updateUserSettings } from '../../api/settings-api/setting-api';
-// // import { getAggregatedWords, getAllUserWords } from '../../api/Words/WordsAPI';
-// // import { getHash } from '../../router';
-// // import { generalState } from '../../states/generalState';
-// // import { Settings, settingsWords } from '../../types/everydayTypes/settingsType';
+import { getAllUserWords } from '../../api/Words/WordsAPI';
+import { generalState } from '../../states/generalState';
 
-// export async function handleSettingsWord() {
-//   const hash = getHash();
+import { getDateToday } from '../../utils';
 
-//   let audioWords: settingsWords;
+export default async function handleSettingsWord() {
+  const today = getDateToday();
 
-//   const audioGameWords = (await getAllUserWords(
-//     generalState.userId as string,
-//     generalState.token as string
-//   ));
+  const userWords = await getAllUserWords(
+    generalState.userId as string,
+    generalState.token as string
+  );
 
+  console.log(today);
+  const todayNewWords = userWords.filter((word) =>
+    (word.optional.whenLearnedDate === today));
+  console.log(todayNewWords);
+  return todayNewWords;
+}
 //   console.log(audioGameWords);
   // if (hash === 'audiocall') {
   //   settingsWord = {
