@@ -3,6 +3,7 @@ import { headerState } from '../../../../../components/main-page/components/head
 import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
 import IWordCard from '../../../../../types/interfaces/words';
+import { getDateToday } from '../../../../../utils';
 import renderBoard from '../../Board/board';
 
 const cardState = {
@@ -117,6 +118,7 @@ async function handleBookWordCard(event: Event) {
   const target = event.target as HTMLElement;
   const currentTarget = event.currentTarget as HTMLElement;
   const { userId, token } = generalState;
+  const today = getDateToday();
 
   const WordId = currentTarget.getAttribute('data-id') as string;
   let options: UserWord;
@@ -132,7 +134,7 @@ async function handleBookWordCard(event: Event) {
         countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
         countAttempt: userWord?.optional.countAttempt || 0,
         isLearned: false,
-        whenLearnedDate: new Date(),
+        whenLearnedDate: today,
         whereLearned: 'book'
       },
     };
@@ -150,7 +152,7 @@ async function handleBookWordCard(event: Event) {
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
         countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
         countAttempt: userWord?.optional.countAttempt || 0,
-        whenLearnedDate: new Date(),
+        whenLearnedDate: today,
         whereLearned: 'book',
       }
     };
@@ -168,7 +170,7 @@ async function handleBookWordCard(event: Event) {
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
         countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
         countAttempt: userWord?.optional.countAttempt || 0,
-        whenLearnedDate: new Date(),
+        whenLearnedDate: today,
         whereLearned: 'book',
       }
     };

@@ -16,6 +16,5 @@ export function getUserToken(): string {
 
 export function getDateToday(): string {
   const today = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-  console.log(today);
   return today;
 }
