@@ -61,15 +61,7 @@ async function handleAnswer(answer: boolean) {
   trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
 
-  const { userId, token } = generalState;
-
-  await handleProgress(
-    userId as string,
-    audioGameState.trueWordId,
-    token as string,
-    answer,
-    'audio-game'
-  );
+  await handleProgress(audioGameState.trueWordId, answer, 'audio-game');
 
   img.src = `${variables.URL}/${audioGameState.imageSrc}`;
   setRandomStatePage();

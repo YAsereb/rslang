@@ -13,3 +13,8 @@ export function getUserToken(): string {
 
   return token;
 }
+
+export function getDateToday(): string {
+  const today = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+  return today;
+}

@@ -6,7 +6,7 @@ export type OptionalWord = {
   countTrueAnswer: number,
   countAttempt: number,
   isLearned: boolean,
-  whenLearnedDate: Date,
+  whenLearnedDate: string,
   whereLearned: PlaceLearnedWord
 };
 
