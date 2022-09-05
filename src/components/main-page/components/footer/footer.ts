@@ -10,19 +10,19 @@ function renderFooter() {
     </div>
     <div class="developer">
       <a href="https://github.com/YAsereb"  class="link">
-        <img src="./assets/icon/rs_school_js.svg" class="gitHub-icon" alt="gitHub-icon">
+        <img src="./assets/icon/GitHub-ico.png" class="gitHub-icon" alt="gitHub-icon">
         <p class="link-name">YAsereb</p>
       </a>
     </div>
     <div class="developer">
       <a href="https://github.com/SEvk4a"  class="link">
-        <img src="./assets/icon/rs_school_js.svg" class="gitHub-icon" alt="gitHub-icon">
+        <img src="./assets/icon/GitHub-ico.png" class="gitHub-icon" alt="gitHub-icon">
         <p class="link-name">SEvk4a</p>
       </a>
     </div>
     <div class="developer">
       <a href="https://github.com/zhentosmak"  class="link">
-        <img src="./assets/icon/rs_school_js.svg" class="gitHub-icon" alt="gitHub-icon">
+        <img src="./assets/icon/GitHub-ico.png" class="gitHub-icon" alt="gitHub-icon">
         <p class="link-name">zhentosmak</p>
       </a>
     </div>

@@ -36,17 +36,17 @@ function renderMain() {
       <div class="wrapper">
         <div class="developer-card">
           <h3 class="developer-name">Yaroslav Serebrenikov</h3>
-          <img src="../../../../../assets/img/proger1.png"class="developer-img" alt="developer_YAsereb">
+          <img src="./assets/img/proger1.png"class="developer-img" alt="developer_YAsereb">
           <p class="developer-description"><br>Team Lead frontend developer <br>Разработал Аудио игру,список слов,учебник.</br>Координировал команду.</p>
         </div>
         <div class="developer-card">
           <h3 class="developer-name">Usevalad Kunski</h3>
-          <img src="../../../../../assets/img/proger2.png"class="developer-img" alt="developer_SEvk4a">
+          <img src="./assets/img/proger2.png"class="developer-img" alt="developer_SEvk4a">
           <p class="developer-description"><br>Team Full stack developer <br>Развернул сервер,разработал авторизацию пользователей и роутинг.Разработал игру спринт.Участвовал в разработке статистики и дизайна.</p>
         </div>
         <div class="developer-card">
           <h3 class="developer-name">Yauhen Makarevich</h3>
-          <img src="../../../../../assets/img/proger3.png"class="developer-img" alt="developer_zhentosmak">
+          <img src="./assets/img/proger3.png"class="developer-img" alt="developer_zhentosmak">
           <p class="developer-description"><br>Frontend developer <br> Сделал дизайн и верстку главной страницы. Участвовал в разработке игры Спринт.</br> </p>
         </div>
       </div>
