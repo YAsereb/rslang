@@ -1,4 +1,5 @@
 import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
+import { getDateToday } from '../../utils';
 
 const today = getDateToday();
 
