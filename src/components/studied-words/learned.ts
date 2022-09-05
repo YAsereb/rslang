@@ -19,7 +19,6 @@ export function setLearnedStatusWord(
       isLearned: true,
       whenLearnedDate: today,
       whereLearned
-
     },
   };
   return optional;

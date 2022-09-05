@@ -1,4 +1,4 @@
-import { AnswerWord, Word } from '../../types';
+import { AnswerWord } from '../../types';
 import renderHeader, {
   handleHeaderListeners,
 } from '../main-page/components/header/header';
@@ -10,8 +10,10 @@ import {
 } from './listener';
 import { audioGameState } from '../../states/audioGameState';
 import './style.scss';
-import { getWords } from './api';
 import variables from '../../variables';
+import { generalState } from '../../states/generalState';
+import IWordCard from '../../types/interfaces/words';
+import getAllWords from '../../api/Words/WordsAPI';
 
 export function renderStartGame() {
   const { body } = document;
@@ -49,16 +51,21 @@ export function renderStartGame() {
   handleHeaderListeners();
 }
 
-export function renderWord(word: Word) {
+export function renderWord(word: IWordCard) {
   return `
   <div class="word flex-center" id="${word.id}">${word.word}</div>
   `;
 }
 
-export async function renderWords(group: number, page: number) {
+export async function renderWords(group?: number, page?: number) {
   const { body } = document;
 
-  const words = await getWords(group, page);
+  let words: IWordCard[] = [];
+
+  if (generalState.currentData.length) {
+    words = generalState.currentData;
+  }
+  words = await getAllWords(group as number, page as number);
   const wordsArray = getWordsArray(words);
   audioGameState.isButtonActive = false;
 
@@ -70,9 +77,8 @@ export async function renderWords(group: number, page: number) {
       <div class="audio-wrapper flex-center flex-column">
       <div class="counter">${audioGameState.countAnswer}/20</div>
           <img src="../../assets/img/Sound-Audio.png" class="audio-img">
-          <audio src="${variables.URL}/${
-    audioGameState.trueWordAudio
-  }" class="audio">
+          <audio src="${variables.URL}/${audioGameState.trueWordAudio
+    }" class="audio">
           </audio>
           <p id="true-word" class="true-word"></p>
             <div class="wrapper-words">
@@ -110,20 +116,18 @@ export function endGame() {
     <div class="game-wrapper">
       <div class="answer-wrapper flex-center flex-column">
         <div class="answers flex-column">
-          <p class="knowledge">Не знаю <span class="unknown-words">${
-            audioGameState.falseAnswers.length
-          }</span></p>
+          <p class="knowledge">Не знаю <span class="unknown-words">${audioGameState.falseAnswers.length
+    }</span></p>
             ${audioGameState.falseAnswers
-              .map((word) => renderAnswer(word))
-              .join('')}
+      .map((word) => renderAnswer(word))
+      .join('')}
         </div>
         <div class="answers flex-column">
-          <p class="knowledge">Знаю <span class="known-words">${
-            audioGameState.trueAnswers.length
-          }</span></p>
+          <p class="knowledge">Знаю <span class="known-words">${audioGameState.trueAnswers.length
+    }</span></p>
             ${audioGameState.trueAnswers
-              .map((word) => renderAnswer(word))
-              .join('')}
+      .map((word) => renderAnswer(word))
+      .join('')}
         </div>
       </div>
     </div>
