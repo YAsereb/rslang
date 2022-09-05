@@ -94,20 +94,6 @@ export async function putFilterUserWord(
   });
 }
 
-export async function deleteFilterUserWord(
-  id: string,
-  token: string,
-  wordId: string
-): Promise<void> {
-  await fetch(`${url}/users/${id}/words/${wordId}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
-    },
-  });
-}
-
 export async function getAggregatedWords(
   id: string,
   token: string,

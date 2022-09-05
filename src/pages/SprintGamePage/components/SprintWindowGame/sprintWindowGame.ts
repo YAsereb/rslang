@@ -41,7 +41,7 @@ function renderSprintWindowGame() {
                         <div class="score-sprint">Score: <span>0</span></div>
                         <div class="sprint-block">
                             <div class="sprint-main__block">
-                                <div class="sprint-timer">3</div>
+                                <div class="sprint-timer">30</div>
                                 <div class="sprint-answers">
                                     <div data-right='1'></div>
                                     <div data-right='2'></div>

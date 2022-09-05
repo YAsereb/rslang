@@ -3,10 +3,9 @@ import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
 import handleProgress from '../progress/progress';
 import { generalState } from '../../states/generalState';
-import learnedWord, { setUnlearnedStatusWord } from '../studied-words/learned';
 
 export function setRandomStatePage() {
-  const min = 0;
+  const min = 1;
   const max = 30;
   const page = Math.floor(Math.random() * (max - min));
   audioGameState.page = page;
@@ -24,7 +23,6 @@ export function getWordsArray(words: Words) {
   audioGameState.trueWordId = trueWord.id;
   audioGameState.trueWord = trueWord.word;
   audioGameState.trueWordAudio = trueWord.audio;
-  audioGameState.trueWordAudioExample = trueWord.audioExample;
   audioGameState.imageSrc = trueWord.image;
   audioGameState.wordTranslate = trueWord.wordTranslate;
 
@@ -68,7 +66,8 @@ async function handleAnswer(answer: boolean) {
     userId as string,
     audioGameState.trueWordId,
     token as string,
-    answer
+    answer,
+    'audio-game'
   );
 
   img.src = `../../${audioGameState.imageSrc}`;
@@ -93,7 +92,6 @@ async function isTrueWord(element: HTMLElement) {
 
   addTrueWord({ trueWord, trueWordAudio, wordTranslate });
   await handleAnswer(true);
-  await learnedWord(audioGameState.trueWordId, 'audio-game');
 }
 
 async function isFalseWord(element: HTMLElement) {
@@ -103,7 +101,6 @@ async function isFalseWord(element: HTMLElement) {
 
   addFalseWord({ trueWord, trueWordAudio, wordTranslate });
   await handleAnswer(false);
-  await setUnlearnedStatusWord(audioGameState.trueWordId, 'audio-game');
 }
 
 export async function handleAudioGame(event: Event) {
