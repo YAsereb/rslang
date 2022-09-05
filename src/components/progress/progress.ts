@@ -1,7 +1,10 @@
 import { getUserWordById, postFilterUserWord, putFilterUserWord } from '../../api/Words/WordsAPI';
 import { generalState } from '../../states/generalState';
 import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
+import { getDateToday } from '../../utils';
 import { setUnlearnedStatusWord, learnedWord } from '../studied-words/learned';
+
+const today = getDateToday();
 
 async function setNewWord(wordId: string, answer: boolean, whereLearned: PlaceLearnedWord) {
   const userWord: UserWord = {
@@ -12,7 +15,7 @@ async function setNewWord(wordId: string, answer: boolean, whereLearned: PlaceLe
       countTrueAnswer: +answer,
       countAttempt: 1,
       isLearned: false,
-      whenLearnedDate: new Date(),
+      whenLearnedDate: today,
       whereLearned
     }
   };
@@ -47,7 +50,7 @@ async function updateAnswerOptional(
         countTrueAnswer: (currentUserWord.optional.countTrueAnswer as number) + 1,
         countAttempt: (currentUserWord.optional.countAttempt as number) + 1,
         isLearned: false,
-        whenLearnedDate: new Date(),
+        whenLearnedDate: today,
         whereLearned
       }
     };
