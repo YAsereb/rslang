@@ -27,8 +27,6 @@ export function setUnlearnedStatusWord(
   whereLearned: PlaceLearnedWord,
   userWord: UserWord
 ) {
-  console.log('неправильный ответ');
-
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {

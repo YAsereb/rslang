@@ -236,9 +236,7 @@ function handleTrueAnswer() {
     sprintGameState.trueData.push(sprintGameState.currentWord);
 
     handleProgress(
-      generalState.userId as string,
       sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
-      generalState.token as string,
       true,
       'sprint-game'
     );
@@ -264,9 +262,7 @@ function handleFalseAnswer() {
     sprintGameState.trueData.push(sprintGameState.currentWord);
 
     handleProgress(
-      generalState.userId as string,
       sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
-      generalState.token as string,
       false,
       'sprint-game'
     );

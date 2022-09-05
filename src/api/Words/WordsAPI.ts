@@ -44,8 +44,6 @@ export async function getUserWordById(
   wordId: string,
   token: string
 ): Promise<UserWord | null> {
-  console.log(3);
-
   const resp = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'GET',
     headers: {
@@ -75,7 +73,7 @@ export async function postFilterUserWord(
   });
 
   if (response.status === 417) {
-    putFilterUserWord(id, token, wordId, optional);
+    await putFilterUserWord(id, token, wordId, optional);
   }
 }
 
