@@ -2,7 +2,6 @@ import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
 import handleProgress from '../progress/progress';
-import { generalState } from '../../states/generalState';
 import variables from '../../variables';
 
 export function setRandomStatePage() {

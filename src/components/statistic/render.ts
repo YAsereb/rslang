@@ -5,7 +5,9 @@ import './statistic.scss';
 
 async function renderStatisticMiniGames(): Promise<string> {
   const todayNewWords = await handleSettingsWord();
-  const audioWords = todayNewWords.filter((word) => (word.optional.whereLearned === 'audio-game'));
+  const audioWords = todayNewWords.filter(
+    (word) => word.optional.whereLearned === 'audio-game'
+  );
 
   let countAudioAttempt = 0;
   let countRightAudioAnswer = 0;
@@ -14,13 +16,17 @@ async function renderStatisticMiniGames(): Promise<string> {
     audioWords.forEach((el) => {
       countAudioAttempt += el.optional.countAttempt as number;
       countRightAudioAnswer += el.optional.countTrueAnswer as number;
-      arrayAudioRightAnswerInRow.push(el.optional.countTrueAnswerInRow as number);
+      arrayAudioRightAnswerInRow.push(
+        el.optional.countTrueAnswerInRow as number
+      );
     });
   }
   const percentageAudio = countRightAudioAnswer / countAudioAttempt;
   const maxAudioRightAnswerInRow = Math.max(...arrayAudioRightAnswerInRow);
 
-  const sprintWords = todayNewWords.filter((word) => (word.optional.whereLearned === 'sprint-game'));
+  const sprintWords = todayNewWords.filter(
+    (word) => word.optional.whereLearned === 'sprint-game'
+  );
   let countSprintAttempt = 0;
   let countRightSprintAnswer = 0;
   const arraySprintRightAnswerInRow: number[] = [];
@@ -28,13 +34,15 @@ async function renderStatisticMiniGames(): Promise<string> {
     audioWords.forEach((el) => {
       countSprintAttempt += el.optional.countAttempt as number;
       countRightSprintAnswer += el.optional.countTrueAnswer as number;
-      arraySprintRightAnswerInRow.push(el.optional.countTrueAnswerInRow as number);
+      arraySprintRightAnswerInRow.push(
+        el.optional.countTrueAnswerInRow as number
+      );
     });
   }
   const percentageSprint = countRightSprintAnswer / countSprintAttempt;
   const maxSprintRightAnswerInRow = Math.max(...arraySprintRightAnswerInRow);
 
-  const cardWords = todayNewWords.filter((word) => (word.optional.whereLearned === 'book'));
+  // const cardWords = todayNewWords.filter((word) => (word.optional.whereLearned === 'book'));
   return `
   <div class="statistic-item">
     <h3 class="statistic-item__header">Mini-game statistics</h3>
