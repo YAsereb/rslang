@@ -73,6 +73,7 @@ function changePage(event: Event) {
 
   if (target.classList.contains('numb')) {
     dicAndBookVars.currentPage = Number(target.textContent);
+    localStorage.setItem('page', String(dicAndBookVars.currentPage));
   } else if (target.classList.contains('btn')) {
     changeNextOrPrevPage(target);
   } else {

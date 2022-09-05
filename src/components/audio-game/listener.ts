@@ -1,5 +1,8 @@
 import {
-  handleAudioGame, handleGroup, handlePlayAudio, playAudioEndGame
+  handleAudioGame,
+  handleGroup,
+  handlePlayAudio,
+  playAudioEndGame,
 } from './game';
 import { endGame } from './render';
 import { audioGameState } from '../../states/audioGameState';

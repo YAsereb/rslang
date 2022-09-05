@@ -48,8 +48,8 @@
 
 .navigation-games {
   position: relative;
+  z-index: 1001;
   color: rgb(214, 209, 209);
-  cursor: pointer;
   margin: 0 1.5rem;
 
   svg {
@@ -77,7 +77,6 @@
 .games-item {
   display: flex;
   align-items: center;
-
   span {
     display: block;
     margin-right: 0.5rem;
@@ -87,10 +86,10 @@
 .games-list {
   position: absolute;
   z-index: 1000;
-  top: 50%;
   display: none;
+  top: 50%;
   flex-direction: column;
-
+  cursor: pointer;
   a {
     margin: 0;
     padding: 0;
@@ -99,7 +98,6 @@
     &:nth-child(1) {
       margin-top: 1.5rem;
     }
-
     li {
       margin: 0.3rem 0;
       background-color: #6441a5;
@@ -113,15 +111,20 @@
       }
     }
   }
-
   &:hover {
     display: flex;
   }
 }
 
+.nonactive-game {
+  pointer-events: none;
+  li {
+    background-color: #7a7d8b !important;
+  }
+}
+
 .navigation-auth {
   margin-left: 2rem;
-
   a {
     padding: 0.8rem 1.4rem;
     color: #fff;
@@ -130,7 +133,6 @@
     border-radius: 1rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
-
     &:hover {
       color: #cf8bf3;
       background-color: #fff;

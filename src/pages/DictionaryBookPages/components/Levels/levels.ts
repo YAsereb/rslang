@@ -72,6 +72,7 @@ function changeLevel(event: Event) {
     if (Number(groupNumber) !== dicAndBookVars.currentGroup) {
       dicAndBookVars.currentGroup = Number(groupNumber);
       dicAndBookVars.currentPage = 1;
+      localStorage.setItem('page', '1');
       addActiveStyle(card);
       renderBoard();
     }

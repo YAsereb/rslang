@@ -50,6 +50,20 @@ export function handleHeaderListeners() {
   logoutBtn.addEventListener('click', handleAuth);
 }
 
+export function handleActiveGamesBtnsState() {
+  const links = document.querySelectorAll('.games-list a');
+
+  if (!generalState.currentData.length) {
+    links.forEach((link) => {
+      link.classList.add('nonactive-game');
+    });
+  } else {
+    links.forEach((link) => {
+      link.classList.remove('nonactive-game');
+    });
+  }
+}
+
 function handleAuth(event: Event) {
   const currentTarget = event.currentTarget as HTMLElement;
 

@@ -2,6 +2,7 @@ import dicAndBookVars from '../..';
 import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
+import { handleActiveGamesBtnsState } from '../../../../components/main-page/components/header/header';
 import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
 import renderPagination, {
@@ -120,6 +121,7 @@ function handleListeners() {
 
 function handleState() {
   handlePaginationState();
+  handleActiveGamesBtnsState();
 }
 
 export default renderBoard;
