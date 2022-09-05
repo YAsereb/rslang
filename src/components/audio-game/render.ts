@@ -60,8 +60,8 @@ export async function renderWords(group: number, page: number) {
   <main class="main flex-center">
     <div class="start-screen-img">
       <div class="game-wrapper">
-        <div class="counter">${audioGameState.countAnswer}/20</div>
-        <div class="audio-wrapper flex-center flex-column">
+      <div class="audio-wrapper flex-center flex-column">
+      <div class="counter">${audioGameState.countAnswer}/20</div>
           <img src="../../assets/img/Sound-Audio.png" class="audio-img">
           <audio src="../../${audioGameState.trueWordAudio}" class="audio">
           </audio>
