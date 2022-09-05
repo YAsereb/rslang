@@ -8,6 +8,8 @@ export async function getWord(id: string): Promise<Word> {
 }
 
 export async function getWords(page = 0, group = 0): Promise<Words> {
-  const words = await (await fetch(`${baseLink}/words?group=${group}&page=${page}`)).json();
+  const words = await (
+    await fetch(`${baseLink}/words?group=${group}&page=${page}`)
+  ).json();
   return words;
 }

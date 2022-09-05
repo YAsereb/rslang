@@ -1,10 +1,17 @@
 import { AnswerWord, Word } from '../../types';
-import renderHeader, { handleHeaderListeners } from '../main-page/components/header/header';
+import renderHeader, {
+  handleHeaderListeners,
+} from '../main-page/components/header/header';
 import { getWordsArray, playAudio } from './game';
-import { listenerAnswer, listenerChooseGroup, listenerStatistic } from './listener';
+import {
+  listenerAnswer,
+  listenerChooseGroup,
+  listenerStatistic,
+} from './listener';
 import { audioGameState } from '../../states/audioGameState';
 import './style.scss';
 import { getWords } from './api';
+import variables from '../../variables';
 
 export function renderStartGame() {
   const { body } = document;
@@ -63,7 +70,9 @@ export async function renderWords(group: number, page: number) {
       <div class="audio-wrapper flex-center flex-column">
       <div class="counter">${audioGameState.countAnswer}/20</div>
           <img src="../../assets/img/Sound-Audio.png" class="audio-img">
-          <audio src="../../${audioGameState.trueWordAudio}" class="audio">
+          <audio src="${variables.URL}/${
+    audioGameState.trueWordAudio
+  }" class="audio">
           </audio>
           <p id="true-word" class="true-word"></p>
             <div class="wrapper-words">
@@ -84,7 +93,7 @@ function renderAnswer(word: AnswerWord) {
     <div class="word-card">
       <div class="answers-item flex-start">
         <img src="../../assets/icon/sound-icon.png"class="sound-icon" id="play">
-        <audio src="../../${word.trueWordAudio}" muted></audio>
+        <audio src="${variables.URL}/${audioGameState.trueWordAudio}" muted></audio>
         <p>${word.trueWord} &mdash; ${word.wordTranslate}</p>
       </div>
     </div>
@@ -101,12 +110,20 @@ export function endGame() {
     <div class="game-wrapper">
       <div class="answer-wrapper flex-center flex-column">
         <div class="answers flex-column">
-          <p class="knowledge">Не знаю <span class="unknown-words">${audioGameState.falseAnswers.length}</span></p>
-            ${audioGameState.falseAnswers.map((word) => renderAnswer(word)).join('')}
+          <p class="knowledge">Не знаю <span class="unknown-words">${
+            audioGameState.falseAnswers.length
+          }</span></p>
+            ${audioGameState.falseAnswers
+              .map((word) => renderAnswer(word))
+              .join('')}
         </div>
         <div class="answers flex-column">
-          <p class="knowledge">Знаю <span class="known-words">${audioGameState.trueAnswers.length}</span></p>
-            ${audioGameState.trueAnswers.map((word) => renderAnswer(word)).join('')}
+          <p class="knowledge">Знаю <span class="known-words">${
+            audioGameState.trueAnswers.length
+          }</span></p>
+            ${audioGameState.trueAnswers
+              .map((word) => renderAnswer(word))
+              .join('')}
         </div>
       </div>
     </div>

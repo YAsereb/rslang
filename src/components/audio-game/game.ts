@@ -2,6 +2,8 @@ import { AnswerWord, Words } from '../../types';
 import { renderWords } from './render';
 import { audioGameState } from '../../states/audioGameState';
 import handleProgress from '../progress/progress';
+import { generalState } from '../../states/generalState';
+import variables from '../../variables';
 
 export function setRandomStatePage() {
   const min = 1;
@@ -59,13 +61,9 @@ async function handleAnswer(answer: boolean) {
   trueWordParagraph.textContent = audioGameState.trueWord;
   trueWordParagraph.hidden = false;
 
-  await handleProgress(
-    audioGameState.trueWordId,
-    answer,
-    'audio-game'
-  );
+  await handleProgress(audioGameState.trueWordId, answer, 'audio-game');
 
-  img.src = `../../${audioGameState.imageSrc}`;
+  img.src = `${variables.URL}/${audioGameState.imageSrc}`;
   setRandomStatePage();
 
   audioGameState.countAnswer += 1;
