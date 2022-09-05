@@ -1,4 +1,5 @@
 import IWordCard from '../../../../types/interfaces/words';
+import variables from '../../../../variables';
 
 function renderResultWord(word: IWordCard) {
   return `  <li>
@@ -6,7 +7,7 @@ function renderResultWord(word: IWordCard) {
                 <svg>
                   <use xlink: href = "./assets/svg/sprite/general.svg#sound" ></use>
                 </svg>
-                <audio class="audio-word" src = "http://localhost:8000/${word.audio}" >
+                <audio class="audio-word" src = "${variables.URL}/${word.audio}" >
                 </button>
                 <span>${word.word} </span>
                 <span>- ${word.wordTranslate}</span>

@@ -17,7 +17,7 @@ export async function setLearnedStatusWord(
       countAttempt: userWord.optional.countAttempt,
       isLearned: true,
       whenLearnedDate: date,
-      whereLearned
+      whereLearned,
     },
   };
 
@@ -29,7 +29,10 @@ export async function setLearnedStatusWord(
   );
 }
 
-export async function setUnlearnedStatusWord(wordId: string, whereLearned: PlaceLearnedWord) {
+export async function setUnlearnedStatusWord(
+  wordId: string,
+  whereLearned: PlaceLearnedWord
+) {
   const userWord: UserWord = (await getUserWordById(
     generalState.userId as string,
     wordId,
@@ -45,7 +48,7 @@ export async function setUnlearnedStatusWord(wordId: string, whereLearned: Place
       countAttempt: userWord.optional.countAttempt,
       isLearned: false,
       whenLearnedDate: date,
-      whereLearned
+      whereLearned,
     },
   };
 
@@ -57,12 +60,15 @@ export async function setUnlearnedStatusWord(wordId: string, whereLearned: Place
   );
 }
 
-export default async function learnedWord(wordId: string, whereLearned: PlaceLearnedWord) {
-  const userWord = await getUserWordById(
+export default async function learnedWord(
+  wordId: string,
+  whereLearned: PlaceLearnedWord
+) {
+  const userWord = (await getUserWordById(
     generalState.userId as string,
     wordId,
     generalState.token as string
-  ) as UserWord;
+  )) as UserWord;
 
   if (
     (userWord.difficulty === 'easy' &&

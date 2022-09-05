@@ -2,7 +2,7 @@ import { generalState } from '../../states/generalState';
 import { UserWord } from '../../types/everydayTypes/userWord';
 import IWordCard from '../../types/interfaces/words';
 
-const url = 'http://localhost:8000';
+const url = 'https://rs-langtask.herokuapp.com';
 
 export default async function getAllWords(numGroup: number, page: number) {
   const response = await fetch(
@@ -44,8 +44,6 @@ export async function getUserWordById(
   wordId: string,
   token: string
 ): Promise<UserWord | null> {
-  console.log(3);
-
   const resp = await fetch(`${url}/users/${id}/words/${wordId}`, {
     method: 'GET',
     headers: {

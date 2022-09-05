@@ -4,7 +4,7 @@ import {
   showTextError,
 } from '../../components/Authentication';
 
-const url = 'http://localhost:8000';
+const url = 'https://rs-langtask.herokuapp.com';
 
 export async function createUser(user: { email: string; password: string }) {
   const response = await fetch(`${url}/users`, {

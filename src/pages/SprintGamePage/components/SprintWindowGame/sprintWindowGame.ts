@@ -2,9 +2,6 @@ import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
 import handleProgress from '../../../../components/progress/progress';
-import learnedWord, {
-  setUnlearnedStatusWord,
-} from '../../../../components/studied-words/learned';
 import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
 import dicAndBookVars from '../../../DictionaryBookPages';
@@ -44,7 +41,7 @@ function renderSprintWindowGame() {
                         <div class="score-sprint">Score: <span>0</span></div>
                         <div class="sprint-block">
                             <div class="sprint-main__block">
-                                <div class="sprint-timer">30</div>
+                                <div class="sprint-timer">3</div>
                                 <div class="sprint-answers">
                                     <div data-right='1'></div>
                                     <div data-right='2'></div>
@@ -237,19 +234,6 @@ function handleTrueAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
-
-    handleProgress(
-      generalState.userId as string,
-      generalState.token as string,
-      (sprintGameState.currentWord.id as string) ||
-        (sprintGameState.currentWord.id as string),
-      true
-    );
-    learnedWord(
-      (sprintGameState.currentWord.id as string) ||
-        (sprintGameState.currentWord.id as string),
-      'sprint-game'
-    );
   } else {
     sprintGameState.falseData.push(sprintGameState.currentWord);
     isRight = false;
@@ -270,19 +254,6 @@ function handleFalseAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
-
-    handleProgress(
-      generalState.userId as string,
-      generalState.token as string,
-      (sprintGameState.currentWord.id as string) ||
-        (sprintGameState.currentWord.id as string),
-      false
-    );
-    setUnlearnedStatusWord(
-      (sprintGameState.currentWord.id as string) ||
-        (sprintGameState.currentWord.id as string),
-      'sprint-game'
-    );
   } else {
     isRight = false;
     sprintGameState.falseData.push(sprintGameState.currentWord);
@@ -294,6 +265,14 @@ function handleFalseAnswer() {
 function handleAnswer(isRight: boolean) {
   if (isRight) {
     playRightSound();
+    handleProgress(
+      generalState.userId as string,
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord._id as string),
+      generalState.token as string,
+      true,
+      'sprint-game'
+    );
     sprintGameState.indexRight += 1;
 
     const circle = document.querySelector(
@@ -308,6 +287,14 @@ function handleAnswer(isRight: boolean) {
       removeActiveCircles();
     }
   } else {
+    handleProgress(
+      generalState.userId as string,
+      (sprintGameState.currentWord.id as string) ||
+        (sprintGameState.currentWord._id as string),
+      generalState.token as string,
+      false,
+      'sprint-game'
+    );
     removeActiveCircles();
     playFalseSound();
     sprintGameState.level = 1;

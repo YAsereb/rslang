@@ -1,14 +1,17 @@
 import { Statistic } from '../../types/everydayTypes/statisticType';
 
-const url = 'http://localhost:8000';
+const url = 'https://rs-langtask.herokuapp.com';
 
-export async function getUserStatistic(userId: string, token: string): Promise<Statistic> {
+export async function getUserStatistic(
+  userId: string,
+  token: string
+): Promise<Statistic> {
   const resp = await fetch(`${url}/users/${userId}/statistics`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
-    }
+    },
   });
   const statistic = await resp.json();
   return statistic;
