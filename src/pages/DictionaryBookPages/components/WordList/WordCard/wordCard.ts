@@ -7,6 +7,7 @@ import { generalState } from '../../../../../states/generalState';
 import { UserWord } from '../../../../../types/everydayTypes/userWord';
 import IWordCard from '../../../../../types/interfaces/words';
 import { getDateToday } from '../../../../../utils';
+import variables from '../../../../../variables';
 
 import renderBoard from '../../Board/board';
 
@@ -46,13 +47,11 @@ function renderAddLearnedButton(word: IWordCard): string {
 function renderHandleWordCardButton(word: IWordCard): string {
   const html = `
   <div class="buttons-block">
-    <button class=${
-      word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'
+    <button class=${word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'
     }>
       <svg>
-        <use xlink:href="./assets/svg/sprite/wordCard.svg#${
-          word.userWord?.difficulty === 'hard' ? 'minus' : 'add'
-        }"></use>
+        <use xlink:href="./assets/svg/sprite/wordCard.svg#${word.userWord?.difficulty === 'hard' ? 'minus' : 'add'
+    }"></use>
       </svg>
     </button>
     ${renderAddLearnedButton(word)}
@@ -99,16 +98,14 @@ function renderWordCardContent(word: IWordCard) {
 function renderWordCard(word: IWordCard) {
   return `
 
-  <li data-id="${word.id || word._id}" class=${
-    word.userWord?.optional?.isLearned === true
+  <li data-id="${word.id || word._id}" class=${word.userWord?.optional?.isLearned === true
       ? 'deleted-word__card'
       : word.userWord?.difficulty === 'hard'
-      ? 'hard-word__card'
-      : ''
-  }>
-    <div class="card-header" style = "background-image: url(${variables.URL}/${
-    word.image
-  })">
+        ? 'hard-word__card'
+        : ''
+    }>
+    <div class="card-header" style = "background-image: url(${variables.URL}/${word.image
+    })">
       <div class="card-header__overlay">
       ${renderProgress(word.userWord)}
       ${headerState.isLogin ? renderHandleWordCardButton(word) : ''}
