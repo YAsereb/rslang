@@ -1,6 +1,6 @@
 import { Words, Word } from '../../types';
 
-const baseLink = 'http://localhost:8000';
+const baseLink = 'https://rs-langtask.herokuapp.com';
 
 export async function getWord(id: string): Promise<Word> {
   const word: Word = await (await fetch(`${baseLink}/word/${id}`)).json();
