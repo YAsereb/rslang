@@ -1,7 +1,7 @@
-import audioGameStart from './components/audio-game';
 import renderAuthPage from './components/Authentication';
 import renderMainPage from './components/main-page/render-main-page';
 import renderStatistic from './components/statistic/render';
+import renderAudioGamePage from './pages/AudioGamePage/audioGamePage';
 import dicAndBookVars from './pages/DictionaryBookPages';
 import renderBookPage from './pages/DictionaryBookPages/BookPage/bookPage';
 import renderDictionaryPage from './pages/DictionaryBookPages/DictionaryPage/dictionaryPage';
@@ -41,15 +41,17 @@ export function handleRouter() {
       renderDictionaryPage();
       break;
     case 'audiocall':
-      audioGameStart();
+      renderAudioGamePage();
       break;
     case 'sprint':
       renderSprintGamePage();
       break;
     case 'statistics':
+      generalState.currentData = [];
       renderStatistic();
       break;
     default:
+      generalState.currentData = [];
       renderMainPage();
       break;
   }

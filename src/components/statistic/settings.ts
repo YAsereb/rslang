@@ -11,34 +11,33 @@ export default async function handleSettingsWord() {
     generalState.token as string
   );
 
-  console.log(today);
-  const todayNewWords = userWords.filter((word) =>
-    (word.optional.whenLearnedDate === today));
-  console.log(todayNewWords);
+  const todayNewWords = userWords.filter(
+    (word) => word.optional.whenLearnedDate === today
+  );
   return todayNewWords;
 }
 //   console.log(audioGameWords);
-  // if (hash === 'audiocall') {
-  //   settingsWord = {
-  //     audioWords: (userSettings.optional.words?.audioWords as string[]).concat(wordId),
-  //     sprintWords: userSettings.optional.words?.sprintWords as string[],
-  //     cardWords: userSettings.optional.words?.sprintWords as string[],
-  //   };
-  // }
-  // if (hash === 'sprint') {
-  //   settingsWord = {
-  //     audioWords: userSettings.optional.words?.audioWords as string[],
-  //     sprintWords: (userSettings.optional.words?.sprintWords as string[]).concat(wordId),
-  //     cardWords: userSettings.optional.words?.sprintWords as string[],
-  //   };
-  // }
-  // settingsWord = {
-  //   audioWords: userSettings.optional.words?.audioWords as string[],
-  //   sprintWords: userSettings.optional.words?.sprintWords as string[],
-  //   cardWords: (userSettings.optional.words?.sprintWords as string[]).concat(wordId),
-  // };
+// if (hash === 'audiocall') {
+//   settingsWord = {
+//     audioWords: (userSettings.optional.words?.audioWords as string[]).concat(wordId),
+//     sprintWords: userSettings.optional.words?.sprintWords as string[],
+//     cardWords: userSettings.optional.words?.sprintWords as string[],
+//   };
+// }
+// if (hash === 'sprint') {
+//   settingsWord = {
+//     audioWords: userSettings.optional.words?.audioWords as string[],
+//     sprintWords: (userSettings.optional.words?.sprintWords as string[]).concat(wordId),
+//     cardWords: userSettings.optional.words?.sprintWords as string[],
+//   };
+// }
+// settingsWord = {
+//   audioWords: userSettings.optional.words?.audioWords as string[],
+//   sprintWords: userSettings.optional.words?.sprintWords as string[],
+//   cardWords: (userSettings.optional.words?.sprintWords as string[]).concat(wordId),
+// };
 
-  // return settingsWord;
+// return settingsWord;
 // }
 
 // export default async function handleSettings(wordId: string) {

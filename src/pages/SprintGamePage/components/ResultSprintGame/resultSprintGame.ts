@@ -1,7 +1,7 @@
-import { generalState } from '../../../../states/generalState';
 import renderResultWord, {
   handleResultWordListeners,
-} from '../ResultWord/resultWord';
+} from '../../../../components/games/ResultWord/resultWord';
+import { generalState } from '../../../../states/generalState';
 import renderSprintWindowGame, {
   sprintGameState,
 } from '../SprintWindowGame/sprintWindowGame';
@@ -33,7 +33,7 @@ function renderResultSprintGame() {
                         </div>
                         <ul class="result-sprint__list">
                             ${sprintGameState.trueData
-                              .map((word) => renderResultWord(word))
+                              .map((word) => word)
                               .join('')}
                         </ul>
                     </div>`

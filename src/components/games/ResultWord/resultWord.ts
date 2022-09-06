@@ -1,5 +1,5 @@
-import IWordCard from '../../../../types/interfaces/words';
-import variables from '../../../../variables';
+import IWordCard from '../../../types/interfaces/words';
+import variables from '../../../variables';
 
 function renderResultWord(word: IWordCard) {
   return `  <li>

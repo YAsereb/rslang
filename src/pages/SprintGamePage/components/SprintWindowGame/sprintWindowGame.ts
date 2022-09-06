@@ -25,7 +25,7 @@ export const sprintGameState = {
 };
 
 function renderSprintWindowGame() {
-  const sprint = document.querySelector('.sprint-game') as HTMLElement;
+  const game = document.querySelector('.game-overlay') as HTMLElement;
 
   sprintGameState.score = 0;
   sprintGameState.level = 1;
@@ -34,7 +34,7 @@ function renderSprintWindowGame() {
   sprintGameState.falseData = [];
   sprintGameState.indexPrevPage = 0;
 
-  sprint.innerHTML = '';
+  game.innerHTML = '';
 
   const html = `
                     <div class="sprint-window">
@@ -60,7 +60,7 @@ function renderSprintWindowGame() {
                     </div>
   `;
 
-  sprint.insertAdjacentHTML('beforeend', html);
+  game.insertAdjacentHTML('beforeend', html);
 
   handleSprintGameListeners();
   handleSprintGameState();
@@ -265,12 +265,14 @@ function handleFalseAnswer() {
 function handleAnswer(isRight: boolean) {
   if (isRight) {
     playRightSound();
-    handleProgress(
-      (sprintGameState.currentWord.id as string) ||
-      (sprintGameState.currentWord._id as string),
-      true,
-      'sprint-game'
-    );
+    if (generalState.userId) {
+      handleProgress(
+        (sprintGameState.currentWord.id as string) ||
+          (sprintGameState.currentWord._id as string),
+        true,
+        'sprint-game'
+      );
+    }
     sprintGameState.indexRight += 1;
 
     const circle = document.querySelector(
@@ -285,12 +287,15 @@ function handleAnswer(isRight: boolean) {
       removeActiveCircles();
     }
   } else {
-    handleProgress(
-      (sprintGameState.currentWord.id as string) ||
-      (sprintGameState.currentWord._id as string),
-      false,
-      'sprint-game'
-    );
+    if (generalState.userId) {
+      handleProgress(
+        (sprintGameState.currentWord.id as string) ||
+          (sprintGameState.currentWord._id as string),
+        false,
+        'sprint-game'
+      );
+    }
+
     removeActiveCircles();
     playFalseSound();
     sprintGameState.level = 1;
