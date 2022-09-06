@@ -20,7 +20,7 @@ async function setNewWord(wordId: string, answer: boolean, whereLearned: PlaceLe
       countTrueAnswer: +answer,
       countAttempt: 1,
       isLearned: false,
-      whenLearnedDate: '',
+      whenLearnedDate: '0',
       whereLearned,
     },
   };
@@ -40,7 +40,6 @@ async function updateAnswerOptional(
   word: UserWord
 ) {
   const today = getDateToday();
-  console.log(word);
 
   const currentUserWord: UserWord = {
     difficulty: word.difficulty,

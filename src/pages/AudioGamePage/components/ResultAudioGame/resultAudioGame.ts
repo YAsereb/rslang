@@ -16,8 +16,6 @@ function renderResultAudioGame() {
 
   game.innerHTML = '';
 
-  console.log('check');
-
   const html = `
                 <div class="result-window">
                     <div class="result-main">
@@ -70,6 +68,8 @@ function handleResultAudioListeners() {
 async function playAgain() {
   audioGameState.falseData = [];
   audioGameState.trueData = [];
+  audioGameState.currentCountRightAnswer = 0;
+  audioGameState.maxRightAnswerInRow = [];
   if (!generalState.currentData.length) {
     await handleRandomData();
   } else {

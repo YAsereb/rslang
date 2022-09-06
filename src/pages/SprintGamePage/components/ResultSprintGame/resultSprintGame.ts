@@ -12,48 +12,44 @@ import {
 import './style.scss';
 
 function renderResultSprintGame() {
-  const sprint = document.querySelector('.sprint-game') as HTMLElement;
+  const sprint = document.querySelector('.game-overlay') as HTMLElement;
 
   sprint.innerHTML = '';
 
   const html = `
                 <div class="result-window">
-                    <div class="result-title">RESULT: <span>${
-                      sprintGameState.score
-                    }</span></div>
+                    <div class="result-title">RESULT: <span>${sprintGameState.score
+    }</span></div>
                     <div class="result-main">
-                        ${
-                          sprintGameState.trueData.length
-                            ? `<div class="result-true">
+                        ${sprintGameState.trueData.length
+      ? `<div class="result-true">
                         <div class="result-true__title">
                             <span>Correct</span>
-                            <span class="count-wrong">${
-                              sprintGameState.trueData.length
-                            }</span>
+                            <span class="count-wrong">${sprintGameState.trueData.length
+      }</span>
                         </div>
                         <ul class="result-sprint__list">
                             ${sprintGameState.trueData
-                              .map((word) => word)
-                              .join('')}
+        .map((word) => renderResultWord(word))
+        .join('')}
                         </ul>
                     </div>`
-                            : ''
-                        }
-                        ${
-                          sprintGameState.falseData.length
-                            ? `<div class="result-false">
+      : ''
+    }
+                        ${sprintGameState.falseData.length
+      ? `<div class="result-false">
                         <div class="result-false__title">
                             <span>Misstakes</span>
                             <span>${sprintGameState.falseData.length}</span>
                         </div>
                         <ul class="result-sprint__list">
                            ${sprintGameState.falseData
-                             .map((word) => renderResultWord(word))
-                             .join('')}
+        .map((word) => renderResultWord(word))
+        .join('')}
                         </ul>
                     </div>`
-                            : ''
-                        }
+      : ''
+    }
                     </div>
                     <button class="play-again__btn">play again</button>
                   </div>
