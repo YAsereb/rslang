@@ -2,52 +2,51 @@ import renderResultWord, {
   handleResultWordListeners,
 } from '../../../../components/games/ResultWord/resultWord';
 import { generalState } from '../../../../states/generalState';
-import renderSprintWindowGame, {
-  sprintGameState,
-} from '../SprintWindowGame/sprintWindowGame';
+import renderAudioWindowGame, {
+  auidoGameState,
+} from '../AudioWindowGame/audioWindowGame';
 import {
+  audiotState,
   handleRandomData,
-  sprintState,
-} from '../StartScreenSprint/startScreenSprint';
-import './style.scss';
+} from '../StartScreenAudio/startScreenAudio';
+import '../../../SprintGamePage/components/ResultSprintGame/style.scss';
 
-function renderResultSprintGame() {
-  const sprint = document.querySelector('.sprint-game') as HTMLElement;
+function renderResultAudioGame() {
+  const game = document.querySelector('.game-overlay') as HTMLElement;
 
-  sprint.innerHTML = '';
+  game.innerHTML = '';
+
+  console.log('check');
 
   const html = `
                 <div class="result-window">
-                    <div class="result-title">RESULT: <span>${
-                      sprintGameState.score
-                    }</span></div>
                     <div class="result-main">
                         ${
-                          sprintGameState.trueData.length
+                          auidoGameState.trueData.length
                             ? `<div class="result-true">
                         <div class="result-true__title">
                             <span>Correct</span>
                             <span class="count-wrong">${
-                              sprintGameState.trueData.length
+                              auidoGameState.trueData.length
                             }</span>
                         </div>
                         <ul class="result-sprint__list">
-                            ${sprintGameState.trueData
-                              .map((word) => word)
+                            ${auidoGameState.trueData
+                              .map((word) => renderResultWord(word))
                               .join('')}
                         </ul>
                     </div>`
                             : ''
                         }
                         ${
-                          sprintGameState.falseData.length
+                          auidoGameState.falseData.length
                             ? `<div class="result-false">
                         <div class="result-false__title">
                             <span>Misstakes</span>
-                            <span>${sprintGameState.falseData.length}</span>
+                            <span>${auidoGameState.falseData.length}</span>
                         </div>
                         <ul class="result-sprint__list">
-                           ${sprintGameState.falseData
+                           ${auidoGameState.falseData
                              .map((word) => renderResultWord(word))
                              .join('')}
                         </ul>
@@ -59,7 +58,7 @@ function renderResultSprintGame() {
                   </div>
     `;
 
-  sprint.insertAdjacentHTML('beforeend', html);
+  game.insertAdjacentHTML('beforeend', html);
 
   handleResultSprintListeners();
 }
@@ -75,10 +74,10 @@ async function playAgain() {
   if (!generalState.currentData.length) {
     await handleRandomData();
   } else {
-    sprintState.sprintData = generalState.currentData;
+    audiotState.audioData = generalState.currentData;
   }
 
-  renderSprintWindowGame();
+  renderAudioWindowGame();
 }
 
-export default renderResultSprintGame;
+export default renderResultAudioGame;

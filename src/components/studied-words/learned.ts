@@ -7,8 +7,6 @@ export function setLearnedStatusWord(
   userWord: UserWord,
   whereLearned: PlaceLearnedWord
 ) {
-  console.log('слово изучено');
-
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
@@ -18,7 +16,7 @@ export function setLearnedStatusWord(
       countAttempt: userWord.optional.countAttempt,
       isLearned: true,
       whenLearnedDate: today,
-      whereLearned
+      whereLearned,
     },
   };
   return optional;
@@ -37,7 +35,7 @@ export function setUnlearnedStatusWord(
       countAttempt: (userWord.optional.countAttempt as number) + 1 || 0,
       isLearned: false,
       whenLearnedDate: today,
-      whereLearned
+      whereLearned,
     },
   };
 

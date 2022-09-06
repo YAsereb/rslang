@@ -1,11 +1,11 @@
-.sprint__wrapper {
+.game-wrapper {
   background-image: url(../../../../assets/img/screenBek.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: calc(100vh - 6rem);
 }
 
-.sprint-game {
+.game-overlay {
   display: flex;
   justify-content: center;
   align-items: center;

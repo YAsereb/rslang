@@ -1,21 +1,21 @@
+import '../../../SprintGamePage/components/StartScreenSprint/style.scss';
 import getAllWords from '../../../../api/Words/WordsAPI';
 import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
-import renderSprintWindowGame from '../SprintWindowGame/sprintWindowGame';
-import './style.scss';
+import renderAudioWindowGame from '../AudioWindowGame/audioWindowGame';
 
-export const sprintState = {
-  sprintData: [] as IWordCard[],
-  cuurentGroup: 0,
-  cuurentPage: 0,
+export const audiotState = {
+  audioData: [] as IWordCard[],
+  currentGroup: 0,
+  currentPage: 0,
   prevCircle: '' as HTMLElement | string,
 };
 
-function renderStartSprintScreen() {
+function renderStartAudioScreen() {
   const main = document.querySelector('main') as HTMLElement;
 
   if (generalState.currentData.length) {
-    sprintState.sprintData = [...generalState.currentData];
+    audiotState.audioData = [...generalState.currentData];
   }
 
   const html = `
@@ -23,8 +23,8 @@ function renderStartSprintScreen() {
                   <div class="game-overlay">
                     <div class="start-screen-window">
                       <div class="start-screen__header">
-                          <p class="start-screen__title">Sprint</p>
-                          <p class="start-screen__text">Sprint is a speed training. Try to guess as many words as possible in 30 seconds.</p>
+                          <p class="start-screen__title">Audiocall</p>
+                          <p class="start-screen__text">Audiocall training improves your listening comprehension.</p>
                       </div>
                       <div class="start-screen__main">
                           ${
@@ -59,7 +59,7 @@ function handleStartSprintScreenListeners() {
   const startBtn = document.querySelector('.start-screen__btn');
   const levelsList = document.querySelector('.start-screen-levels__list');
 
-  startBtn?.addEventListener('click', renderSprintWindowGame);
+  startBtn?.addEventListener('click', renderAudioWindowGame);
   levelsList?.addEventListener('click', handleLevel);
 }
 
@@ -67,26 +67,26 @@ async function handleLevel(event: Event) {
   const target = event.target as HTMLElement;
 
   if (target.nodeName === 'LI') {
-    if (sprintState.prevCircle) {
+    if (audiotState.prevCircle) {
       removeStyles();
     }
-    sprintState.cuurentGroup = Number(target.getAttribute('data-group'));
+    audiotState.currentGroup = Number(target.getAttribute('data-group'));
     addStyles(target);
     handleRandomData();
-    sprintState.prevCircle = target;
+    audiotState.prevCircle = target;
   }
 }
 
 export async function handleRandomData() {
   const page = getRandomPage();
 
-  sprintState.cuurentPage = page;
+  audiotState.currentPage = page;
 
-  sprintState.sprintData = await getAllWords(sprintState.cuurentGroup, page);
+  audiotState.audioData = await getAllWords(audiotState.currentGroup, page);
 }
 
 function removeStyles() {
-  (sprintState.prevCircle as HTMLElement).classList.remove(
+  (audiotState.prevCircle as HTMLElement).classList.remove(
     'active-sprint__level'
   );
 }
@@ -104,4 +104,4 @@ export function getRandomPage() {
   return Math.ceil(Math.random() * 30);
 }
 
-export default renderStartSprintScreen;
+export default renderStartAudioScreen;
