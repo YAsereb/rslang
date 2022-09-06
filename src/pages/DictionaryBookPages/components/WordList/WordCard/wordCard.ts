@@ -47,13 +47,11 @@ function renderAddLearnedButton(word: IWordCard): string {
 function renderHandleWordCardButton(word: IWordCard): string {
   const html = `
   <div class="buttons-block">
-    <button class=${
-      word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'
+    <button class=${word.userWord?.difficulty === 'hard' ? 'back-word__btn' : 'add-word__btn'
     }>
       <svg>
-        <use xlink:href="./assets/svg/sprite/wordCard.svg#${
-          word.userWord?.difficulty === 'hard' ? 'minus' : 'add'
-        }"></use>
+        <use xlink:href="./assets/svg/sprite/wordCard.svg#${word.userWord?.difficulty === 'hard' ? 'minus' : 'add'
+    }"></use>
       </svg>
     </button>
     ${renderAddLearnedButton(word)}
@@ -100,16 +98,14 @@ function renderWordCardContent(word: IWordCard) {
 function renderWordCard(word: IWordCard) {
   return `
 
-  <li data-id="${word.id || word._id}" class=${
-    word.userWord?.optional?.isLearned === true
+  <li data-id="${word.id || word._id}" class=${word.userWord?.optional?.isLearned === true
       ? 'deleted-word__card'
       : word.userWord?.difficulty === 'hard'
-      ? 'hard-word__card'
-      : ''
-  }>
-    <div class="card-header" style = "background-image: url(${variables.URL}/${
-    word.image
-  })">
+        ? 'hard-word__card'
+        : ''
+    }>
+    <div class="card-header" style = "background-image: url(${variables.URL}/${word.image
+    })">
       <div class="card-header__overlay">
       ${renderProgress(word.userWord)}
       ${headerState.isLogin ? renderHandleWordCardButton(word) : ''}
@@ -149,7 +145,7 @@ async function handleBookWordCard(event: Event) {
       difficulty: 'hard',
       optional: {
         isNew: userWord?.optional.isNew || false,
-        whenSetNew: userWord?.optional.whenSetNew || '',
+        whenSetNew: userWord?.optional.whenSetNew || '0',
         isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
         countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
@@ -173,7 +169,7 @@ async function handleBookWordCard(event: Event) {
       difficulty: 'easy',
       optional: {
         isNew: userWord?.optional.isNew || false,
-        whenSetNew: userWord?.optional.whenSetNew || '',
+        whenSetNew: userWord?.optional.whenSetNew || '0',
         isLearned: true,
         isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
