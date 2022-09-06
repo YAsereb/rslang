@@ -64,7 +64,7 @@ async function updateAnswerOptional(
         whereLearned,
       },
     };
-    userWord = learnedWord(whereLearned, currentUserWord);
+    userWord = learnedWord(whereLearned, userWord);
   } else {
     userWord = setUnlearnedStatusWord(whereLearned, currentUserWord);
   }

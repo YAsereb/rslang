@@ -1,5 +1,7 @@
+import { getUserSettings, updateUserSettings } from '../../api/settings-api/setting-api';
 import { getAllUserWords } from '../../api/Words/WordsAPI';
 import { generalState } from '../../states/generalState';
+import { Settings } from '../../types/everydayTypes/settingsType';
 
 import { getDateToday } from '../../utils';
 
@@ -15,6 +17,22 @@ export default async function handleSettingsWord() {
     (word) => word.optional.whenLearnedDate === today
   );
   return todayNewWords;
+}
+
+export async function handleSettings(userSettings: Settings) {
+  const settings = await getUserSettings(
+    generalState.userId as string,
+    generalState.token as string
+  );
+  console.log(settings);
+  if (!settings) {
+    console.log('нет статистики');
+    await updateUserSettings(
+      generalState.userId as string,
+      generalState.token as string,
+      userSettings
+    );
+  }
 }
 //   console.log(audioGameWords);
 // if (hash === 'audiocall') {

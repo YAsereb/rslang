@@ -9,6 +9,9 @@ import renderAudioWords from './AudioWords/audioWords';
 import getAllWords from '../../../../api/Words/WordsAPI';
 import renderResultAudioGame from '../ResultAudioGame/resultAudioGame';
 import handleProgress from '../../../../components/progress/progress';
+import { Settings } from '../../../../types/everydayTypes/settingsType';
+import { getDateToday } from '../../../../utils';
+import { handleSettings } from '../../../../components/statistic/settings';
 
 export const audioGameState = {
   dataRound: [] as string[],
@@ -32,6 +35,26 @@ async function renderAudioWindowGame() {
     audioGameState.maxRightAnswerInRow.push(audioGameState.currentCountRightAnswer);
 
     renderResultAudioGame();
+
+    const today = getDateToday();
+
+    const userSettings: Settings = {
+      wordsPerDay: audioGameState.trueData.length + audioGameState.falseData.length,
+      optional: {
+        dayToday: today,
+        audioGame: {
+          percentageRightAnswer: audioGameState.trueData.length /
+            (audioGameState.trueData.length + audioGameState.falseData.length),
+          maxRightAnswerInRow: Math.max(...audioGameState.maxRightAnswerInRow)
+        },
+        sprintGame: {
+          percentageRightAnswer: 0,
+          maxRightAnswerInRow: 0,
+        }
+      }
+    };
+    await handleSettings(userSettings);
+
     return;
   }
 

@@ -7,6 +7,7 @@ export function setLearnedStatusWord(
   userWord: UserWord,
   whereLearned: PlaceLearnedWord
 ) {
+  console.log('изучено в игре');
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
@@ -60,8 +61,9 @@ export function learnedWord(
       (userWord.optional.countTrueAnswerInRow as number) >= 5)
   ) {
     optional = setLearnedStatusWord(userWord, whereLearned);
+  } else {
+    optional = userWord;
   }
-  optional = userWord;
 
   return optional;
 }
