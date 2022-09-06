@@ -12,6 +12,8 @@ export function setLearnedStatusWord(
   const optional: UserWord = {
     difficulty: 'easy',
     optional: {
+      isNew: userWord?.optional.isNew || false,
+      whenSetNew: userWord?.optional.whenSetNew || '',
       isLastTrueAnswer: userWord.optional.isLastTrueAnswer,
       countTrueAnswerInRow: userWord.optional.countTrueAnswerInRow,
       countTrueAnswer: userWord.optional.countTrueAnswer,
@@ -28,9 +30,13 @@ export function setUnlearnedStatusWord(
   whereLearned: PlaceLearnedWord,
   userWord: UserWord
 ) {
+  console.log('неправильный ответ');
+
   const optional: UserWord = {
     difficulty: userWord.difficulty,
     optional: {
+      isNew: userWord?.optional.isNew || false,
+      whenSetNew: userWord?.optional.whenSetNew || '',
       isLastTrueAnswer: false,
       countTrueAnswerInRow: 0,
       countTrueAnswer: userWord.optional.countTrueAnswer || 0,

@@ -234,12 +234,6 @@ function handleTrueAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
-
-    handleProgress(
-      sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
-      true,
-      'sprint-game'
-    );
   } else {
     sprintGameState.falseData.push(sprintGameState.currentWord);
     isRight = false;
@@ -260,11 +254,6 @@ function handleFalseAnswer() {
     isRight = true;
     updateScore();
     sprintGameState.trueData.push(sprintGameState.currentWord);
-    handleProgress(
-      sprintGameState.currentWord.id as string || sprintGameState.currentWord._id as string,
-      false,
-      'sprint-game'
-    );
   } else {
     isRight = false;
     sprintGameState.falseData.push(sprintGameState.currentWord);

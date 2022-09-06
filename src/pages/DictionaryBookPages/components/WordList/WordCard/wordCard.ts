@@ -145,6 +145,8 @@ async function handleBookWordCard(event: Event) {
     options = {
       difficulty: 'hard',
       optional: {
+        isNew: userWord?.optional.isNew || false,
+        whenSetNew: userWord?.optional.whenSetNew || '',
         isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
         countTrueAnswer: userWord?.optional.countTrueAnswer || 0,
@@ -168,6 +170,8 @@ async function handleBookWordCard(event: Event) {
     options = {
       difficulty: 'easy',
       optional: {
+        isNew: userWord?.optional.isNew || false,
+        whenSetNew: userWord?.optional.whenSetNew || '',
         isLearned: true,
         isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
@@ -191,6 +195,8 @@ async function handleBookWordCard(event: Event) {
     options = {
       difficulty: 'easy',
       optional: {
+        isNew: userWord?.optional.isNew || false,
+        whenSetNew: userWord?.optional.whenSetNew || '',
         isLearned: false,
         isLastTrueAnswer: userWord?.optional.isLastTrueAnswer || false,
         countTrueAnswerInRow: userWord?.optional.countTrueAnswerInRow || 0,
