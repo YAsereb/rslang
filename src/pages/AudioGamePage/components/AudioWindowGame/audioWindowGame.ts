@@ -1,7 +1,7 @@
 import './style.scss';
 import IWordCard from '../../../../types/interfaces/words';
 import {
-  audiotState,
+  audioState,
   getRandomPage,
 } from '../StartScreenAudio/startScreenAudio';
 import variables from '../../../../variables';
@@ -9,7 +9,7 @@ import renderAudioWords from './AudioWords/audioWords';
 import getAllWords from '../../../../api/Words/WordsAPI';
 import renderResultAudioGame from '../ResultAudioGame/resultAudioGame';
 
-export const auidoGameState = {
+export const audioGameState = {
   dataRound: [] as string[],
   randomData: [] as IWordCard[],
   currentWord: {} as IWordCard,
@@ -22,9 +22,12 @@ export const auidoGameState = {
 async function renderAudioWindowGame() {
   const game = document.querySelector('.game-overlay') as HTMLElement;
 
-  auidoGameState.isChoose = false;
+  audioGameState.isChoose = false;
 
-  console.log(audiotState.audioData);
+  if (!audioState.audioData.length) {
+    renderResultAudioGame();
+    return;
+  }
 
   await handleRound();
 
@@ -39,9 +42,9 @@ async function renderAudioWindowGame() {
                           </button>
                           <div class="audio-image__block"></div>
                           <ul class="audio-words__list">
-                            ${auidoGameState.dataRound
-                              .map((word) => renderAudioWords(word))
-                              .join('')}
+                            ${audioGameState.dataRound
+      .map((word) => renderAudioWords(word))
+      .join('')}
                           </ul>
                           <button class="next-audio__btn">Не знаю</button>
                       </div>
@@ -68,21 +71,21 @@ function handleList(event: Event) {
     '.next-audio__btn'
   ) as HTMLElement;
 
-  if (auidoGameState.isChoose) {
+  if (audioGameState.isChoose) {
     return;
   }
 
   if (target.classList.contains('audio-words__list')) {
     return;
   }
-  auidoGameState.isChoose = true;
+  audioGameState.isChoose = true;
   nextRoundBtn.textContent = 'Дальше';
   handleAnswer(target);
 }
 
 function handleAnswer(word: HTMLElement) {
-  if (word.textContent === auidoGameState.currentWord.word) {
-    handleTrueAnser();
+  if (word.textContent === audioGameState.currentWord.word) {
+    handleTrueAnswer();
     word.classList.add('right-audio__answer');
   } else {
     handleFalseAnswer();
@@ -97,45 +100,36 @@ function handleImage() {
     '.audio-image__block'
   ) as HTMLElement;
 
-  imageBlock.style.backgroundImage = `url(${variables.URL}/${auidoGameState.currentWord.image})`;
+  imageBlock.style.backgroundImage = `url(${variables.URL}/${audioGameState.currentWord.image})`;
 }
 
-function handleTrueAnser() {
-  auidoGameState.trueData.push(auidoGameState.currentWord);
+function handleTrueAnswer() {
+  audioGameState.trueData.push(audioGameState.currentWord);
 }
 
 function handleFalseAnswer() {
-  auidoGameState.falseData.push(auidoGameState.currentWord);
+  audioGameState.falseData.push(audioGameState.currentWord);
 }
 
 async function handleRound() {
-  if (!audiotState.audioData.length) {
-    console.log(1);
-
-    renderResultAudioGame();
-    return;
-  }
-
-  console.log(2);
-
   startGame();
   handleAudioData();
   await handleDataRound();
 }
 
 async function handleDataRound() {
-  auidoGameState.dataRound = [];
-  auidoGameState.dataRound.push(auidoGameState.currentWord.word);
+  audioGameState.dataRound = [];
+  audioGameState.dataRound.push(audioGameState.currentWord.word);
 
   const page = getRandomPage();
 
-  auidoGameState.randomData = await getAllWords(audiotState.currentGroup, page);
+  audioGameState.randomData = await getAllWords(audioState.currentGroup, page);
 
   for (let i = 0; i < 3; i += 1) {
-    const number = getRandomNumber(auidoGameState.randomData.length);
-    const newWord = auidoGameState.randomData[number].word;
-    auidoGameState.dataRound.push(newWord);
-    auidoGameState.randomData = auidoGameState.randomData.filter(
+    const number = getRandomNumber(audioGameState.randomData.length);
+    const newWord = audioGameState.randomData[number].word;
+    audioGameState.dataRound.push(newWord);
+    audioGameState.randomData = audioGameState.randomData.filter(
       (obj) => obj.word !== newWord
     );
   }
@@ -144,17 +138,17 @@ async function handleDataRound() {
 }
 
 function handleAudioData() {
-  audiotState.audioData = audiotState.audioData.filter(
-    (obj) => obj.word !== auidoGameState.currentWord.word
+  audioState.audioData = audioState.audioData.filter(
+    (obj) => obj.word !== audioGameState.currentWord.word
   );
 }
 
 function shuffleArray() {
-  for (let i = auidoGameState.dataRound.length - 1; i > 0; i -= 1) {
+  for (let i = audioGameState.dataRound.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
-    [auidoGameState.dataRound[i], auidoGameState.dataRound[j]] = [
-      auidoGameState.dataRound[j],
-      auidoGameState.dataRound[i],
+    [audioGameState.dataRound[i], audioGameState.dataRound[j]] = [
+      audioGameState.dataRound[j],
+      audioGameState.dataRound[i],
     ];
   }
 }
@@ -167,16 +161,16 @@ function startGame() {
 
 function playAudio() {
   const audio = new Audio(
-    `${variables.URL}/${auidoGameState.currentWord.audio}`
+    `${variables.URL}/${audioGameState.currentWord.audio}`
   );
 
   audio.play();
 }
 
 function handleCurrentWord() {
-  const number = getRandomNumber(audiotState.audioData.length);
+  const number = getRandomNumber(audioState.audioData.length);
 
-  auidoGameState.currentWord = audiotState.audioData[number];
+  audioGameState.currentWord = audioState.audioData[number];
 }
 
 function getRandomNumber(max: number) {

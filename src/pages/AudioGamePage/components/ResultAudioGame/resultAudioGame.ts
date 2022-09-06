@@ -3,16 +3,17 @@ import renderResultWord, {
 } from '../../../../components/games/ResultWord/resultWord';
 import { generalState } from '../../../../states/generalState';
 import renderAudioWindowGame, {
-  auidoGameState,
+  audioGameState,
 } from '../AudioWindowGame/audioWindowGame';
 import {
-  audiotState,
+  audioState,
   handleRandomData,
 } from '../StartScreenAudio/startScreenAudio';
 import '../../../SprintGamePage/components/ResultSprintGame/style.scss';
 
 function renderResultAudioGame() {
   const game = document.querySelector('.game-overlay') as HTMLElement;
+  console.log(game);
 
   game.innerHTML = '';
 
@@ -21,38 +22,35 @@ function renderResultAudioGame() {
   const html = `
                 <div class="result-window">
                     <div class="result-main">
-                        ${
-                          auidoGameState.trueData.length
-                            ? `<div class="result-true">
+                        ${audioGameState.trueData.length
+      ? `<div class="result-true">
                         <div class="result-true__title">
                             <span>Correct</span>
-                            <span class="count-wrong">${
-                              auidoGameState.trueData.length
-                            }</span>
+                            <span class="count-wrong">${audioGameState.trueData.length
+      }</span>
                         </div>
                         <ul class="result-sprint__list">
-                            ${auidoGameState.trueData
-                              .map((word) => renderResultWord(word))
-                              .join('')}
+                            ${audioGameState.trueData
+        .map((word) => renderResultWord(word))
+        .join('')}
                         </ul>
                     </div>`
-                            : ''
-                        }
-                        ${
-                          auidoGameState.falseData.length
-                            ? `<div class="result-false">
+      : ''
+    }
+                        ${audioGameState.falseData.length
+      ? `<div class="result-false">
                         <div class="result-false__title">
-                            <span>Misstakes</span>
-                            <span>${auidoGameState.falseData.length}</span>
+                            <span>Mistakes</span>
+                            <span>${audioGameState.falseData.length}</span>
                         </div>
                         <ul class="result-sprint__list">
-                           ${auidoGameState.falseData
-                             .map((word) => renderResultWord(word))
-                             .join('')}
+                           ${audioGameState.falseData
+        .map((word) => renderResultWord(word))
+        .join('')}
                         </ul>
                     </div>`
-                            : ''
-                        }
+      : ''
+    }
                     </div>
                     <button class="play-again__btn">play again</button>
                   </div>
@@ -60,10 +58,10 @@ function renderResultAudioGame() {
 
   game.insertAdjacentHTML('beforeend', html);
 
-  handleResultSprintListeners();
+  handleResultAudioListeners();
 }
 
-function handleResultSprintListeners() {
+function handleResultAudioListeners() {
   handleResultWordListeners();
   const playAgainBtn = document.querySelector('.play-again__btn');
 
@@ -71,10 +69,12 @@ function handleResultSprintListeners() {
 }
 
 async function playAgain() {
+  audioGameState.falseData = [];
+  audioGameState.trueData = [];
   if (!generalState.currentData.length) {
     await handleRandomData();
   } else {
-    audiotState.audioData = generalState.currentData;
+    audioState.audioData = generalState.currentData;
   }
 
   renderAudioWindowGame();

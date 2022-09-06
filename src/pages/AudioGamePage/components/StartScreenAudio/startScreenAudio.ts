@@ -4,7 +4,7 @@ import { generalState } from '../../../../states/generalState';
 import IWordCard from '../../../../types/interfaces/words';
 import renderAudioWindowGame from '../AudioWindowGame/audioWindowGame';
 
-export const audiotState = {
+export const audioState = {
   audioData: [] as IWordCard[],
   currentGroup: 0,
   currentPage: 0,
@@ -15,7 +15,7 @@ function renderStartAudioScreen() {
   const main = document.querySelector('main') as HTMLElement;
 
   if (generalState.currentData.length) {
-    audiotState.audioData = [...generalState.currentData];
+    audioState.audioData = [...generalState.currentData];
   }
 
   const html = `
@@ -27,9 +27,8 @@ function renderStartAudioScreen() {
                           <p class="start-screen__text">Audiocall training improves your listening comprehension.</p>
                       </div>
                       <div class="start-screen__main">
-                          ${
-                            !generalState.currentData.length
-                              ? `<div class="start-screen-levels__title">Сhoose a level:</div>
+                          ${!generalState.currentData.length
+      ? `<div class="start-screen-levels__title">Сhoose a level:</div>
                           <ul class="start-screen-levels__list">
                               <li data-group="0">A1</li>
                               <li data-group="1">A2</li>
@@ -38,11 +37,10 @@ function renderStartAudioScreen() {
                               <li data-group="4">C1</li>
                               <li data-group="5">C2</li>
                           </ul>`
-                              : ''
-                          }
-                          <button class="start-screen__btn" ${
-                            !generalState.currentData.length ? 'disabled' : ''
-                          }>Start</button>
+      : ''
+    }
+                          <button class="start-screen__btn" ${!generalState.currentData.length ? 'disabled' : ''
+    }>Start</button>
                     </div>
                   </div>
                 </div>
@@ -67,26 +65,26 @@ async function handleLevel(event: Event) {
   const target = event.target as HTMLElement;
 
   if (target.nodeName === 'LI') {
-    if (audiotState.prevCircle) {
+    if (audioState.prevCircle) {
       removeStyles();
     }
-    audiotState.currentGroup = Number(target.getAttribute('data-group'));
+    audioState.currentGroup = Number(target.getAttribute('data-group'));
     addStyles(target);
     handleRandomData();
-    audiotState.prevCircle = target;
+    audioState.prevCircle = target;
   }
 }
 
 export async function handleRandomData() {
   const page = getRandomPage();
 
-  audiotState.currentPage = page;
+  audioState.currentPage = page;
 
-  audiotState.audioData = await getAllWords(audiotState.currentGroup, page);
+  audioState.audioData = await getAllWords(audioState.currentGroup, page);
 }
 
 function removeStyles() {
-  (audiotState.prevCircle as HTMLElement).classList.remove(
+  (audioState.prevCircle as HTMLElement).classList.remove(
     'active-sprint__level'
   );
 }
