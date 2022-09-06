@@ -13,6 +13,7 @@ import './style.scss';
 
 function renderResultSprintGame() {
   const sprint = document.querySelector('.game-overlay') as HTMLElement;
+  console.log(sprintGameState.maxRightAnswerInRow);
 
   sprint.innerHTML = '';
 

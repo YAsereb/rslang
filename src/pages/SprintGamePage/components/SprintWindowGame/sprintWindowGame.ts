@@ -22,6 +22,8 @@ export const sprintGameState = {
   idInterval: '' as NodeJS.Timer | string,
   trueData: [] as IWordCard[],
   falseData: [] as IWordCard[],
+  currentCountRightAnswer: 0,
+  maxRightAnswerInRow: [] as number[],
 };
 
 function renderSprintWindowGame() {
@@ -94,6 +96,7 @@ function startTimer() {
     if (totalSeconds === 0) {
       clearInterval(sprintGameState.idInterval as NodeJS.Timer);
       renderResultSprintGame();
+      sprintGameState.maxRightAnswerInRow.push(sprintGameState.currentCountRightAnswer);
     }
   }, 1000);
 }
@@ -268,10 +271,11 @@ function handleAnswer(isRight: boolean) {
     if (generalState.userId) {
       handleProgress(
         (sprintGameState.currentWord.id as string) ||
-          (sprintGameState.currentWord._id as string),
+        (sprintGameState.currentWord._id as string),
         true,
         'sprint-game'
       );
+      sprintGameState.currentCountRightAnswer += 1;
     }
     sprintGameState.indexRight += 1;
 
@@ -290,10 +294,12 @@ function handleAnswer(isRight: boolean) {
     if (generalState.userId) {
       handleProgress(
         (sprintGameState.currentWord.id as string) ||
-          (sprintGameState.currentWord._id as string),
+        (sprintGameState.currentWord._id as string),
         false,
         'sprint-game'
       );
+      sprintGameState.maxRightAnswerInRow.push(sprintGameState.currentCountRightAnswer);
+      sprintGameState.currentCountRightAnswer = 0;
     }
 
     removeActiveCircles();
