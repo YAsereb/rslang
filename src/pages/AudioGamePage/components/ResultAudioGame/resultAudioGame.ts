@@ -13,11 +13,8 @@ import '../../../SprintGamePage/components/ResultSprintGame/style.scss';
 
 function renderResultAudioGame() {
   const game = document.querySelector('.game-overlay') as HTMLElement;
-  console.log(game);
 
   game.innerHTML = '';
-
-  console.log('check');
 
   const html = `
                 <div class="result-window">
@@ -71,6 +68,8 @@ function handleResultAudioListeners() {
 async function playAgain() {
   audioGameState.falseData = [];
   audioGameState.trueData = [];
+  audioGameState.currentCountRightAnswer = 0;
+  audioGameState.maxRightAnswerInRow = [];
   if (!generalState.currentData.length) {
     await handleRandomData();
   } else {

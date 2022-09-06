@@ -8,6 +8,10 @@ import variables from '../../../../variables';
 import renderAudioWords from './AudioWords/audioWords';
 import getAllWords from '../../../../api/Words/WordsAPI';
 import renderResultAudioGame from '../ResultAudioGame/resultAudioGame';
+import handleProgress from '../../../../components/progress/progress';
+import { Settings } from '../../../../types/everydayTypes/settingsType';
+import { getDateToday } from '../../../../utils';
+import { handleSettings } from '../../../../components/statistic/settings';
 
 export const audioGameState = {
   dataRound: [] as string[],
@@ -17,15 +21,40 @@ export const audioGameState = {
   falseData: [] as IWordCard[],
   isKnowRod: false,
   isChoose: false,
+  currentCountRightAnswer: 0,
+  maxRightAnswerInRow: [] as number[],
 };
 
 async function renderAudioWindowGame() {
   const game = document.querySelector('.game-overlay') as HTMLElement;
 
   audioGameState.isChoose = false;
+  console.log(audioGameState.currentCountRightAnswer);
 
   if (!audioState.audioData.length) {
+    audioGameState.maxRightAnswerInRow.push(audioGameState.currentCountRightAnswer);
+
     renderResultAudioGame();
+
+    const today = getDateToday();
+
+    const userSettings: Settings = {
+      wordsPerDay: audioGameState.trueData.length + audioGameState.falseData.length,
+      optional: {
+        dayToday: today,
+        audioGame: {
+          percentageRightAnswer: audioGameState.trueData.length /
+            (audioGameState.trueData.length + audioGameState.falseData.length),
+          maxRightAnswerInRow: Math.max(...audioGameState.maxRightAnswerInRow)
+        },
+        sprintGame: {
+          percentageRightAnswer: 0,
+          maxRightAnswerInRow: 0,
+        }
+      }
+    };
+    await handleSettings(userSettings);
+
     return;
   }
 
@@ -87,9 +116,22 @@ function handleAnswer(word: HTMLElement) {
   if (word.textContent === audioGameState.currentWord.word) {
     handleTrueAnswer();
     word.classList.add('right-audio__answer');
+    handleProgress(
+      audioGameState.currentWord.id as string || audioGameState.currentWord._id as string,
+      true,
+      'audio-game'
+    );
+    audioGameState.currentCountRightAnswer += 1;
   } else {
     handleFalseAnswer();
     word.classList.add('false-audio__answer');
+    handleProgress(
+      audioGameState.currentWord.id as string || audioGameState.currentWord._id as string,
+      false,
+      'audio-game'
+    );
+    audioGameState.maxRightAnswerInRow.push(audioGameState.currentCountRightAnswer);
+    audioGameState.currentCountRightAnswer = 0;
   }
 
   handleImage();

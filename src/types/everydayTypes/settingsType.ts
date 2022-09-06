@@ -1,15 +1,15 @@
-export type settingsWords = {
-  audioWords: string[],
-  sprintWords: string[],
-  cardWords: string[],
+type OptionalSettingsGame = {
+  percentageRightAnswer: number,
+  maxRightAnswerInRow: number,
 }
 
 export type OptionalSettings = {
-  dayToday: Date,
-  words: Partial<settingsWords>
+  dayToday: string,
+  audioGame: OptionalSettingsGame,
+  sprintGame: OptionalSettingsGame,
 }
 
 export type Settings = {
   wordsPerDay: number,
-  optional: Partial<OptionalSettings>,
+  optional: OptionalSettings,
 }

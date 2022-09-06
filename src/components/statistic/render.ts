@@ -1,5 +1,6 @@
+import { generalState } from '../../states/generalState';
 import renderFooter from '../main-page/components/footer/footer';
-import renderHeader from '../main-page/components/header/header';
+import renderHeader, { handleHeaderListeners } from '../main-page/components/header/header';
 import handleSettingsWord from './settings';
 import './statistic.scss';
 
@@ -70,15 +71,28 @@ async function renderStatisticMiniGames(): Promise<string> {
 
 export default async function renderStatistic(): Promise<void> {
   const { body } = document;
+  console.log(generalState.userId);
 
-  body.innerHTML = `
+  const html = `
     ${renderHeader()}
+    ${generalState.userId ? `
     <main class="main">
       <div class="statistic">
         ${await renderStatisticMiniGames()}
       </div>
     </main>
+    `
+      :
+      ` <main class="main">
+    <div class="statistic">
+    Для отображения статистики войдите в ваш в аккаунт
+    </div>
+    </main>`
+    }
+  ${renderFooter()}
 
-    ${renderFooter()}
-  `;
+`;
+
+  body.innerHTML = html;
+  handleHeaderListeners();
 }

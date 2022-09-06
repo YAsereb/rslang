@@ -8,22 +8,19 @@ import { PlaceLearnedWord, UserWord } from '../../types/everydayTypes/userWord';
 import { getDateToday } from '../../utils';
 import { setUnlearnedStatusWord, learnedWord } from '../studied-words/learned';
 
-const today = getDateToday();
-
-async function setNewWord(
-  wordId: string,
-  answer: boolean,
-  whereLearned: PlaceLearnedWord
-) {
+async function setNewWord(wordId: string, answer: boolean, whereLearned: PlaceLearnedWord) {
+  const today = getDateToday();
   const userWord: UserWord = {
     difficulty: 'easy',
     optional: {
+      isNew: true,
+      whenSetNew: today,
       isLastTrueAnswer: answer,
       countTrueAnswerInRow: +answer,
       countTrueAnswer: +answer,
       countAttempt: 1,
       isLearned: false,
-      whenLearnedDate: today,
+      whenLearnedDate: '0',
       whereLearned,
     },
   };
@@ -42,15 +39,20 @@ async function updateAnswerOptional(
   whereLearned: PlaceLearnedWord,
   word: UserWord
 ) {
+  const today = getDateToday();
+
   const currentUserWord: UserWord = {
     difficulty: word.difficulty,
     optional: word.optional,
   };
+
   let userWord: UserWord;
   if (answer) {
     userWord = {
       difficulty: currentUserWord.difficulty,
       optional: {
+        isNew: currentUserWord?.optional.isNew || false,
+        whenSetNew: currentUserWord?.optional.whenSetNew || '',
         isLastTrueAnswer: true,
         countTrueAnswerInRow:
           (currentUserWord.optional.countTrueAnswerInRow as number) + 1,
@@ -62,7 +64,7 @@ async function updateAnswerOptional(
         whereLearned,
       },
     };
-    userWord = learnedWord(whereLearned, currentUserWord);
+    userWord = learnedWord(whereLearned, userWord);
   } else {
     userWord = setUnlearnedStatusWord(whereLearned, currentUserWord);
   }

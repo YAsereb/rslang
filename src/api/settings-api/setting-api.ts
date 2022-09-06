@@ -4,8 +4,8 @@ const url = 'https://rs-langtask.herokuapp.com';
 
 export async function getUserSettings(
   userId: string,
-  token: string
-): Promise<Settings> {
+  token: string,
+): Promise<Settings | null> {
   const resp = await fetch(`${url}/users/${userId}/settings`, {
     method: 'GET',
     headers: {
@@ -13,22 +13,26 @@ export async function getUserSettings(
       Accept: 'application/json',
     },
   });
-  const settings = await resp.json();
-  return settings;
+  if (resp.status === 404) return null;
+
+  const setting = await resp.json();
+  return setting;
 }
 
 export async function updateUserSettings(
   userId: string,
   token: string,
-  settings: Settings
-): Promise<void> {
-  await fetch(`${url}/users/${userId}/settings`, {
+  userSettings: Settings
+): Promise<Settings> {
+  const resp = await fetch(`${url}/users/${userId}/settings`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(settings),
+    body: JSON.stringify(userSettings),
   });
+  const settings = resp.json();
+  return settings;
 }

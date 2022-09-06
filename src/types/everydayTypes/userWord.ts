@@ -1,6 +1,8 @@
 export type PlaceLearnedWord = 'audio-game' | 'sprint-game' | 'book'
 
 export type OptionalWord = {
+  isNew: boolean,
+  whenSetNew: string,
   isLastTrueAnswer: boolean,
   countTrueAnswerInRow: number,
   countTrueAnswer: number,
@@ -12,5 +14,5 @@ export type OptionalWord = {
 
 export type UserWord = {
   difficulty: 'hard' | 'easy',
-  optional: Partial<OptionalWord>
+  optional: OptionalWord
 }
