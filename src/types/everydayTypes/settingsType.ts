@@ -1,4 +1,5 @@
 type OptionalSettingsGame = {
+  countGame: number,
   percentageRightAnswer: number,
   maxRightAnswerInRow: number,
 }

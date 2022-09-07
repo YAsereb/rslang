@@ -1,9 +1,12 @@
+import { getUserSettings, updateUserSettings } from '../../../../api/settings-api/setting-api';
 import getAllWords, {
   getAggregatedWords,
 } from '../../../../api/Words/WordsAPI';
 import handleProgress from '../../../../components/progress/progress';
 import { generalState } from '../../../../states/generalState';
+import { Settings } from '../../../../types/everydayTypes/settingsType';
 import IWordCard from '../../../../types/interfaces/words';
+import { getDateToday } from '../../../../utils';
 import dicAndBookVars from '../../../DictionaryBookPages';
 import renderResultSprintGame from '../ResultSprintGame/resultSprintGame';
 import {
@@ -35,6 +38,8 @@ function renderSprintWindowGame() {
   sprintGameState.trueData = [];
   sprintGameState.falseData = [];
   sprintGameState.indexPrevPage = 0;
+  sprintGameState.currentCountRightAnswer = 0;
+  sprintGameState.maxRightAnswerInRow = [];
 
   game.innerHTML = '';
 
@@ -82,7 +87,7 @@ function handleSprintGameState() {
 function startTimer() {
   const timerElement = document.querySelector('.sprint-timer') as HTMLElement;
   let totalSeconds = Number(timerElement.textContent);
-  sprintGameState.idInterval = setInterval(() => {
+  sprintGameState.idInterval = setInterval(async () => {
     totalSeconds -= 1;
     timerElement.textContent = String(totalSeconds);
     window.addEventListener(
@@ -97,6 +102,7 @@ function startTimer() {
       clearInterval(sprintGameState.idInterval as NodeJS.Timer);
       renderResultSprintGame();
       sprintGameState.maxRightAnswerInRow.push(sprintGameState.currentCountRightAnswer);
+      setSetting();
     }
   }, 1000);
 }
@@ -113,6 +119,8 @@ async function handleWord() {
     if (!sprintState.sprintData.length) {
       renderResultSprintGame();
       clearInterval(sprintGameState.idInterval as NodeJS.Timer);
+      sprintGameState.maxRightAnswerInRow.push(sprintGameState.currentCountRightAnswer);
+      setSetting();
       return;
     }
   }
@@ -335,6 +343,68 @@ function playRightSound() {
   const audioObj = new Audio(url);
 
   audioObj.play();
+}
+
+async function setSetting() {
+  const today = getDateToday();
+
+  let userSettings: Settings;
+
+  const setting = await getUserSettings(
+    generalState.userId as string,
+    generalState.token as string
+  );
+
+  const percentageRightAnswer = sprintGameState.trueData.length /
+    (sprintGameState.trueData.length + sprintGameState.falseData.length);
+
+  const maxRightAnswerInRow = Math.max(...sprintGameState.maxRightAnswerInRow);
+  const wordsPerDay = sprintGameState.trueData.length + sprintGameState.falseData.length;
+
+  if (!setting) {
+    userSettings = {
+      wordsPerDay,
+      optional: {
+        dayToday: today,
+        audioGame: {
+          countGame: 0,
+          percentageRightAnswer: 0,
+          maxRightAnswerInRow: 0,
+        },
+        sprintGame: {
+          countGame: 1,
+          percentageRightAnswer,
+          maxRightAnswerInRow,
+        }
+      }
+    };
+  } else {
+    userSettings = {
+      wordsPerDay: wordsPerDay + setting.wordsPerDay,
+      optional: {
+        dayToday: today,
+        audioGame: {
+          countGame: setting.optional.audioGame.countGame || 0,
+          percentageRightAnswer: setting.optional.sprintGame.percentageRightAnswer || 0,
+          maxRightAnswerInRow: setting.optional.sprintGame.maxRightAnswerInRow || 0,
+        },
+        sprintGame: {
+          countGame: setting.optional.sprintGame.countGame + 1,
+          percentageRightAnswer: setting.optional.sprintGame.countGame ?
+            (percentageRightAnswer +
+              setting.optional.audioGame.percentageRightAnswer) / 2 :
+            percentageRightAnswer,
+          maxRightAnswerInRow
+        }
+      }
+    };
+  }
+
+  await updateUserSettings(
+    generalState.userId as string,
+    generalState.token as string,
+    userSettings
+  );
 }
 
 export default renderSprintWindowGame;

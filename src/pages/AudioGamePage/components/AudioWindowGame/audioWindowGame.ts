@@ -11,7 +11,8 @@ import renderResultAudioGame from '../ResultAudioGame/resultAudioGame';
 import handleProgress from '../../../../components/progress/progress';
 import { Settings } from '../../../../types/everydayTypes/settingsType';
 import { getDateToday } from '../../../../utils';
-import { handleSettings } from '../../../../components/statistic/settings';
+import { getUserSettings, updateUserSettings } from '../../../../api/settings-api/setting-api';
+import { generalState } from '../../../../states/generalState';
 
 export const audioGameState = {
   dataRound: [] as string[],
@@ -29,7 +30,6 @@ async function renderAudioWindowGame() {
   const game = document.querySelector('.game-overlay') as HTMLElement;
 
   audioGameState.isChoose = false;
-  console.log(audioGameState.currentCountRightAnswer);
 
   if (!audioState.audioData.length) {
     audioGameState.maxRightAnswerInRow.push(audioGameState.currentCountRightAnswer);
@@ -38,22 +38,63 @@ async function renderAudioWindowGame() {
 
     const today = getDateToday();
 
-    const userSettings: Settings = {
-      wordsPerDay: audioGameState.trueData.length + audioGameState.falseData.length,
-      optional: {
-        dayToday: today,
-        audioGame: {
-          percentageRightAnswer: audioGameState.trueData.length /
-            (audioGameState.trueData.length + audioGameState.falseData.length),
-          maxRightAnswerInRow: Math.max(...audioGameState.maxRightAnswerInRow)
-        },
-        sprintGame: {
-          percentageRightAnswer: 0,
-          maxRightAnswerInRow: 0,
+    let userSettings: Settings;
+
+    const setting = await getUserSettings(
+      generalState.userId as string,
+      generalState.token as string
+    );
+
+    const percentageRightAnswer = audioGameState.trueData.length /
+      (audioGameState.trueData.length + audioGameState.falseData.length);
+
+    const maxRightAnswerInRow = Math.max(...audioGameState.maxRightAnswerInRow);
+    const wordsPerDay = audioGameState.trueData.length + audioGameState.falseData.length;
+
+    if (!setting) {
+      userSettings = {
+        wordsPerDay,
+        optional: {
+          dayToday: today,
+          audioGame: {
+            countGame: 1,
+            percentageRightAnswer,
+            maxRightAnswerInRow,
+          },
+          sprintGame: {
+            countGame: 0,
+            percentageRightAnswer: 0,
+            maxRightAnswerInRow: 0,
+          }
         }
-      }
-    };
-    await handleSettings(userSettings);
+      };
+    } else {
+      userSettings = {
+        wordsPerDay: wordsPerDay + setting.wordsPerDay,
+        optional: {
+          dayToday: today,
+          audioGame: {
+            countGame: setting.optional.audioGame.countGame + 1,
+            percentageRightAnswer: setting.optional.audioGame.countGame ?
+              (percentageRightAnswer +
+                setting.optional.audioGame.percentageRightAnswer) / 2 :
+              percentageRightAnswer,
+            maxRightAnswerInRow
+          },
+          sprintGame: {
+            countGame: setting.optional.sprintGame.countGame || 0,
+            percentageRightAnswer: setting.optional.sprintGame.percentageRightAnswer || 0,
+            maxRightAnswerInRow: setting.optional.sprintGame.maxRightAnswerInRow || 0,
+          }
+        }
+      };
+    }
+
+    await updateUserSettings(
+      generalState.userId as string,
+      generalState.token as string,
+      userSettings
+    );
 
     return;
   }
