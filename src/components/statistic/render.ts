@@ -55,12 +55,12 @@ async function renderStatisticMiniGames(): Promise<string> {
       <div class="game-statistic-wrapper">
         <div class="statistic-item__game">Sprint:
           <p>Count new word today: ${sprintWords.length}</p>
-          <p>Percentage right answer: ${settings.optional.sprintGame.percentageRightAnswer ? settings.optional.sprintGame.percentageRightAnswer : 0}</p>
+          <p>Percentage right answer: ${settings.optional.sprintGame.percentageRightAnswer ? Math.floor(settings.optional.sprintGame.percentageRightAnswer * 100) : 0} %</p>
           <p>Longest series of correct answers: ${settings.optional.sprintGame.maxRightAnswerInRow ? settings.optional.sprintGame.maxRightAnswerInRow : 0}</p>
         </div>
         <div class="statistic-item__game">Audio call:
           <p>Count new word today: ${audioWords.length}</p>
-          <p>Percentage right answer: ${settings.optional.audioGame.percentageRightAnswer ? settings.optional.audioGame.percentageRightAnswer : 0}</p>
+          <p>Percentage right answer: ${settings.optional.audioGame.percentageRightAnswer ? Math.floor(settings.optional.audioGame.percentageRightAnswer * 100) : 0} %</p>
           <p>Longest series of correct answers: ${settings.optional.audioGame.maxRightAnswerInRow ? settings.optional.audioGame.maxRightAnswerInRow : 0}</p>
         </div>
       </div>
@@ -69,7 +69,7 @@ async function renderStatisticMiniGames(): Promise<string> {
       <h3 class="statistic-item__header">Word statistic</h3>
       <p>Number of new word today: ${todayNewWords.length}</p>
       <p>Number of learned words today: ${todayLearnedWords.length}</p>
-      <p>Percentage right answer today: ${middlePercentageRightAnswer}</p>
+      <p>Percentage right answer today: ${middlePercentageRightAnswer * 100} %</p>
     </div>
   `;
   }
@@ -89,11 +89,12 @@ export default async function renderStatistic(): Promise<void> {
     </main>
     `
       :
-      ` <main class="main">
-    <div class="statistic">
-    Для отображения статистики войдите в ваш в аккаунт
-    </div>
-    </main>`
+      ` 
+      <main class="main">
+        <div class="statistic">
+          You are not authorized
+        </div>
+      </main>`
     }
   ${renderFooter()}
 
