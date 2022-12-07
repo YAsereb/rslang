@@ -1,6 +1,6 @@
 import { Settings } from '../../types/everydayTypes/settingsType';
 
-const url = 'https://rs-langtask.herokuapp.com';
+const url = 'https://react-rs-lang-be.onrender.com';
 
 export async function getUserSettings(
   userId: string,

@@ -2,7 +2,7 @@ import { generalState } from '../../states/generalState';
 import { UserWord } from '../../types/everydayTypes/userWord';
 import IWordCard from '../../types/interfaces/words';
 
-const url = 'https://rs-langtask.herokuapp.com';
+const url = 'https://react-rs-lang-be.onrender.com';
 
 export default async function getAllWords(numGroup: number, page: number) {
   const response = await fetch(

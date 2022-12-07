@@ -1,5 +1,5 @@
 const variables = {
-  URL: 'https://rs-langtask.herokuapp.com',
+  URL: 'https://react-rs-lang-be.onrender.com',
 };
 
 export default variables;

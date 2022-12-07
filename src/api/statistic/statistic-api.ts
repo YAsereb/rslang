@@ -1,6 +1,6 @@
 import { Statistic } from '../../types/everydayTypes/statisticType';
 
-const url = 'https://rs-langtask.herokuapp.com';
+const url = 'https://react-rs-lang-be.onrender.com';
 
 export async function getUserStatistic(
   userId: string,
